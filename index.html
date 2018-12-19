@@ -30,7 +30,7 @@
   <link href="css/style.css" rel="stylesheet">
 
   <!-- D3.JS -->
-  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="js/d3.v4.min.js"></script>
 
 </head>
 
@@ -47,24 +47,44 @@
 
 
 
+<style>
+.outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
 
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  /*whatever width you want*/
+}
+</style>
 
 
 <!-- =======================  LANDING SECTION ======================= -->
-<header class="masthead">
- <div style="background-color: #DE4938">
+<header>
+ <div style="background-color: #b8b8b8; height: 100vh">
    <div class="container">
-      <div class="intro-text">
-        <br><br><br><br>
-        <p style="font-size: 38px">A dive in Mental disorders</p>
-        <p style="font-size: 24px">What, How, Why, Which and other answers</p>
-        <center><img src="img/landing.png" width="70%"></img></center>
-        <p>A visual essay by Yan <u>Holtz</u>, John <u>McGrath</u> and others</p>
-      </div>
+     <div class="outer">
+       <div class="middle">
+         <div class="inner" align="center">
+           <h1>The Content</h1>
+           <p>Once upon a midnigh</p>
+           <div id="my_dataviz"></div>
+         </div>
+       </div>
+     </div>
     </div>
-  </div>
-  <div class="arrowlanding">
-    <a class="js-scroll-trigger" href="#intro"><p style="font-size: 40px; color: black">&#xfe40;</p></a>
   </div>
 </header>
 
@@ -73,7 +93,75 @@
 
 
 
+<script>
 
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 20, left: 50},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv", function(data) {
+
+  // List of subgroups = header of the csv files = soil condition here
+  var subgroups = data.columns.slice(1)
+
+  // List of groups = species here = value of the first column called group -> I show them on the X axis
+  var groups = d3.map(data, function(d){return(d.group)}).keys()
+
+  // Add X axis
+  var x = d3.scaleBand()
+      .domain(groups)
+      .range([0, width])
+      .padding([0.2])
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).tickSizeOuter(0));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 60])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+
+  // color palette = one color per subgroup
+  var color = d3.scaleOrdinal()
+    .domain(subgroups)
+    .range(['#e41a1c','#377eb8','#4daf4a'])
+
+  //stack the data? --> stack per subgroup
+  var stackedData = d3.stack()
+    .keys(subgroups)
+    (data)
+
+  // Show the bars
+  svg.append("g")
+    .selectAll("g")
+    // Enter in the stack data = loop key per key = group per group
+    .data(stackedData)
+    .enter().append("g")
+      .attr("fill", function(d) { return color(d.key); })
+      .selectAll("rect")
+      // enter a second time = loop subgroup per subgroup to add all rectangles
+      .data(function(d) { return d; })
+      .enter().append("rect")
+        .attr("x", function(d) { return x(d.data.group); })
+        .attr("y", function(d) { return y(d[1]); })
+        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+        .attr("width",x.bandwidth())
+})
+
+</script>
 
 
 
@@ -178,7 +266,6 @@
     <!-- JQUERY -->
     <script src="LIB/jquery-easing/jquery.easing.min.js"></script>
     <script src="LIB/jquery/jquery.min.js"></script>
-
 
     <!-- Custom scripts for this template -->
     <script src="js/agency.min.js"></script>
