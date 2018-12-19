@@ -131,12 +131,7 @@ u {
 
 
 
-
-
-
-
-
-
+/* ---------- FOOTER ----------------- */
 
 footer {
   padding: 25px 0;
@@ -179,4 +174,31 @@ ul.social-buttons li a {
 
 ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
   background-color: #fed136;
+}
+
+
+
+
+
+
+/* ---------- THIS IS TO CENTER IN A DIV ----------------- */
+
+.outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
 }

@@ -6,11 +6,53 @@
 # Run it with --> Rscript data_preparation.R
 ###
 
+## setwd("/Users/y.holtz/Documents/Mortality/DATA")
+
+# Libraries
+library(dplyr)
+library(tidyr)
+library(jsonlite)
+
+# Lost Years of Life = LYL File
+LYL <- read.table("LYL.txt", header=T)
+#improve colnames
+colnames(LYL) <- c("mentalDis", "COD", "sex", "n", "LYL")
+# get a wide format
+wide <- LYL %>% 
+  filter(n>3) %>%
+  filter(COD!="All Causes") %>%
+  select(mentalDis, sex, COD, LYL) %>%
+  spread(COD, LYL, -4, fill=0)
+tosave <- paste("data_LYL = ", toJSON(wide))
+fileConn<-file("LYL.js")
+writeLines(tosave, fileConn)
+close(fileConn)
 
 
-# Step 1: Read input files
+# Mortality Rate ratio = MRR. It compares the number of death with or without mental disorder. If > 1 -> people with a mental disorder dye more often.
+MRR <- read.table("MRR.txt", header=T)
+clean <- MRR %>%
+  filter(!is.na(MRR)) %>%
+  select(sex, dx2, cod_label, MRR, MRR_left, MRR_right)
+colnames(clean) <- c("sex", "mentalDis", "COD", "MRR", "MRR_left", "MRR_right")
+tosave <- paste("data_MRR = ", toJSON(clean))
+fileConn<-file("MRR.js")
+writeLines(tosave, fileConn)
+close(fileConn)
 
 
-# Data: symmetric stacked barplot
+# MRR age -> Same thing but split by age Range
+MRRage <- read.table("MRR_age.txt", header=T)
+clean <- MRRage
+tosave <- paste("data_MRRage = ", toJSON(clean))
+fileConn<-file("MRRage.js")
+writeLines(tosave, fileConn)
+close(fileConn)
 
-# Save to JSON! 
+
+
+
+
+
+
+
