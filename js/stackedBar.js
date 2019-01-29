@@ -1,3 +1,7 @@
+function plotStackedbar(){
+
+console.log("start stacked bar")
+
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 20, left: 50},
     width = 960 - margin.left - margin.right,
@@ -60,3 +64,11 @@ svg.append("g")
       .attr("y", function(d) { return y(d[1]); })
       .attr("height", function(d) { return y(d[0]) - y(d[1]); })
       .attr("width",x.bandwidth())
+
+console.log("end stacked bar")
+
+}
+
+
+
+plotStackedbar()

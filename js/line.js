@@ -1,4 +1,6 @@
-function toto(){
+function plotLine(){
+
+console.log("start plotting line")
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -53,5 +55,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
 })
 
+console.log("end plotting line")
+
 }
-toto()
+plotLine()
