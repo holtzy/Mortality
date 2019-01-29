@@ -43,6 +43,35 @@
 
 
 
+<!-- =======================  NAVIGATION ======================= -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+  <div class="container">
+    <a href="index.html">
+      &larr; HOME
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#contact">Intro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Mortality rate</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">LYLs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
 
 
@@ -50,29 +79,89 @@
 
 
 <!-- =======================  LANDING SECTION ======================= -->
-<header>
- <div style="background-color: #b8b8b8; height: 100vh">
-   <div class="container">
-     <div class="outer">
-       <div class="middle">
-         <div class="inner" align="center">
-           <h1>The Content</h1>
-           <p>Once upon a midnigh</p>
-           <center><div id="viz_heatmap"></div></center>
-           <center><div id="my_dataviz"></div></center>
-           <center><div id="my_dataviz2"></div></center>
-           <center><div id="my_dataviz3"></div></center>
-         </div>
-       </div>
-     </div>
-    </div>
+<header class="masthead">
+  <div style="margin-top: 10%">
+    <center><p style="font-size: 35px; max-width: 900px">Association between mortality-related health metrics and mental disorders</p></center>
+    <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
+    <br>
+    <ul class="list-inline social-buttons">
+      <li class="list-inline-item">
+        <a href="https://twitter.com/R_Graph_Gallery">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+      <li class="list-inline-item social-buttons">
+        <a href="https://github.com/holtzy">
+          <i class="fa fa-github" style="color: white"></i>
+        </a>
+      </li>
+      <li class="list-inline-item social-buttons">
+        <a href="https://www.linkedin.com/in/yan-holtz-2477534a/">
+          <i class="fa fa-linkedin"></i>
+        </a>
+      </li>
+    </ul>
+    <br><br>
+    <center><p style="max-width: 700px; text-align: left" class="twoColumns">Systematic reviews have consistently demonstrated that those with mental disorders have an increased risk of premature mortality. We provide a comprehensive analysis of mortality by different types of mental disorders, presenting both mortality rate ratios and premature mortality based on Life Years Lost</p></center>
   </div>
+
 </header>
 
 
 
 
 
+
+
+
+
+
+
+
+<!-- ======================== MORTALITY SECTION============================ -->
+<section id="mortality" class="bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center" style="padding-bottom: 3%">
+        <p style="display:inline; font-size: 35px">Mortality with any disorder</p>
+        <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
+        <h3 class="section-subheading text-muted">A few stories about statistics, R, dataviz. More or less linked with our world, always related to data</h3>
+      </div>
+      <br><br>
+      <center><div id="my_dataviz3"></div></center>
+
+
+    </div>
+  </div>
+</section>
+
+
+
+           <!-- <center><div id="viz_heatmap"></div></center>
+           <center><div id="my_dataviz"></div></center>
+           <center><div id="my_dataviz2"></div></center>
+           <center><div id="my_dataviz3"></div></center>
+ -->
+
+
+
+
+<!-- ======================== CAUSE SECTION ============================ -->
+<section id="causality" class="bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center" style="padding-bottom: 3%">
+        <p style="display:inline; font-size: 35px">Mortality with any disorder</p>
+        <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
+        <h3 class="section-subheading text-muted">A few stories about statistics, R, dataviz. More or less linked with our world, always related to data</h3>
+      </div>
+      <br><br>
+      <center><div id="my_dataviz2"></div></center>
+
+
+    </div>
+  </div>
+</section>
 
 
 
@@ -167,10 +256,10 @@
     <script src="DATA/MRRage.js"></script>
 
     <!-- Charts -->
-    <script src="js/heatmap.js"></script>
-    <!-- <script src="js/stackedBar.js"></script>
-    <script src="js/lollipop.js"></script>
-    <script src="js/line.js"></script> -->
+    <!-- <script src="js/heatmap.js"></script>
+    <script src="js/stackedBar.js"></script>
+    <script src="js/lollipop.js"></script> -->
+    <script src="js/line.js"></script>
 
 
 <!-- ======================================================================= -->
