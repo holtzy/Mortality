@@ -1,14 +1,20 @@
-function plotLine(){
+function plotMR(){
 
-console.log("start plotting line")
+
+// ======================= //
+// DATA, SVG AREAS
+// ======================= //
+
+// Get filtered data
+data_filter = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Males" & d.specific > 15})
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
+var margin = {top: 10, right: 30, bottom: 50, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz3")
+var svgLeft = d3.select("#my_MR")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -16,46 +22,206 @@ var svg = d3.select("#my_dataviz3")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+// append the svg object to the body of the page
+var svgRight = d3.select("#my_MRR")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-  // When reading the csv, I must format variables:
-  function(d){
-    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
-  },
 
-  // Now I can use this dataset:
-  function(data) {
 
-    // Add X axis --> it is a date format
-    var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.date; }))
-      .range([ 0, width ]);
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+// ======================= //
+// X and Y AXIS AND SCALES
+// ======================= //
 
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.value; })])
-      .range([ height, 0 ]);
-    svg.append("g")
-      .call(d3.axisLeft(y));
+// Add X axis
+var x = d3.scaleLinear()
+  .domain([10, d3.max(data_filter, function(d) { return +d.specific; }) ])
+  .range([ 0, width ]);
+svgLeft.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x));
+svgRight.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x));
 
-    // Add the line
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.value) })
-        )
+// Add X axis labels:
+svgLeft.append("text")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + margin.top + 30)
+    .text("Age (in years)");
+svgRight.append("text")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + margin.top + 30)
+    .text("Age (in years)");
 
-})
+// Left: Add Y axis and scales
+var yLeft = d3.scaleLog()
+  .domain([1, 100000])
+  .range([ height, 0 ]);
+svgLeft.append("g")
+  .call(d3.axisLeft(yLeft).ticks(5, ","))
 
-console.log("end plotting line")
+// Right: Add Y axis
+var yRight = d3.scaleLinear()
+  .domain([0, 10])
+  .range([ height, 0 ]);
+
+var formatPercent = d3.format(".0%");
+console.log(formatPercent(10))
+
+svgRight.append("g")
+  .call(d3.axisLeft(yRight).tickFormat(function(d) { return d + "%"; }) )
+
+
+
+// ======================= //
+// CURVES OF LEFT AND RIGHT
+// ======================= //
+
+// Add the diagnosed line
+svgLeft.append("path")
+  .datum( data_filter )
+  .attr("fill", "none")
+  .attr("stroke", "steelblue")
+  .attr("stroke-width", 1.5)
+  .attr("d", d3.line()
+    .x(function(d) { return x(d.specific) })
+    .y(function(d) { return yLeft(d.diagnosed) })
+    )
+
+// Add the UNdiagnosed line
+svgLeft.append("path")
+  .datum( data_filter )
+  .attr("fill", "none")
+  .attr("stroke", "steelblue")
+  .attr("stroke-width", 1.5)
+  .attr("d", d3.line()
+    .x(function(d) { return x(d.specific) })
+    .y(function(d) { return yLeft(d.undiagnosed) })
+    )
+
+// Add confindence interval
+svgRight.append("path")
+  .datum( data_filter )
+  .attr("fill", "#cce5df")
+  .attr("stroke", "none")
+  .attr("stroke-width", 1.5)
+  .attr("d", d3.area()
+    .x(function(d) { return x(d.specific) })
+    .y0(function(d) { return yRight(d.left) })
+    .y1(function(d) { return yRight(d.right) })
+    )
+
+// Add the diagnosed line
+svgRight.append("path")
+  .datum( data_filter )
+  .attr("fill", "none")
+  .attr("stroke", "steelblue")
+  .attr("stroke-width", 1.5)
+  .attr("d", d3.line()
+    .x(function(d) { return x(d.specific) })
+    .y(function(d) { return yRight(d.irr) })
+    )
+
+
+
+
+// ======================= //
+// ADD THE ANNOTATION WHEN HOVER
+// ======================= //
+
+// This allows to find the closest X index of the mouse:
+var bisect = d3.bisector(function(d) { return d.specific; }).left;
+
+// Create the circle that travels along the curve of right chart
+var focusRight = svgRight.append('g')
+  .append('circle')
+    .style("fill", "none")
+    .attr("stroke", "black")
+    .attr('r', 8.5)
+    .style("opacity", 0)
+
+// Create the circle that travels along the curve of left chart
+var focusLeftTop = svgLeft.append('g')
+  .append('circle')
+    .style("fill", "black")
+    .attr('r', 3.5)
+    .style("opacity", 0)
+
+// Create the circle that travels along the curve of left chart
+var focusLeftBottom = svgLeft.append('g')
+  .append('circle')
+    .style("fill", "black")
+    .attr('r', 3.5)
+    .style("opacity", 0)
+
+// Create the Line that travels along both curves of left chart
+var focusLeftLine = svgLeft.append('g')
+  .append('line')
+    .style("stroke", "black")
+    .style("opacity", 0)
+
+// Create 2 rect on top of each of the svg areas: this rectangle recovers mouse position
+svgRight.append('rect')
+  .style("fill", "none")
+  .style("pointer-events", "all")
+  .attr('width', width)
+  .attr('height', height)
+  .on('mouseover', mouseover)
+  .on('mousemove', mousemove)
+  .on('mouseout', mouseout);
+
+svgLeft.append('rect')
+  .style("fill", "none")
+  .style("pointer-events", "all")
+  .attr('width', width)
+  .attr('height', height)
+  .on('mouseover', mouseover)
+  .on('mousemove', mousemove)
+  .on('mouseout', mouseout);
+
+// What happens when the mouse move -> show the annotations at the right positions.
+function mouseover() {
+  focusRight.style("opacity", 1)
+  focusLeftTop.style("opacity", 1)
+  focusLeftBottom.style("opacity", 1)
+  focusLeftLine.style("opacity", 1)
+}
+
+function mousemove() {
+  // recover coordinate we need
+  var x0 = x.invert(d3.mouse(this)[0]);
+  var i = bisect(data_filter, x0, 1);
+  selectedData = data_filter[i]
+  focusRight
+    .attr("cx", x(selectedData.specific))
+    .attr("cy", yRight(selectedData.irr))
+  focusLeftTop
+    .attr("cx", x(selectedData.specific))
+    .attr("cy", yLeft(selectedData.undiagnosed))
+  focusLeftBottom
+    .attr("cx", x(selectedData.specific))
+    .attr("cy", yLeft(selectedData.diagnosed))
+  focusLeftLine
+    .attr("x1", x(selectedData.specific))
+    .attr("x2", x(selectedData.specific))
+    .attr("y1", yLeft(selectedData.undiagnosed))
+    .attr("y2", yLeft(selectedData.diagnosed))
+}
+function mouseout() {
+  focusRight.style("opacity", 0)
+  focusLeftTop.style("opacity", 0)
+  focusLeftBottom.style("opacity", 0)
+  focusLeftLine.style("opacity", 0)
+}
+
+
 
 }
-plotLine()
+plotMR()

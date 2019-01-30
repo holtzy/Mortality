@@ -6,7 +6,7 @@
 # Run it with --> Rscript data_preparation.R
 ###
 
-## setwd("/Users/y.holtz/Documents/Mortality/DATA")
+## setwd("~Desktop/Mortality/DATA")
 
 # Libraries
 library(dplyr)
@@ -18,7 +18,7 @@ LYL <- read.table("LYL.txt", header=T)
 #improve colnames
 colnames(LYL) <- c("mentalDis", "COD", "sex", "n", "LYL")
 # get a wide format
-wide <- LYL %>% 
+wide <- LYL %>%
   filter(n>3) %>%
   filter(COD!="All Causes") %>%
   select(mentalDis, sex, COD, LYL) %>%
@@ -48,11 +48,3 @@ tosave <- paste("data_MRRage = ", toJSON(clean))
 fileConn<-file("MRRage.js")
 writeLines(tosave, fileConn)
 close(fileConn)
-
-
-
-
-
-
-
-
