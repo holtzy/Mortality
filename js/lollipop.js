@@ -7,7 +7,6 @@ function plotLoli(){
 
 // Get filtered data
 data_filter = data_MRR.filter(function(d){ return d.mentalDis == "Any Disorder" & d.sex == "both"})
-console.log(data_MRR)
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 40, left: 100},

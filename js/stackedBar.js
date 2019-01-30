@@ -6,12 +6,14 @@ function plotStackedbar(){
 // ======================= //
 
 // Get filtered data
-data_filter = data_LYL.filter(function(d){ return d.sex == "Males" })
+data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
+// Order data
+
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 20, left: 150},
     width = 960 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_stackedBar")
@@ -42,7 +44,7 @@ var color = d3.scaleOrdinal()
 
 // Add X axis
 var x = d3.scaleLinear()
-  .domain([-2, 30])
+  .domain([-3, 15])
   .range([0, width])
 svg.append("g")
   .attr("transform", "translate(0," + height + ")")
@@ -52,7 +54,7 @@ svg.append("g")
 var y = d3.scaleBand()
     .domain(groups)
     .range([ height, 0 ])
-    .padding([0.2])
+    .padding([0.4])
 svg.append("g")
   .call(d3.axisLeft(y));
 
@@ -66,7 +68,10 @@ svg.append("g")
 //stack the data? --> stack per subgroup
 var stackedData = d3.stack()
   .keys(subgroups)
-  (data_filter)
+  .offset(d3.stackOffsetDiverging)
+  (data_filtered)
+console.log(data_filtered)
+console.log(stackedData)
 
 // Show the bars
 svg.append("g")
@@ -83,13 +88,6 @@ svg.append("g")
       .attr("height", y.bandwidth())
       .attr("x", function(d) {  return x(d[0]); })
       .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
-      //
-      //
-      // .attr("x", function(d) { return x(d.data.mentalDis); })
-      // .attr("y", function(d) { return y(d[1]); })
-      // .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-      // .attr("width",x.bandwidth())
-
 
 }
 

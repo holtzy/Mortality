@@ -4,7 +4,7 @@ var margin = {top: 30, right: 30, bottom: 120, left: 120},
   height = 650 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#viz_heatmap")
+var svg = d3.select("#my_heatmap")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
