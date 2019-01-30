@@ -9,7 +9,7 @@ p {
 }
 
 a {
-  color: #69b3a2;
+  color: #ED3A3B;
 }
 
 a:hover {
@@ -17,7 +17,7 @@ a:hover {
 }
 
 .text-primary {
-  color: #69b3a2 !important;
+  color: #ED3A3B !important;
 }
 
 h1,
@@ -81,14 +81,14 @@ u {
 
 .btn-primary {
   background-color: transparent;
-  border-color: #69b3a2;
-  color: #69b3a2;
+  border-color: #ED3A3B;
+  color: #ED3A3B;
   border-width: medium;
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background-color: #69b3a2 !important;
-  border-color: #69b3a2 !important;
+  background-color: #ED3A3B !important;
+  border-color: #ED3A3B !important;
   color: white;
 }
 
@@ -98,34 +98,34 @@ u {
 
 .btn-secondary {
   background-color: transparent;
-  border-color: #69b3a2;
-  color: #69b3a2;
+  border-color: #ED3A3B;
+  color: #ED3A3B;
   border-width: small;
 }
 
 .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
-  background-color: #69b3a2 !important;
-  border-color: #69b3a2 !important;
+  background-color: #ED3A3B !important;
+  border-color: #ED3A3B !important;
   color: white;
 }
 
 .btn-secondary:active, .btn-secondary:focus {
-  background-color: #69b3a2 !important;
+  background-color: #ED3A3B !important;
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active {
-  background-color: #69b3a2 !important;
-  border-color: #69b3a2 !important;
+  background-color: #ED3A3B !important;
+  border-color: #ED3A3B !important;
   color: white;
 }
 
 ::-moz-selection {
-  background: #69b3a2;
+  background: #ED3A3B;
   text-shadow: none;
 }
 
 ::selection {
-  background: #69b3a2;
+  background: #ED3A3B;
   text-shadow: none;
 }
 

@@ -11,7 +11,7 @@ data_filter = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 50, left: 60},
     width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 440 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svgLeft = d3.select("#my_MR")
@@ -39,7 +39,7 @@ var svgRight = d3.select("#my_MRR")
 
 // Add X axis
 var x = d3.scaleLinear()
-  .domain([10, d3.max(data_filter, function(d) { return +d.specific; }) ])
+  .domain([5, d3.max(data_filter, function(d) { return +d.specific; }) ])
   .range([ 0, width ]);
 svgLeft.append("g")
   .attr("transform", "translate(0," + height + ")")
@@ -62,21 +62,50 @@ svgRight.append("text")
 
 // Left: Add Y axis and scales
 var yLeft = d3.scaleLog()
-  .domain([1, 100000])
+  .domain([1, 500000])
   .range([ height, 0 ]);
 svgLeft.append("g")
-  .call(d3.axisLeft(yLeft).ticks(5, ","))
+  .call(d3.axisLeft(yLeft).ticks(5, ",").tickSizeOuter(0))
 
-// Right: Add Y axis
+// Left Add Y axis labels:
+svgLeft.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 10)
+    .attr("y", 10)
+    .text("Mortality rates")
+svgLeft.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 10)
+    .attr("y", 30)
+    .text("per 100,000 person-years")
+    .style("opacity", ".6")
+svgLeft.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 10)
+    .attr("y", 50)
+    .text("(95% CI)")
+    .style("opacity", ".6")
+
+
+// Right: Add Y axis and scale
 var yRight = d3.scaleLinear()
-  .domain([0, 10])
+  .domain([0, 13])
   .range([ height, 0 ]);
-
-var formatPercent = d3.format(".0%");
-console.log(formatPercent(10))
-
 svgRight.append("g")
-  .call(d3.axisLeft(yRight).tickFormat(function(d) { return d + "%"; }) )
+  .call(d3.axisLeft(yRight).ticks(5).tickFormat(function(d) { return d + "%"; }).tickSizeOuter(0))
+
+// Left Add Y axis labels:
+svgRight.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 10)
+    .attr("y", 10)
+    .text("Mortality rate ratio")
+svgRight.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 10)
+    .attr("y", 30)
+    .text("(95% CI)")
+    .style("opacity", ".6")
 
 
 
@@ -101,6 +130,7 @@ svgLeft.append("path")
   .attr("fill", "none")
   .attr("stroke", "steelblue")
   .attr("stroke-width", 1.5)
+  .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
   .attr("d", d3.line()
     .x(function(d) { return x(d.specific) })
     .y(function(d) { return yLeft(d.undiagnosed) })
