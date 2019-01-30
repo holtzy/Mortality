@@ -1,4 +1,4 @@
-function plotMR(){
+function plotLine(){
 
 
 // ======================= //
@@ -254,4 +254,4 @@ function mouseout() {
 
 
 }
-plotMR()
+plotLine()

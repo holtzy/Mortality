@@ -1,14 +1,20 @@
 function plotStackedbar(){
 
-console.log("start stacked bar")
+
+// ======================= //
+// DATA, SVG AREAS
+// ======================= //
+
+// Get filtered data
+data_filter = data_LYL.filter(function(d){ return d.sex == "Males" })
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 20, left: 50},
+var margin = {top: 10, right: 30, bottom: 20, left: 150},
     width = 960 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#my_stackedBar")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -22,32 +28,45 @@ var subgroups = allCOD
 // List of groups = List of Mental Disorder
 var groups = allDisorder
 
-// Add X axis
-var x = d3.scaleBand()
-    .domain(groups)
-    .range([0, width])
-    .padding([0.2])
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x).tickSizeOuter(0));
-
-// Add Y axis
-var y = d3.scaleLinear()
-  .domain([-2, 30])
-  .range([ height, 0 ]);
-svg.append("g")
-  .call(d3.axisLeft(y));
-
 // color palette = one color per subgroup
 var color = d3.scaleOrdinal()
   .domain(subgroups)
   .range(d3.schemeSet3);
 
+
+
+
+// ======================= //
+// AXIS
+// ======================= //
+
+// Add X axis
+var x = d3.scaleLinear()
+  .domain([-2, 30])
+  .range([0, width])
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x).tickSizeOuter(0));
+
+// Add Y axis
+var y = d3.scaleBand()
+    .domain(groups)
+    .range([ height, 0 ])
+    .padding([0.2])
+svg.append("g")
+  .call(d3.axisLeft(y));
+
+
+
+
+// ======================= //
+// BARS
+// ======================= //
+
 //stack the data? --> stack per subgroup
 var stackedData = d3.stack()
   .keys(subgroups)
-  (data_LYL)
-console.log(stackedData)
+  (data_filter)
 
 // Show the bars
 svg.append("g")
@@ -60,12 +79,17 @@ svg.append("g")
     // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(function(d) { return d; })
     .enter().append("rect")
-      .attr("x", function(d) { return x(d.data.mentalDis); })
-      .attr("y", function(d) { return y(d[1]); })
-      .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-      .attr("width",x.bandwidth())
+      .attr("y", function(d) { return y(d.data.mentalDis) } )
+      .attr("height", y.bandwidth())
+      .attr("x", function(d) {  return x(d[0]); })
+      .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
+      //
+      //
+      // .attr("x", function(d) { return x(d.data.mentalDis); })
+      // .attr("y", function(d) { return y(d[1]); })
+      // .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+      // .attr("width",x.bandwidth())
 
-console.log("end stacked bar")
 
 }
 
