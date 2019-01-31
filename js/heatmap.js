@@ -118,9 +118,15 @@ function showLYL() {
   d3.selectAll(".LYL").transition().duration(1000).style("opacity",1)
 }
 
-d3.selectAll("input").on("change", function(){
-    console.log(this.value)
-});
+// An event listener to the radio button
+d3.select("#form").on("click", function(){
+    var radioValue = $("input[name='controlHeatmapType']:checked").val();
+    if(radioValue == "MRR"){
+      showMRR()
+    }else{
+      showLYL()
+    }
+})
 
 
 plotHeatmap()
