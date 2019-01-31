@@ -56,11 +56,17 @@ yAxis.selectAll("text")
 yAxis.select(".domain").remove();
 
 
-// Build color scale
-var myColor = d3.scaleLinear()
+// Build color scales
+var myColorMRR = d3.scaleLinear()
   .range(["white", "#ED3A3B"])
   .domain([1,10])
 
+var myColorLYL = d3.scaleSequential(d3.interpolatePuOr)
+  .domain([-3,10])
+
+
+console.log(data_MRR)
+console.log(data_LYL_long)
 
 
 
@@ -69,18 +75,53 @@ var myColor = d3.scaleLinear()
 // SHAPES
 // ======================= //
 
-// Add squares
+
+// Add squares for MRR
 svg.selectAll()
     .data(data_MRR.filter(function(d){ return d.sex == "women" }))
     .enter()
     .append("rect")
-    .attr("x", function(d) { return x(d.COD) })
-    .attr("y", function(d) { return y(d.mentalDis) })
-    .attr("width", x.bandwidth() )
-    .attr("height", y.bandwidth() )
-    .style("fill", function(d) { return myColor(d.MRR)} )
+      .attr("class", "MRR")
+      .attr("x", function(d) { return x(d.COD) })
+      .attr("y", function(d) { return y(d.mentalDis) })
+      .attr("width", x.bandwidth() )
+      .attr("height", y.bandwidth() )
+      .style("fill", function(d) { return myColorMRR(d.MRR)} )
+      .attr("opacity", 0)
+
+// Add squares for LYL
+svg.selectAll()
+    .data(data_LYL_long.filter(function(d){ return d.sex == "Females" }))
+    .enter()
+    .append("rect")
+      .attr("class", "LYL")
+      .attr("x", function(d) { return x(d.COD) })
+      .attr("y", function(d) { return y(d.mentalDis) })
+      .attr("width", x.bandwidth() )
+      .attr("height", y.bandwidth() )
+      .style("fill", function(d) { console.log(d) ; console.log(x(d.COD)) ; return myColorLYL(+d.LYL)} )
+      .attr("opacity", 1)
+
+
+
 
 }
 
 
+// A function that shows MRR and hide LYL
+function showMRR() {
+  d3.selectAll(".MRR").transition().duration(1000).style("opacity",1)
+  d3.selectAll(".LYL").transition().duration(1000).style("opacity",0)
+}
+function showLYL() {
+  d3.selectAll(".MRR").transition().duration(1000).style("opacity",0)
+  d3.selectAll(".LYL").transition().duration(1000).style("opacity",1)
+}
+
+d3.selectAll("input").on("change", function(){
+    console.log(this.value)
+});
+
+
 plotHeatmap()
+showMRR()

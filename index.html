@@ -215,6 +215,31 @@
       </div>
       <br><br>
     </div>
+
+    <!-- Add 2 buttons -->
+    <!-- <center>
+      <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="aaa" id="buttonShowMRR" autocomplete="off"> MRR
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="aaa" id="buttonShowLYL" autocomplete="off"> LYL
+        </label>
+      </form>
+    </center> -->
+
+    <center>
+      <form id="form" class="btn-group btn-group-toggle">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="controlHeatmapType" value="MRR">MRR<br>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="controlHeatmapType" value="LYL" >LYL<br>
+        </label>
+      </form>
+    </center>
+
+    <!-- Chart -->
     <center><div id="my_heatmap"></div></center>
   </div>
 </section>
@@ -243,6 +268,7 @@
        </div>
     </div>
   </section>
+
 
 
 
@@ -326,6 +352,7 @@
 
     <!-- DATA -->
     <script src="DATA/LYL.js"></script>
+    <script src="DATA/LYLlong.js"></script>
     <script src="DATA/MRR.js"></script>
     <script src="DATA/MRRage.js"></script>
 

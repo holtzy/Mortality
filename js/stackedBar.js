@@ -70,8 +70,6 @@ var stackedData = d3.stack()
   .keys(subgroups)
   .offset(d3.stackOffsetDiverging)
   (data_filtered)
-console.log(data_filtered)
-console.log(stackedData)
 
 // Show the bars
 svg.append("g")

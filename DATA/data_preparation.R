@@ -17,6 +17,11 @@ library(jsonlite)
 LYL <- read.table("LYL.txt", header=T)
 #improve colnames
 colnames(LYL) <- c("mentalDis", "COD", "sex", "n", "LYL")
+# Save this long format
+tosave <- paste("data_LYL_long = ", toJSON(LYL))
+fileConn<-file("LYLlong.js")
+writeLines(tosave, fileConn)
+close(fileConn)
 # get a wide format
 wide <- LYL %>%
   filter(n>3) %>%
