@@ -75,7 +75,6 @@ console.log(data_LYL_long)
 // SHAPES
 // ======================= //
 
-
 // Add squares for MRR
 svg.selectAll()
     .data(data_MRR.filter(function(d){ return d.sex == "women" }))
@@ -87,7 +86,7 @@ svg.selectAll()
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColorMRR(d.MRR)} )
-      .attr("opacity", 0)
+      .attr("opacity", 1)
 
 // Add squares for LYL
 svg.selectAll()
@@ -100,10 +99,7 @@ svg.selectAll()
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { console.log(d) ; console.log(x(d.COD)) ; return myColorLYL(+d.LYL)} )
-      .attr("opacity", 1)
-
-
-
+      .attr("opacity", 0)
 
 }
 
@@ -120,14 +116,14 @@ function showLYL() {
 
 // An event listener to the radio button
 d3.select("#form").on("click", function(){
-    var radioValue = $("input[name='controlHeatmapType']:checked").val();
+    var radioValue = $("input[name='controlHeatmapType']:active").val();
+    console.log(radioValue)
     if(radioValue == "MRR"){
       showMRR()
-    }else{
+    } else {
       showLYL()
     }
 })
 
 
 plotHeatmap()
-showMRR()

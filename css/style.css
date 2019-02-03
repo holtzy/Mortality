@@ -154,6 +154,7 @@ u {
 .btn {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 500;
+  box-shadow: none !important;
 }
 
 .btn-xl {
@@ -175,7 +176,7 @@ u {
 }
 
 .btn-primary:active, .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
+  box-shadow: 0 0 0 0rem rgba(254, 209, 55, 0) !important;
 }
 
 .btn-secondary {

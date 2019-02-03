@@ -60,13 +60,19 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#contact">Intro</a>
+          <a class="nav-link js-scroll-trigger" href="#intro">Intro</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#mortality">Mortality</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.html">LYLs</a>
+          <a class="nav-link js-scroll-trigger" href="#causality">Cause of Death</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#lyl">Life Year Lost</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#explore">Explore</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
@@ -80,10 +86,8 @@
 
 
 
-
-
 <!-- =======================  LANDING SECTION ======================= -->
-<header class="masthead">
+<header id="intro" class="masthead">
   <div style="margin-top: 10%; margin-bottom: 1%;">
     <center><p style="font-size: 35px; max-width: 900px">Association between mortality-related health metrics and mental disorders</p></center>
     <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
@@ -160,18 +164,41 @@
 
 
 
-<!-- ======================== LOLLIPOP ============================ -->
+
+
+
+
+
+<!-- ======================== LOLLIPOP CAUSE OF DEATH ============================ -->
 <section id="causality" class="bg">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
-        <p style="display:inline; font-size: 35px">Digging causes of death</p>
+        <p style="display:inline; font-size: 35px">Mortality rates by specific causes of death</p>
         <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
-        <center><p style="text-align: justify" class="threeColumns"><code>Mortality rate</code> is defined as the proportion of people dying. As expected, mortality rate increases constantly with age (<i>Left</i>). Moreover, mortality rate of those <code>with</code> mental disorder is always <code>higher</code> than the general population. This difference can be quantified through the <code>mortality rate ratio</code>. It is not constant over age. Overall, mortality rate ratio peaked around age <code>35 years old</code>, when people with mental disorders have a <code>8 fold increase</code> of mortality.</p></center>
+        <center><p style="text-align: justify" class="threeColumns">People with mental disorders have an increase in death probability, and so for any cause of death. The cause of death specific mortality rate ratios range from 1.4 for neoplasm to 11.8 for suicide. Cause-specific MRR were systematically higher among males; however, the association between any mental disorder and suicide was higher for females (MRR=17·3 [16·1-18·6]) than for males.</p></center>
       </div>
       <br><br>
     </div>
+
+    <center>
+      <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="controlLolliCOD" value="all" checked>All<br>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="controlLolliCOD" value="specific">Sex specific<br>
+        </label>
+      </form>
+
+      <select class="btn btn-secondary" id="selectButton">Filter disorder</select>
+
+
+    </center>
     <center><div id="my_loli"></div></center>
+
+    <center><p style="text-align: justify" class="threeColumns">Here talk about what happens when we can study the trend for a specific disorder. With link to observe it.</p></center>
+
   </div>
 </section>
 
@@ -184,13 +211,13 @@
 
 
 <!-- ======================== STACKED BAR LYLS ============================ -->
-<section id="causality" class="bg-light">
+<section id="lyl" class="bg-light">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
-        <p style="display:inline; font-size: 35px">Excess Life Years Los</p>
+        <p style="display:inline; font-size: 35px">Excess in Life Year Lost</p>
         <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
-        <center><p style="text-align: justify" class="threeColumns"><code>Mortality rate</code> is defined as the proportion of people dying. As expected, mortality rate increases constantly with age (<i>Left</i>). Moreover, mortality rate of those <code>with</code> mental disorder is always <code>higher</code> than the general population. This difference can be quantified through the <code>mortality rate ratio</code>. It is not constant over age. Overall, mortality rate ratio peaked around age <code>35 years old</code>, when people with mental disorders have a <code>8 fold increase</code> of mortality.</p></center>
+        <center><p style="text-align: justify" class="threeColumns">Excess in life year losts is another way to study the premature component of mortality</p>Surprisingly, we found that men with all types of mental disorder had fewer LYLs associated with neoplasm-related deaths compared to the general population.</center>
       </div>
       <br><br>
     </div>
@@ -205,7 +232,7 @@
 
 
 <!-- ======================== HEATMAP ============================ -->
-<section id="causality" class="bg">
+<section id="explore" class="bg">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
@@ -231,10 +258,10 @@
     <center>
       <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary active">
-          <input type="radio" name="controlHeatmapType" value="MRR" autocomplete="" checked>MRR<br>
+          <input type="radio" name="controlHeatmapType" value="MRR" checked>MRR<br>
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="controlHeatmapType" value="LYL" autocomplete="" >LYL<br>
+          <input type="radio" name="controlHeatmapType" value="LYL">LYL<br>
         </label>
       </form>
     </center>
