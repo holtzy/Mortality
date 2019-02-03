@@ -137,8 +137,15 @@ var myBaselines = svg.selectAll("myBaseline")
 // ======================= //
 
 // Function that update the chart for a disorder
-function updateChart(selectedGroup) {
+function updateChart(selectedGroup, selectedSex) {
   var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedGroup })
+  if(selectedSex == "both"){
+    selectedData = selectedData.filter(function(d){ return d.sex == "both" })
+  }else{
+    selectedData = selectedData.filter(function(d){ console.log(d) ; return d.sex != "both" })
+  }
+  console.log(selectedData)
+
   myCircles
     .data(selectedData)
     .transition()
@@ -169,7 +176,7 @@ function updateChart(selectedGroup) {
 // Listen to the mental disorder selection button
 d3.select("#selectButton").on("change", function(d){
   selectedGroup = this.value
-  updateChart(selectedGroup)
+  updateChart(selectedGroup, "other")
 })
 
 // Function that update the chart to show or hide sex?

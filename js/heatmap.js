@@ -65,10 +65,6 @@ var myColorLYL = d3.scaleSequential(d3.interpolatePuOr)
   .domain([-3,10])
 
 
-console.log(data_MRR)
-console.log(data_LYL_long)
-
-
 
 
 // ======================= //
@@ -98,7 +94,7 @@ svg.selectAll()
       .attr("y", function(d) { return y(d.mentalDis) })
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
-      .style("fill", function(d) { console.log(d) ; console.log(x(d.COD)) ; return myColorLYL(+d.LYL)} )
+      .style("fill", function(d) { return myColorLYL(+d.LYL)} )
       .attr("opacity", 0)
 
 }
@@ -117,7 +113,6 @@ function showLYL() {
 // An event listener to the radio button
 d3.select("#form").on("click", function(){
     var radioValue = $("input[name='controlHeatmapType']:active").val();
-    console.log(radioValue)
     if(radioValue == "MRR"){
       showMRR()
     } else {
