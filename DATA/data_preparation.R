@@ -6,7 +6,7 @@
 # Run it with --> Rscript data_preparation.R
 ###
 
-## setwd("~Desktop/Mortality/DATA")
+## setwd("~/Desktop/Mortality/DATA")
 
 # Libraries
 library(dplyr)
@@ -40,6 +40,8 @@ clean <- MRR %>%
   filter(!is.na(MRR)) %>%
   select(sex, dx2, cod_label, MRR, MRR_left, MRR_right)
 colnames(clean) <- c("sex", "mentalDis", "COD", "MRR", "MRR_left", "MRR_right")
+# TOCHECK: heart disease is the same as circularory system?
+clean$COD <- gsub("Dis. Circulatory System", "Heart Diseases", clean$COD)
 tosave <- paste("data_MRR = ", toJSON(clean))
 fileConn<-file("MRR.js")
 writeLines(tosave, fileConn)

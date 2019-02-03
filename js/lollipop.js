@@ -9,9 +9,9 @@ function plotLoli(){
 data_filter = data_MRR.filter(function(d){ return d.mentalDis == "Any Disorder" & d.sex == "both"})
 
 // set the dimensions and margins of the graph
-var margin = {top: 40, right: 30, bottom: 100, left: 180},
+var margin = {top: 70, right: 30, bottom: 100, left: 180},
     width = 810 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 680 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_loli")
@@ -45,19 +45,30 @@ svg.append("text")
     .attr("y", height + margin.top)
     .text("Mortality Rate Ratio");
 
-// Y axis
-var smallGap = 80
-var bigGap = 300
-var posYaxis = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300 ]
-var y = d3.scalePoint()
-  .range([0, height])
-  .domain(bothCOD)
-var yAxis = svg.append("g")
-  .call(d3.axisLeft(y).tickSize(0))
-yAxis.select(".domain").remove()
-yAxis.selectAll("text")
-    .style("text-anchor", "end")
+// Y 'axis': prepare position of each group
+var smallGap = 30
+var bigGap = 60
+var posYaxis = [0, bigGap, bigGap+smallGap, bigGap+smallGap*2, bigGap+smallGap*3, bigGap*2+smallGap*3, bigGap*2+smallGap*4, bigGap*2+smallGap*5, bigGap*2+smallGap*6, bigGap*2+smallGap*7, bigGap*2+smallGap*8, bigGap*2+smallGap*9, bigGap*2+smallGap*10, bigGap*2+smallGap*11 ]
+
+// Add the labels
+var myYLabels = svg.selectAll("myYLabels")
+  .data(posYaxis)
+  .enter()
+  .append("text")
+    .attr('x', -20)
+    .attr('y', function(d,i){return posYaxis[i]})
+    .text( function(d,i){return bothCOD[i]})
+    .attr("text-anchor", "end")
     .style("font-size", 14)
+    .style("fill", 'grey')
+    .attr('class', function(d,i){ cod = bothCOD[i] ; if( typeCOD.includes(cod)){return 'myMainLabel'} })
+    .style('alignment-baseline', 'middle')
+
+// Custom labels of main groups
+svg.selectAll('.myMainLabel')
+    .style("font-size", 16)
+    .style("fill", 'black')
+    .attr('x', 0)
 
 
 
@@ -88,9 +99,10 @@ var myLines = svg.selectAll("myline")
   .append("line")
     .attr("x1", function(d) { return x(d.MRR_left); })
     .attr("x2", function(d) { return x(d.MRR_right); })
-    .attr("y1", function(d) { return y(d.COD); })
-    .attr("y2", function(d) { return y(d.COD); })
+    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
     .attr("stroke", "grey")
+    .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = .6} ; return opacity  })
 
 // Circles
 var myCircles = svg.append('g')
@@ -99,10 +111,24 @@ var myCircles = svg.append('g')
   .enter()
   .append("circle")
     .attr("cx", function(d) { return x(d.MRR); })
-    .attr("cy", function(d) { return y(d.COD); })
-    .attr("r", "7")
+    .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+    .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 9}else{size=6} ; return size  })
     .style("fill", "#69b3a2")
     .attr("stroke", "black")
+    .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = .6} ; return opacity  })
+
+// Lines from baseline
+var myBaselines = svg.selectAll("myBaseline")
+  .data(data_filter)
+  .enter()
+  .append("line")
+    .attr("x1", function(d) { return 10; })
+    .attr("x2", function(d) { return x(d.MRR); })
+    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+    .attr("stroke", "grey")
+    .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = 0} ; return opacity  })
+    .style("stroke-dasharray", ("3, 3"))
 
 
 
@@ -110,15 +136,15 @@ var myCircles = svg.append('g')
 // INTERACTIVITY
 // ======================= //
 
-// Function that update the chart for a group
+// Function that update the chart for a disorder
 function updateChart(selectedGroup) {
-  var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedGroup & d.sex == "both"})
+  var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedGroup })
   myCircles
     .data(selectedData)
     .transition()
     .duration(1000)
     .attr("cx", function(d) { return x(d.MRR); })
-    .attr("cy", function(d) { return y(d.COD); })
+    .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
 
   myLines
     .data(selectedData)
@@ -126,16 +152,27 @@ function updateChart(selectedGroup) {
     .duration(1000)
     .attr("x1", function(d) { return x(d.MRR_left); })
     .attr("x2", function(d) { return x(d.MRR_right); })
-    .attr("y1", function(d) { return y(d.COD); })
-    .attr("y2", function(d) { return y(d.COD); })
+    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+
+  myBaselines
+    .data(selectedData)
+    .transition()
+    .duration(1000)
+    .attr("x1", function(d) { return 10; })
+    .attr("x2", function(d) { return x(d.MRR); })
+    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+
   }
 
-// Listen to the slider?
+// Listen to the mental disorder selection button
 d3.select("#selectButton").on("change", function(d){
   selectedGroup = this.value
   updateChart(selectedGroup)
 })
 
+// Function that update the chart to show or hide sex?
 
 
 }
