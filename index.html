@@ -92,23 +92,7 @@
     <center><p style="font-size: 35px; max-width: 900px">Association between mortality-related health metrics and mental disorders</p></center>
     <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
     <br>
-    <ul class="list-inline social-buttons">
-      <li class="list-inline-item">
-        <a href="https://twitter.com/R_Graph_Gallery">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-      <li class="list-inline-item social-buttons">
-        <a href="https://github.com/holtzy">
-          <i class="fa fa-github" style="color: white"></i>
-        </a>
-      </li>
-      <li class="list-inline-item social-buttons">
-        <a href="https://www.linkedin.com/in/yan-holtz-2477534a/">
-          <i class="fa fa-linkedin"></i>
-        </a>
-      </li>
-    </ul>
+    <img src="img/people.png" width="400px"></img>
     <br><br>
     <center><p style="max-width: 700px; text-align: justify" class="threeColumns">Systematic reviews have consistently demonstrated that those with mental disorders have an increased risk of premature mortality. We provide a comprehensive analysis of mortality by different types of mental disorders, presenting both mortality rate ratios and premature mortality based on Life Years Lost</p></center>
     <br><br><br>
@@ -181,22 +165,26 @@
       <br><br>
     </div>
 
-    <!-- Show buttons -->
-    <center>
+    <!-- Plot title -->
+    <div>
+      <p style="display: inline-block; padding-left: 20px; border-width: .5px; border-left: solid; margin-left: 5em; font-size: 15px; text-align: left; max-width:400px">Mortality rates per specific cause of death for people with <select id="controlLolliDisorder">Filter disorder</select></p>
       <!-- Radio button that controls sex: split or both? -->
-      <div id="controlLolliSex">
-        <input type="radio" name="controlLolliSex" value="both" checked> Both<br>
-        <input type="radio" name="controlLolliSex" value="split"> Split<br>
-      </div>
-      <!-- Dropdown button: which mental disorder -->
-      <select id="controlLolliDisorder">Filter disorder</select>
-    </center>
+      <div id="controlLolliSex" style="display: inline-block; position: absolute; right: 270px; font-size: 15px; text-align: right">
+        <span>You can study sex together or separately:</span>
+        <br>
+        <input type="radio" name="controlLolliSex" value="both" checked> Together<br>
+        <input type="radio" name="controlLolliSex" value="split"> Separately<br>
+        </div>
+      </p>
+    </div>
 
     <!-- Show Chart-->
     <center><div id="my_loli"></div></center>
 
+
+
     <!-- Last text-->
-    <center><p style="text-align: justify" class="threeColumns">Here talk about what happens when we can study the trend for a specific disorder. With link to observe it.</p></center>
+    <center><p style="text-align: justify" class="threeColumns">Here talk about what happens when we can study the trend for a specific disorder. With link to observe it. For instance, it is interesting to notice that suicide is much more frequent for women than men. More generally, it is substance use that is the most linked with high mortality rate.</p></center>
 
   </div>
 </section>

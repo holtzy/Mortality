@@ -94,7 +94,7 @@ svg.selectAll("yTicks")
 // Color scale for dots
 var myColorLolliSex = d3.scaleOrdinal()
   .domain(["both", "men", "women"])
-  .range(["black", "blue", "pink"])
+  .range(["steelblue", "#1E8F89", "#EE5A45"])
 
 // Scale to slightly modify sexes on the Y axis
 var myPositionLolliSex = d3.scaleOrdinal()
@@ -160,8 +160,11 @@ function updateChart(selectedGroup, selectedSex) {
       .attr("class", "myLolliCircles")
       .attr("cx", function(d) { return x(d.MRR); })
       .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-      .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 9}else{size=6} ; return size  })
+      .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 12}else{size=6} ; return size  })
       .style("fill", function(d){ return myColorLolliSex(d.sex) })
+      .style("stroke", "black")
+      .style("fill-opacity", 1)
+      .style("stroke-width", 1)
   u
     .exit()
     .transition()
