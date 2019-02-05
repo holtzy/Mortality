@@ -112,6 +112,7 @@ function showLYL() {
 
 // An event listener to the radio button
 d3.select("#form").on("click", function(){
+    console.log("Heatmap type button has been clicked")
     var radioValue = $("input[name='controlHeatmapType']:active").val();
     if(radioValue == "MRR"){
       showMRR()

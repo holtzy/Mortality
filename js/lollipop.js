@@ -138,6 +138,8 @@ var myBaselines = svg.selectAll("myBaseline")
 
 // Function that update the chart for a disorder
 function updateChart(selectedGroup, selectedSex) {
+
+  // Create the filtered dataset
   var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedGroup })
   if(selectedSex == "both"){
     selectedData = selectedData.filter(function(d){ return d.sex == "both" })
@@ -179,7 +181,12 @@ d3.select("#selectButton").on("change", function(d){
   updateChart(selectedGroup, "other")
 })
 
-// Function that update the chart to show or hide sex?
+// An event listener to the radio button for SEX
+d3.select("#formSexLollipop").on("click", function(){
+    console.log("Sex Lollipop button has been clicked")
+    var radioValue = $("input[name='controlLolliCOD']:active").val();
+    updateChart("Any Disorders", "both")
+})
 
 
 }
