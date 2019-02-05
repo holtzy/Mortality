@@ -146,8 +146,16 @@ u {
 
 
 
-
-
+/* Style select button */
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;       /* remove default arrow */
+   background-image: url(...);   /* add custom arrow */
+   border: none;
+   color: red;
+   text-decoration: underline;
+}
 
 
 /* ---------- BUTTON ----------------- */

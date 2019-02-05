@@ -6,7 +6,7 @@ function plotLoli(){
 // ======================= //
 
 // set the dimensions and margins of the graph
-var margin = {top: 70, right: 30, bottom: 100, left: 180},
+var margin = {top: 70, right: 30, bottom: 100, left: 190},
     width = 810 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
 
@@ -76,7 +76,7 @@ var myYLabels = svg.selectAll("myYLabels")
 svg.selectAll('.myMainLabel')
     .style("font-size", 16)
     .style("fill", 'black')
-    .attr('x', -10)
+    .attr('x', -50)
 
 // Horizontal bars
 yTickPos = [0, bigGap, bigGap*2+smallGap*3]
@@ -84,7 +84,7 @@ svg.selectAll("yTicks")
   .data(yTickPos)
   .enter()
   .append("line")
-    .attr("x1", 0)
+    .attr("x1", -30)
     .attr("x2", width)
     .attr("y1", function(d) { return d })
     .attr("y2", function(d) { return d })
@@ -194,7 +194,7 @@ function updateChart(selectedGroup, selectedSex) {
     .remove()
 
 
-  // 
+  //
   // // Add confidence interval
   // var w = svg.selectAll(".myLolliBaseline")
   //   .data(selectedData)
