@@ -5,13 +5,10 @@ function plotLoli(){
 // DATA AND SVG AREAS
 // ======================= //
 
-// Get filtered data
-data_filter = data_MRR.filter(function(d){ return d.mentalDis == "Any Disorder" & d.sex == "both"})
-
 // set the dimensions and margins of the graph
 var margin = {top: 70, right: 30, bottom: 100, left: 180},
     width = 810 - margin.left - margin.right,
-    height = 680 - margin.top - margin.bottom;
+    height = 650 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_loli")
@@ -32,17 +29,28 @@ var svg = d3.select("#my_loli")
 var x = d3.scaleLinear()
   .domain([0, 20])
   .range([ 0, width]);
-svg.append("g")
+var xAxis = svg.append("g")
   .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x))
-  .selectAll("text")
-    .style("text-anchor", "end");
+  .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
+xAxis.select(".domain").remove()
+svg.selectAll(".tick line").attr("stroke", "#B0B0B0")
+xTickPos = [0,5,10,15,20]
+svg.selectAll("xTicks")
+  .data(xTickPos)
+  .enter()
+  .append("line")
+    .attr("x1", function(d) { return x(d); })
+    .attr("x2", function(d) { return x(d); })
+    .attr("y1", -20 )
+    .attr("y2", height-20)
+    .attr("stroke", "#B0B0B0")
+
 
 // Add X axis label:
 svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
-    .attr("y", height + margin.top)
+    .attr("y", height + 30)
     .text("Mortality Rate Ratio");
 
 // Y 'axis': prepare position of each group
@@ -55,7 +63,7 @@ var myYLabels = svg.selectAll("myYLabels")
   .data(posYaxis)
   .enter()
   .append("text")
-    .attr('x', -20)
+    .attr('x', -30)
     .attr('y', function(d,i){return posYaxis[i]})
     .text( function(d,i){return bothCOD[i]})
     .attr("text-anchor", "end")
@@ -68,7 +76,31 @@ var myYLabels = svg.selectAll("myYLabels")
 svg.selectAll('.myMainLabel')
     .style("font-size", 16)
     .style("fill", 'black')
-    .attr('x', 0)
+    .attr('x', -10)
+
+// Horizontal bars
+yTickPos = [0, bigGap, bigGap*2+smallGap*3]
+svg.selectAll("yTicks")
+  .data(yTickPos)
+  .enter()
+  .append("line")
+    .attr("x1", 0)
+    .attr("x2", width)
+    .attr("y1", function(d) { return d })
+    .attr("y2", function(d) { return d })
+    .attr("stroke", "#B0B0B0")
+
+
+// Color scale for dots
+var myColorLolliSex = d3.scaleOrdinal()
+  .domain(["both", "men", "women"])
+  .range(["black", "blue", "pink"])
+
+// Scale to slightly modify sexes on the Y axis
+var myPositionLolliSex = d3.scaleOrdinal()
+  .domain(["both", "men", "women"])
+  .range([0, -3, 3])
+
 
 
 
@@ -77,7 +109,7 @@ svg.selectAll('.myMainLabel')
 // ======================= //
 
 // add the options to the button
-d3.select("#selectButton")
+d3.select("#controlLolliDisorder")
   .selectAll('myOptions')
   .data(allDisorder)
   .enter()
@@ -87,106 +119,115 @@ d3.select("#selectButton")
 
 
 
-
-// ======================= //
-// LINES AND CIRCLES
-// ======================= //
-
-// Lines between CI?
-var myLines = svg.selectAll("myline")
-  .data(data_filter)
-  .enter()
-  .append("line")
-    .attr("x1", function(d) { return x(d.MRR_left); })
-    .attr("x2", function(d) { return x(d.MRR_right); })
-    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr("stroke", "grey")
-    .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = .6} ; return opacity  })
-
-// Circles
-var myCircles = svg.append('g')
-  .selectAll("mycircle")
-  .data(data_filter)
-  .enter()
-  .append("circle")
-    .attr("cx", function(d) { return x(d.MRR); })
-    .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 9}else{size=6} ; return size  })
-    .style("fill", "#69b3a2")
-    .attr("stroke", "black")
-    .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = .6} ; return opacity  })
-
-// Lines from baseline
-var myBaselines = svg.selectAll("myBaseline")
-  .data(data_filter)
-  .enter()
-  .append("line")
-    .attr("x1", function(d) { return 10; })
-    .attr("x2", function(d) { return x(d.MRR); })
-    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr("stroke", "grey")
-    .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = 0} ; return opacity  })
-    .style("stroke-dasharray", ("3, 3"))
-
-
-
 // ======================= //
 // INTERACTIVITY
 // ======================= //
 
 // Function that update the chart for a disorder
 function updateChart(selectedGroup, selectedSex) {
+  console.log("Function updateChart lollipop is triggered")
+
+  // Recover the SEX option?
+  selectedSexOption = $("input[name='controlLolliSex']:checked").val();
+  console.log("Sex option is")
+  console.log(selectedSexOption)
+
+  // Recover the Mental Disorder option?
+  var selector = document.getElementById('controlLolliDisorder');
+  var selectedMentalDisOption = selector[selector.selectedIndex].value;
+  console.log("Mental dis option is")
+  console.log(selectedMentalDisOption)
 
   // Create the filtered dataset
-  var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedGroup })
-  if(selectedSex == "both"){
+  var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedMentalDisOption })
+  if(selectedSexOption == "both"){
     selectedData = selectedData.filter(function(d){ return d.sex == "both" })
   }else{
-    selectedData = selectedData.filter(function(d){ console.log(d) ; return d.sex != "both" })
+    selectedData = selectedData.filter(function(d){ return d.sex != "both" })
   }
+  console.log("Resulting lollipop dataset is")
   console.log(selectedData)
 
-  myCircles
+  // Update circle position
+  var u = svg.selectAll(".myLolliCircles")
     .data(selectedData)
+  u
+    .enter()
+    .append("circle")
+    .merge(u)
     .transition()
     .duration(1000)
-    .attr("cx", function(d) { return x(d.MRR); })
-    .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+      .attr("class", "myLolliCircles")
+      .attr("cx", function(d) { return x(d.MRR); })
+      .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 9}else{size=6} ; return size  })
+      .style("fill", function(d){ return myColorLolliSex(d.sex) })
+  u
+    .exit()
+    .transition()
+    .duration(1000)
+    .style("opacity",0)
+    .remove()
 
-  myLines
-    .data(selectedData)
-    .transition()
-    .duration(1000)
-    .attr("x1", function(d) { return x(d.MRR_left); })
-    .attr("x2", function(d) { return x(d.MRR_right); })
-    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
 
-  myBaselines
+  // Add confidence interval
+  var v = svg.selectAll(".myLolliCI")
     .data(selectedData)
+  v
+    .enter()
+    .append("line")
+    .merge(v)
     .transition()
     .duration(1000)
-    .attr("x1", function(d) { return 10; })
-    .attr("x2", function(d) { return x(d.MRR); })
-    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+      .attr("class", "myLolliCI")
+      .attr("x1", function(d) { return x(d.MRR_left); })
+      .attr("x2", function(d) { return x(d.MRR_right); })
+      .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr("stroke", "grey")
+      .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = .6} ; return opacity  })
+  v
+    .exit()
+    .transition()
+    .duration(1000)
+    .style("opacity",0)
+    .remove()
+
+
+  // 
+  // // Add confidence interval
+  // var w = svg.selectAll(".myLolliBaseline")
+  //   .data(selectedData)
+  // w
+  //   .enter()
+  //   .append("line")
+  //   .merge(w)
+  //   .transition()
+  //   .duration(1000)
+  //     .attr("x1", function(d) { return 10; })
+  //     .attr("x2", function(d) { return x(d.MRR); })
+  //     .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+  //     .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
+  //     .attr("stroke", "grey")
+  //     .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = 0} ; return opacity  })
+  //     .style("stroke-dasharray", ("3, 3"))
+  // w
+  //   .exit()
+  //   .transition()
+  //   .duration(1000)
+  //   .style("opacity",0)
+  //   .remove()
 
   }
 
 // Listen to the mental disorder selection button
-d3.select("#selectButton").on("change", function(d){
-  selectedGroup = this.value
-  updateChart(selectedGroup, "other")
-})
+d3.select("#controlLolliDisorder").on("change", updateChart)
 
-// An event listener to the radio button for SEX
-d3.select("#formSexLollipop").on("click", function(){
-    console.log("Sex Lollipop button has been clicked")
-    var radioValue = $("input[name='controlLolliCOD']:active").val();
-    updateChart("Any Disorders", "both")
-})
+// An event listener to the radio button for Lollipop SEX
+d3.select("#controlLolliSex").on("change", updateChart)
+
+// Run the updateChart function at loading
+updateChart()
 
 
 }
