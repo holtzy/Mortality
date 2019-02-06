@@ -75,6 +75,9 @@
           <a class="nav-link js-scroll-trigger" href="#explore">Explore</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" href="#method">Method</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
       </ul>
@@ -190,8 +193,9 @@
 </section>
 
 
-
-
+<div class="container">
+<div id="my_loliAll"></div>
+</div>
 
 
 
@@ -268,13 +272,12 @@
          <div class="col-lg-8 text-center">
            <br><br><br>
            <h2 class="section-heading text-uppercase" style="color: black">About</h2>
-           <p>Feel free to contact me for any question. For open source project, please open an issue or pull request on <a href="https://github.com/holtzy/">Github</a>. If you want to follow my work, reach me on <a href="https://twitter.com/R_Graph_Gallery">Twitter</a>. Otherwise, send me an email at <a href="mailto:yan.holtz.data@gmail.com">yan.holtz.data@gmail.com</a>.</p>
+           <p>This webpage aims to provide more information on our scientific publication in <a href="">journal Z</a>. Pipeline of analysis is described here with reproducible code, dataviz section is <a href="https://github.com/holtzy/Mortality">here</a>. You can see more of our work on Comorbidity en Mental disorder epidemiology on our webpage: <a href="https://www.nbepi.com">nbepi.com</a>.</p>
            <div style="text-align:center">
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://github.com/holtzy/data_to_viz">Github</a>
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://twitter.com/R_Graph_Gallery">Twitter</a>
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="mailto:yan.holtz.data@gmail.com">Mail</a>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://www.nbepi.com">NB Epi.com</a>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://www.nbepi.com">Paper</a>
+              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="mailto:j.mcgrath@uq.edu.au">Mail</a>
             </div>
-
          </div>
        </div>
     </div>
@@ -286,10 +289,43 @@
 
 
 
+  <!-- ======================= LOGO SECTION =============================== -->
+
+<section id="logo"  style="padding-top: 4%; padding-bottom: 4%; background-color: white">
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-4 text-center" style="margin-top: 40px; margin-bottom: 40px;">
+        <br>
+        <a href="http://www.au.dk/en/"><img class="img-fluid d-block mx-auto" src="img/aarhus_university_logo.png" alt=""></a>
+       </div>
+       <div class="col-lg-4 text-center">
+         <a href="https://dg.dk/en/"><img class="img-fluid d-block mx-auto" src="img/DNRF.png" alt=""></a>
+       </div>
+       <div class="col-lg-4 text-center"s tyle="margin-top: 40px; margin-bottom: 40px;">
+        <br>
+        <a href="https://www.uq.edu.au"><img class="img-fluid d-block mx-auto" src="img/UQlogo.png" alt=""></a>
+       </div>
+       <div class="col-lg-4 offset-lg-2 text-center" style="margin-top: 40px; margin-bottom: 40px;">
+        <br>
+        <a href="http://econ.au.dk/the-national-centre-for-register-based-research/niels-bohr-professorship/"><img class="img-fluid d-block mx-auto" src="img/NBPlogo.jpg" alt="" style="width: 60%"></a>
+       </div>
+       <div class="col-lg-4 text-center" style="margin-top: 40px; margin-bottom: 40px;">
+        <br>
+        <a href="https://www.harvard.edu"><img class="img-fluid d-block mx-auto" src="img/harvard.png" alt="" style="width: 80%"></a>
+       </div>
+      </div>
+     </div>
+  </div>
+</section>
+
+
+
+
+
 
 
 <!-- ======================= FOOTER SECTION ================================ -->
-    <footer>
+    <footer class="bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
@@ -336,6 +372,51 @@
 
 
 
+<!-- ======================= MODAL SECTION ================================ -->
+
+<!-- Data management -->
+<center><div class="portfolio-modal modal fade" id="method" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog h-100">
+    <div class="modal-content">
+      <div class="close-modal" data-dismiss="modal">
+        <div class="lr">
+          <div class="rl"></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div class="modal-body">
+              <br><br><br>
+              <h1>METHOD</h1>
+              <hr>
+              <br><br>
+              <p style="max-width: 600px">Please provide me with text for the methods.</p>
+              <div style="text-align: left">
+                <h6>Part 1</h6>
+                <hr>
+                <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
+                <br>
+                <h6>Part 2:</h6>
+                <hr>
+                <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
+                <br>
+                <h6>Contact me</h6>
+                <hr>
+                <span>Lorem ipsum.</span>
+                <div style="margin-top: 15px;">
+                   <a class="btn btn-secondary btn text-uppercase js-scroll-trigger" href="https://github.com/holtzy/data_to_viz">Github</a>
+                   <a class="btn btn-secondary btn text-uppercase js-scroll-trigger" href="https://twitter.com/R_Graph_Gallery">Twitter</a>
+                   <a class="btn btn-secondary btn text-uppercase js-scroll-trigger" href="mailto:yan.holtz.data@gmail.com">Mail</a>
+                 </div>
+                 <br><br><br>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></center>
 
 
 
@@ -369,7 +450,8 @@
 
     <!-- Charts -->
     <script src="js/heatmap.js"></script>
-    <script src="js/lollipop.js"></script>
+    <!-- <script src="js/lollipop.js"></script> -->
+    <script src="js/lollipopAll.js"></script>
     <script src="js/line.js"></script>
     <script src="js/stackedBar.js"></script>
 
