@@ -27,6 +27,7 @@ var svg = d3.select("#my_loliAll")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      .style("overflow", "visible")
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")" )
 
@@ -84,12 +85,12 @@ var myYLabels = svg
   .data(posYaxis)
   .enter()
   .append("text")
-    .attr('x', -0)
+    .attr('x', -10)
     .attr('y', function(d,i){return posYaxis[i]})
     .text( function(d,i){return bothCOD[i]})
     .attr("text-anchor", "end")
     .style("font-size", 14)
-    .style("fill", 'none')
+    .style("fill", 'black')
     .attr('class', function(d,i){ cod = bothCOD[i] ; if( typeCOD.includes(cod)){return 'myMainLabel'} })
     .style('alignment-baseline', 'middle')
 
@@ -129,13 +130,6 @@ var mouseover = function(d) {
     .duration(300)
     .style("fill", "red")
     .style("opacity", 1)
-  // Show the horizontal line
-  horizLine
-    .style("opacity", 1)
-    .attr("x1", 0)
-    .attr("x2", function(d) { console.log( d.values() ) ; return 100 }) 
-    .attr("y1", 100)
-    .attr("y2", 100)
   }
 var mouseleave = function(d) {
   selectedClass = d3.select(this).attr("class")
@@ -144,7 +138,9 @@ var mouseleave = function(d) {
     .transition()
     .duration(300)
     .style("fill", "black")
-  horizLine
+  horizLines
+    .transition()
+    .duration(300)
     .style("opacity", 0)
 
   }
@@ -179,23 +175,18 @@ $('#allLolli').on('shown.bs.modal', function (e) {
 })
 
 // Add Baseline
-var horizLine = svg
+var horizLines = svg
+  .selectAll('vertLines')
+  .data( function(d){ return(d.values)} )
+  .enter()
   .append("line")
-  .attr("stroke", "red")
-
-
-// var vertLines = svg
-//   .selectAll('vertLines')
-//   .data( function(d){ return(d.values)} )
-//   .enter()
-//   .append("line")
-//     .attr("x1", function(d) { return x(d.MRR); })
-//     .attr("x2", function(d) { return x(d.MRR); })
-//     .attr("y1", 0)
-//     .attr("y2", height)
-//     .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-//     .attr("stroke", "red")
-//     .style("opacity",0)
+    .attr("x1", 0)
+    .attr("x2", function(d) { return x(d.MRR); })
+    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+    .attr("stroke", "red")
+    .style("opacity",0)
 
 
 
