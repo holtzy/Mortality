@@ -6,10 +6,9 @@ function plotLoliAll(){
 // ======================= //
 
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 10, bottom: 20, left: 70},
+var margin = {top: 27, right: 10, bottom: 15, left: 20},
     width = 260 - margin.left - margin.right,
-    height = 270 - margin.top - margin.bottom;
-
+    height = 260 - margin.top - margin.bottom;
 
 // group the data: I want to draw one line per group
 var data_filter = data_MRR.filter(function(d){ return d.sex == "both" })
@@ -48,7 +47,6 @@ var xAxis = svg.append("g")
   .attr("transform", "translate(0," + (height-20) + ")")
   .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
 xAxis.select(".domain").remove()
-svg.selectAll(".tick line").attr("stroke", "#B0B0B0")
 xTickPos = [0,5,10,15]
 svg.selectAll("xTicks")
   .data(xTickPos)
@@ -58,7 +56,7 @@ svg.selectAll("xTicks")
     .attr("x2", function(d) { return x(d); })
     .attr("y1", -20 )
     .attr("y2", height-20)
-    .attr("stroke", "#B0B0B0")
+    .attr("stroke", "#F8F8F8")
 
 // Y 'axis': prepare position of each group
 var smallGap = 13
@@ -95,7 +93,7 @@ var myPositionLolliSex = d3.scaleOrdinal()
 svg
   .append("text")
   .attr("text-anchor", "start")
-  .attr("y", -15)
+  .attr("y", -17)
   .attr("x", 0)
   .text(function(d){ return(d.key)})
 
