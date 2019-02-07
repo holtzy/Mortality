@@ -6,7 +6,7 @@ function plotLoliAll(){
 // ======================= //
 
 // set the dimensions and margins of the graph
-var margin = {top: 27, right: 10, bottom: 15, left: 20},
+var margin = {top: 37, right: 10, bottom: 3, left: 20},
     width = 260 - margin.left - margin.right,
     height = 260 - margin.top - margin.bottom;
 
@@ -28,25 +28,38 @@ var svg = d3.select("#my_loliAll")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
-      // .attr("transform", function(d){
-      //     if( d.key=="Any Disorder" || d.key=="Mood Disorders" || d.key == "Intellectual Disabilities"){
-      //       a = "translate(" + (margin.left+150) + "," + margin.top + ")"
-      //     }else{
-      //       a = "translate(" + margin.left + "," + margin.top + ")"
-      //     } ;
-      //     return a
-      // });
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")" )
 
+// Add background
+svg
+    .append("rect")
+      .attr("x",0)
+      .attr("y",-16)
+      .attr("width",width)
+      .attr("height",height+16)
+      .style("fill", "grey")
+      .style("opacity", .1)
+
+// Add titles to each subplot with disorder Name
+svg
+  .append("text")
+  .attr("text-anchor", "start")
+  .attr("y", -22)
+  .attr("x", 0)
+  .text(function(d){ return(d.key)})
+
+
+
+
+
+// ======================= //
+// SCALES AND AXIS
+// ======================= //
 
 // Add X axis
 var x = d3.scaleLinear()
   .domain([0, 20])
   .range([ 0, width]);
-var xAxis = svg.append("g")
-  .attr("transform", "translate(0," + (height-20) + ")")
-  .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
-xAxis.select(".domain").remove()
 xTickPos = [0,5,10,15]
 svg.selectAll("xTicks")
   .data(xTickPos)
@@ -57,6 +70,7 @@ svg.selectAll("xTicks")
     .attr("y1", -20 )
     .attr("y2", height-20)
     .attr("stroke", "#F8F8F8")
+    .attr("stroke-width", 2)
 
 // Y 'axis': prepare position of each group
 var smallGap = 13
@@ -89,43 +103,58 @@ var myPositionLolliSex = d3.scaleOrdinal()
   .domain(["both", "men", "women"])
   .range([0, -3, 3])
 
-// Add titles to each subplot with disorder Name
-svg
-  .append("text")
-  .attr("text-anchor", "start")
-  .attr("y", -17)
-  .attr("x", 0)
-  .text(function(d){ return(d.key)})
+
+
+
+
+
+// ======================= //
+// INTERACTIVITY
+// ======================= //
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
+  // recover the class = the COD of the circle
   selectedClass = d3.select(this).attr("class")
+  // Turn every circle grey
   svg
     .selectAll("circle")
     .transition()
     .duration(300)
     .style("fill", "#B8B8B8")
+  // Turn red the good circle
   svg
     .selectAll("."+selectedClass)
     .transition()
     .duration(300)
     .style("fill", "red")
     .style("opacity", 1)
-}
+  // Show the horizontal line
+  horizLine
+    .style("opacity", 1)
+    .attr("x1", 0)
+    .attr("x2", function(d) { console.log( d.values() ) ; return 100 }) 
+    .attr("y1", 100)
+    .attr("y2", 100)
+  }
 var mouseleave = function(d) {
-  console.log("mouseleave")
   selectedClass = d3.select(this).attr("class")
-  console.log(selectedClass)
   svg
     .selectAll("circle")
     .transition()
     .duration(300)
     .style("fill", "black")
-  horizLines
+  horizLine
     .style("opacity", 0)
-  vertLines
-    .style("opacity", 0)
-}
+
+  }
+
+
+
+
+// ======================= //
+// SHAPES
+// ======================= //
 
 // Add circles
 svg
@@ -133,38 +162,40 @@ svg
   .data( function(d){ return(d.values)} )
   .enter()
   .append("circle")
-    .attr("cx", function(d) { return x(d.MRR); })
+    .attr("cx", x(0))
     .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
     .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 8}else{size=4} ; return size  })
-    .attr("class", function(d) { return d.COD; })
+    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
     .on("mouseover", mouseover)
     .on("mouseleave", mouseleave)
 
+// When the modal loads, activate circle position
+$('#allLolli').on('shown.bs.modal', function (e) {
+  svg
+    .selectAll('circle')
+    .transition()
+    .duration(1000)
+    .attr("cx", function(d) { return x(d.MRR); })
+})
+
 // Add Baseline
-var horizLines = svg
-  .selectAll('horizLines')
-  .data( function(d){ return(d.values)} )
-  .enter()
+var horizLine = svg
   .append("line")
-    .attr("x1", 0)
-    .attr("x2", width)
-    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr("class", function(d) { return d.COD; })
-    .attr("stroke", "red")
-    .style("opacity",0)
-var vertLines = svg
-  .selectAll('vertLines')
-  .data( function(d){ return(d.values)} )
-  .enter()
-  .append("line")
-    .attr("x1", function(d) { return x(d.MRR); })
-    .attr("x2", function(d) { return x(d.MRR); })
-    .attr("y1", 0)
-    .attr("y2", height)
-    .attr("class", function(d) { return d.COD; })
-    .attr("stroke", "red")
-    .style("opacity",0)
+  .attr("stroke", "red")
+
+
+// var vertLines = svg
+//   .selectAll('vertLines')
+//   .data( function(d){ return(d.values)} )
+//   .enter()
+//   .append("line")
+//     .attr("x1", function(d) { return x(d.MRR); })
+//     .attr("x2", function(d) { return x(d.MRR); })
+//     .attr("y1", 0)
+//     .attr("y2", height)
+//     .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+//     .attr("stroke", "red")
+//     .style("opacity",0)
 
 
 

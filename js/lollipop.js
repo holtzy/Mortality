@@ -125,18 +125,13 @@ d3.select("#controlLolliDisorder")
 
 // Function that update the chart for a disorder
 function updateChart(selectedGroup, selectedSex) {
-  console.log("Function updateChart lollipop is triggered")
 
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlLolliSex']:checked").val();
-  console.log("Sex option is")
-  console.log(selectedSexOption)
 
   // Recover the Mental Disorder option?
   var selector = document.getElementById('controlLolliDisorder');
   var selectedMentalDisOption = selector[selector.selectedIndex].value;
-  console.log("Mental dis option is")
-  console.log(selectedMentalDisOption)
 
   // Create the filtered dataset
   var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedMentalDisOption })
@@ -145,9 +140,7 @@ function updateChart(selectedGroup, selectedSex) {
   }else{
     selectedData = selectedData.filter(function(d){ return d.sex != "both" })
   }
-  console.log("Resulting lollipop dataset is")
-  console.log(selectedData)
-
+  
   // Update circle position
   var u = svg.selectAll(".myLolliCircles")
     .data(selectedData)

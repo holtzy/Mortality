@@ -315,11 +315,25 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 
 
+/* -------------------- MODAL ------------------ */
+
+.tooltip {
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  min-width: 400px;
+  text-align: left;
+  color: white;
+}
 
 
 
 
 
+.dark{
+  filter: brightness(0.1)
+}
 /* -------------------- MODAL ------------------ */
 
 /* width of modal: different following the device: small (100%), medium(50%), large(30%); */

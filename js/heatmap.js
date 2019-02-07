@@ -7,9 +7,9 @@ function plotHeatmap(){
 // ======================= //
 
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 130, left: 120},
-  width = 600 - margin.left - margin.right,
-  height = 600 - margin.top - margin.bottom;
+var margin = {top: 30, right: 80, bottom: 130, left: 160},
+  width = 660 - margin.left - margin.right,
+  height = 540 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_heatmap")
@@ -21,7 +21,7 @@ var svg = d3.select("#my_heatmap")
         "translate(" + margin.left + "," + margin.top + ")");
 
 // Labels of row and columns
-var myGroups = allCOD
+var myGroups = bothCOD
 var myVars = allDisorder
 
 
@@ -30,21 +30,41 @@ var myVars = allDisorder
 // AXIS and SCALES
 // ======================= //
 
-// Build X scales and axis:
+// A scale to add padding between groups
+var gap = 20
+var gaps = [0, gap, gap, gap, gap, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2 ]
+var myPadding = d3.scaleOrdinal()
+  .domain(myGroups)
+  .range(gaps);
+
+// Build X scales:
 var x = d3.scaleBand()
   .range([ 0, width ])
   .domain(myGroups)
   .padding(0.01);
-var xAxis = svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x).tickSize(0))
-xAxis.selectAll("text")
-    .attr("transform", "translate(-10,10)rotate(-45)")
-    .style("text-anchor", "end")
-    .style("font-size", "12px")
-xAxis.select(".domain").remove()
 
-// Build X scales and axis:
+// add the X Labels
+var xLabels = svg
+  .selectAll("Xlabels")
+  .data(bothCOD)
+  .enter()
+  .append("text")
+    .text(function(d){ return d})
+    .attr("x", 0)
+    .attr("y", 0)
+    .style("text-anchor", "end")
+    .style("font-size", 14)
+    .style("fill", 'grey')
+    .attr("transform", function(d){ return( "translate(" + (x(d) + myPadding(d) + 18) + "," + (height+11) + ")rotate(-45)")})
+    .attr('class', function(d,i){ cod = bothCOD[i] ; if( typeCOD.includes(cod)){return 'myMainLabel'} })
+
+// Custom labels of main groups
+svg.selectAll('.myMainLabel')
+    .style("font-size", 16)
+    .style("fill", 'black')
+    .attr('x', -10)
+
+// Build Y scales and axis:
 var y = d3.scaleBand()
   .range([ height, 0 ])
   .domain(myVars)
@@ -52,18 +72,60 @@ var y = d3.scaleBand()
 var yAxis = svg.append("g")
   .call(d3.axisLeft(y).tickSize(0))
 yAxis.selectAll("text")
-  .style("font-size", "12px")
+    .style("font-size", 14)
+    .style("fill", 'grey')
 yAxis.select(".domain").remove();
 
 
+
 // Build color scales
-var myColorMRR = d3.scaleLinear()
-  .range(["white", "#ED3A3B"])
-  .domain([1,10])
+var myColorMRR = d3.scaleSequential()
+    .interpolator(d3.interpolateInferno)
+    .domain([0,10])
 
-var myColorLYL = d3.scaleSequential(d3.interpolatePuOr)
-  .domain([-3,10])
+var myColorLYL = d3.scaleSequential()
+    .interpolator(d3.interpolateInferno)
+    .domain([-3,10])
 
+
+
+
+
+
+
+// ======================= //
+// TOOLTIP
+// ======================= //
+
+// create a tooltip
+var tooltip = d3.select("#my_heatmap")
+  .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("font-size", "16px")
+
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseover = function(d) {
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 1)
+  tooltip
+      .html("<span style='color:grey'>M. Disorder: </span>" + d.mentalDis + "<br>" + "<span style='color:grey'>Cause of death: </span>" + d.COD + "<br>" + "MRR: " + Math.round(d.MRR*100)/100 + " [" + Math.round(d.MRR_left*100)/100 + "-" + Math.round(d.MRR_right*100)/100 + "]") // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .style("top", (event.pageY)+"px")
+      .style("left",(event.pageX+20)+"px")
+}
+var mousemove = function(d) {
+  tooltip
+    .style("top", (event.pageY)+"px")
+    .style("left",(event.pageX+20)+"px")
+}
+var mouseleave = function(d) {
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 0)
+}
 
 
 
@@ -71,31 +133,46 @@ var myColorLYL = d3.scaleSequential(d3.interpolatePuOr)
 // SHAPES
 // ======================= //
 
+// Prepare data
+var data_MRR_filter = data_MRR.filter(function(d){ return d.sex == "women" })
+var data_LYL_filter = data_LYL_long.filter(function(d){ return d.sex == "women" })
+
 // Add squares for MRR
 svg.selectAll()
-    .data(data_MRR.filter(function(d){ return d.sex == "women" }))
+    .data(data_MRR_filter)
     .enter()
     .append("rect")
       .attr("class", "MRR")
-      .attr("x", function(d) { return x(d.COD) })
+      .attr("x", function(d) { return x(d.COD)+myPadding(d.COD) })
       .attr("y", function(d) { return y(d.mentalDis) })
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColorMRR(d.MRR)} )
       .attr("opacity", 1)
+      .style("stroke-width", 1)
+      .style("stroke", "black")
+      .style("opacity", 0.8)
+      .attr("rx", 0)
+      .attr("ry", 0)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
 
 // Add squares for LYL
 svg.selectAll()
-    .data(data_LYL_long.filter(function(d){ return d.sex == "Females" }))
+    .data(data_LYL_filter)
     .enter()
     .append("rect")
       .attr("class", "LYL")
-      .attr("x", function(d) { return x(d.COD) })
+      .attr("x", function(d) { return x(d.COD)+myPadding(d.COD) })
       .attr("y", function(d) { return y(d.mentalDis) })
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColorLYL(+d.LYL)} )
       .attr("opacity", 0)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
 
 }
 
@@ -112,13 +189,13 @@ function showLYL() {
 
 // An event listener to the radio button
 d3.select("#form").on("click", function(){
-    console.log("Heatmap type button has been clicked")
     var radioValue = $("input[name='controlHeatmapType']:active").val();
     if(radioValue == "MRR"){
       showMRR()
     } else {
       showLYL()
     }
+
 })
 
 
