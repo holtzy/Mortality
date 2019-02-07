@@ -89,10 +89,24 @@ var myYLabels = svg
     .attr('y', function(d,i){return posYaxis[i]})
     .text( function(d,i){return bothCOD[i]})
     .attr("text-anchor", "end")
-    .style("font-size", 14)
-    .style("fill", 'black')
-    .attr('class', function(d,i){ cod = bothCOD[i] ; if( typeCOD.includes(cod)){return 'myMainLabel'} })
+    .style("font-size", 9)
+    .style("fill", 'grey')
+    .attr('class', function(d,i){
+      cod = bothCOD[i] ;
+      cod_clean = cod.replace(/\s/g, '')
+      if( typeCOD.includes(cod)){
+        return 'myMainLabel'+cod_clean
+      }else{
+        return cod_clean
+      }
+    })
     .style('alignment-baseline', 'middle')
+
+// Custom labels of main groups
+svg.selectAll('.myMainLabel')
+    .style("font-size", 13)
+    .style("fill", 'black')
+    .attr('x', -20)
 
 // Color scale for dots
 var myColorLolliSex = d3.scaleOrdinal()
