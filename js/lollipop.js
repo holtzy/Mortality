@@ -114,7 +114,7 @@ d3.select("#controlLolliDisorder")
   .data(allDisorder)
   .enter()
   .append('option')
-  .text(function (d) { return d; }) // text showed in the menu
+  .text(function (d) { return d }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
 
@@ -140,7 +140,7 @@ function updateChart(selectedGroup, selectedSex) {
   }else{
     selectedData = selectedData.filter(function(d){ return d.sex != "both" })
   }
-  
+
   // Update circle position
   var u = svg.selectAll(".myLolliCircles")
     .data(selectedData)

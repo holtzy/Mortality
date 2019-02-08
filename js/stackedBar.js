@@ -86,6 +86,7 @@ svg.append("g")
       .attr("height", y.bandwidth())
       .attr("x", function(d) {  return x(d[0]); })
       .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
+      .style("border-radius", 20)
 
 }
 
