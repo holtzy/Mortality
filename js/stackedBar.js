@@ -1,5 +1,17 @@
 function plotStackedbar(){
 
+// IDEAS
+// color palette = one for natural, one for unatural, one for neoplasm
+// toggle natural/unatural or list of diseases.
+// Hover: show tooltip with barplot to see ranking
+// Click: reorder bars to see vertical ranking
+// order general bars
+// Y scale: any disorder should be separated
+
+
+
+
+
 
 // ======================= //
 // DATA, SVG AREAS
@@ -9,11 +21,10 @@ function plotStackedbar(){
 data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
 // Order data
 
-
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 20, left: 150},
+var margin = {top: 100, right: 30, bottom: 90, left: 150},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 560 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_stackedBar")
@@ -27,8 +38,6 @@ var svg = d3.select("#my_stackedBar")
 // List of subgroups = Cause of Death
 var subgroups = allCOD
 
-// List of groups = List of Mental Disorder
-var groups = allDisorder
 
 // color palette = one color per subgroup
 var color = d3.scaleOrdinal()
@@ -39,24 +48,40 @@ var color = d3.scaleOrdinal()
 
 
 // ======================= //
-// AXIS
+// X AXIS AND SCALE
 // ======================= //
 
 // Add X axis
 var x = d3.scaleLinear()
   .domain([-3, 15])
   .range([0, width])
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x).tickSizeOuter(0));
+
+
+
+
+
+// ======================= //
+// Y AXIS AND SCALE
+// ======================= //
+
+// List of groups = List of Mental Disorder
+var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eating Disorders","Schizophrenia", "Developmental Disorders","Personality Disorders", "Behavioral Disorders", "Mood Disorders", "Neurotic Disorders", "Organic Disorders"]
 
 // Add Y axis
 var y = d3.scaleBand()
     .domain(groups)
-    .range([ height, 0 ])
+    .range([ 0, height ])
     .padding([0.4])
-svg.append("g")
-  .call(d3.axisLeft(y));
+
+// A scale to add padding between groups
+var gap = 30
+var gaps = [0, gap, gap, gap, gap, gap, gap, gap, gap, gap, gap ]
+var myPadding = d3.scaleOrdinal()
+  .domain(groups)
+  .range(gaps);
+
+
+
 
 
 
@@ -82,11 +107,90 @@ svg.append("g")
     // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(function(d) { return d; })
     .enter().append("rect")
-      .attr("y", function(d) { return y(d.data.mentalDis) } )
+      .attr("y", function(d) { return y(d.data.mentalDis)+myPadding(d.data.mentalDis) } )
       .attr("height", y.bandwidth())
       .attr("x", function(d) {  return x(d[0]); })
       .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
-      .style("border-radius", 20)
+
+
+
+// ======================= //
+// LABELS ON TOP OF BARS
+// ======================= //
+
+// Compute center of each bar of the first top group
+var myMeans = []
+for( i in  stackedData){
+  inter = stackedData[i][0]
+  mean = (inter[0] + inter[1]) / 2
+  myMeans.push(mean)
+}
+
+// Add label
+svg.selectAll("topLabels")
+  .data(myMeans)
+  .enter()
+  .append("text")
+    .attr("x", function(d) { return x(d); })
+    .text(function(d,i){ grp=subgroups[i] ; return(grp)})
+    .attr("y", 0)
+    .style("fill", function(d,i){ grp=subgroups[i] ; return(color(grp))})
+    .style("font-size",12)
+    .style("text-anchor", "start")
+    .attr("transform", function(d){ return( "translate(" + (x(d) + 18) + "," + (30) + ")rotate(-45)")})
+
+
+
+
+
+
+// ======================= //
+// X AXIS
+// ======================= //
+
+xTickPos = [-3,0,3,6,9,12]
+
+// Vertical lines
+svg.selectAll("xTicks")
+  .data(xTickPos)
+  .enter()
+  .append("line")
+    .attr("x1", function(d) { return x(d); })
+    .attr("x2", function(d) { return x(d); })
+    .attr("y1", 0 )
+    .attr("y2", height+30)
+    .attr("stroke", "#B0B0B0")
+    .attr("stroke-width", 1)
+
+// Special separation for the 0
+svg
+  .append("line")
+    .attr("x1", x(0) )
+    .attr("x2", x(0) )
+    .attr("y1", 0 )
+    .attr("y2", height+30)
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
+
+// Labels
+svg.selectAll("xLabels")
+  .data(xTickPos)
+  .enter()
+  .append("text")
+    .attr("x", function(d) { return x(d); })
+    .text(function(d){ return d} )
+    .attr("y", height+30+12)
+    .style("fill", "#B0B0B0")
+    .style("font-size",12)
+    .style("text-anchor", "middle")
+
+// Title
+svg.append("text")
+    .attr("text-anchor", "end")
+    .attr("x", width-70)
+    .attr("y", height + 30+32)
+    .text("Life Years Lost (LYL)");
 
 }
 

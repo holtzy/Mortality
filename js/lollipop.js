@@ -46,7 +46,7 @@ svg.selectAll("xTicks")
     .attr("stroke", "#B0B0B0")
 
 
-// Add X axis label:
+// Add X axis title:
 svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
