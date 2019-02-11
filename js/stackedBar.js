@@ -45,15 +45,24 @@ var svg = d3.select("#my_stackedBar")
 // List of subgroups = Cause of Death
 var subgroups = allCOD
 
+// -----> Color to show the 11 categories
 // List of colors: manually picked with 2 main groups
 var allColors = [
   "#A7729A", "#B69EAA", "#C5CABA",
   "#5D81F8","#518FF0","#459DE8","#39ABE0","#2EBAD9","#22C8D1","#16D6C9","#0BE5C2"]
-
-// color palette = one color per subgroup
+// color palette
 var color = d3.scaleOrdinal()
   .domain(subgroups)
   .range(allColors);
+
+// -----> Color to show the 3 categories
+var allColors3Groups = [
+  "#A7729A", "#A7729A", "#A7729A",
+  "#518FF0","red", "#518FF0","#518FF0","#518FF0","#518FF0","#518FF0","#518FF0"]
+// color palette = one color per subgroup
+var color3Groups = d3.scaleOrdinal()
+  .domain(subgroups)
+  .range(allColors3Groups);
 
 
 
@@ -106,6 +115,9 @@ var tooltip = d3.select("#my_stackedBar")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
+  console.log(d)
+  console.log(d.key)
+  console.log(d.data)
   tooltip
       .html(d.data.mentalDis + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
       .style("top", (event.pageY)+"px")
@@ -147,13 +159,14 @@ console.log("stackedData")
 console.log(stackedData)
 
 // Show the bars
-svg.append("g")
+var allBars = svg.append("g")
   .selectAll("g")
   // Enter in the stack data = loop key per key = group per group
   .data(stackedData)
   .enter().append("g")
-    .attr("fill", function(d) { return color(d.key); })
-    .selectAll("rect")
+    .attr("fill", function(d) { return color3Groups(d.key); })
+allBars
+  .selectAll("rect")
     // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(function(d) { return d; })
     .enter().append("rect")
@@ -164,9 +177,6 @@ svg.append("g")
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
-
-
-
 
 
 
@@ -189,7 +199,7 @@ console.log("myMeans")
 console.log(myMeans)
 
 // Add label
-svg.selectAll("topLabels")
+var topLabels = svg.selectAll("topLabels")
   .data(myMeans)
   .enter()
   .append("text")
@@ -199,8 +209,34 @@ svg.selectAll("topLabels")
     .style("fill", function(d,i){ grp=subgroups[i] ; return(color(grp))})
     .style("font-size",12)
     .style("text-anchor", "start")
-     .attr('transform', (d)=>{
+    .attr('transform', (d)=>{
           return 'translate( '+x(d)+' , '+0+'),'+ 'rotate(-45)';})
+    .style("opacity", 0)
+
+
+
+
+// ======================= //
+// CHANGE COLOR and TOP LABELS IF BUTTON IS CLICKED
+// ======================= //
+
+// A function to switch to complete color scale
+var doFunction = function(){
+  allBars
+    .transition()
+    .duration(1000)
+    .attr("fill", function(d) { console.log(d) ; return color(d.key); })
+  topLabels
+    .transition()
+    .duration(1000)
+    .style("opacity", 1)
+};
+
+document.getElementById("changeAllCOD").onclick = doFunction;
+
+
+
+
 
 
 
@@ -263,8 +299,6 @@ svg.append("text")
 // Y LABELS ON LEFT SIDE
 // ======================= //
 
-console.log("data filtered")
-console.log(data_filtered)
 
 // Compute the most left position of each mental disorder
 // TODO : find a cleaner way to isolate the min of each group
@@ -273,8 +307,6 @@ for (i = 0; i < 11; i++) {
   min = stackedData[4][i][0]
   myMins.push(min)
 }
-console.log("myMins")
-console.log(myMins)
 
 // Add label
 svg.selectAll("leftLabels")
