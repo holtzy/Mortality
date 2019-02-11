@@ -17,9 +17,16 @@ function plotStackedbar(){
 // DATA, SVG AREAS
 // ======================= //
 
+// List of groups = List of Mental Disorder
+var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eating Disorders","Schizophrenia", "Developmental Disorders","Personality Disorders", "Behavioral Disorders", "Mood Disorders", "Neurotic Disorders", "Organic Disorders"]
+
 // Get filtered data
 data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
-// Order data
+
+// Order data following groups
+var data_filtered = data_filtered.sort(function(a,b) {
+    return groups.indexOf( a.mentalDis ) > groups.indexOf( b.mentalDis );
+});
 
 // set the dimensions and margins of the graph
 var margin = {top: 100, right: 30, bottom: 90, left: 150},
@@ -38,11 +45,23 @@ var svg = d3.select("#my_stackedBar")
 // List of subgroups = Cause of Death
 var subgroups = allCOD
 
+// List of colors: manually picked with 2 main groups
+var allColors = [
+
+//"#A7729A", "#B69EAA", "#C5CABA",
+"red", "red", "red",
+"#7872A7",
+"#857EAA",
+"#938BAD",
+"#A198B0",
+"#AEA4B3",
+"#BCB1B6",
+"#CABEBA"]
 
 // color palette = one color per subgroup
 var color = d3.scaleOrdinal()
   .domain(subgroups)
-  .range(d3.schemeSet3);
+  .range(allColors);
 
 
 
@@ -64,9 +83,6 @@ var x = d3.scaleLinear()
 // Y AXIS AND SCALE
 // ======================= //
 
-// List of groups = List of Mental Disorder
-var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eating Disorders","Schizophrenia", "Developmental Disorders","Personality Disorders", "Behavioral Disorders", "Mood Disorders", "Neurotic Disorders", "Organic Disorders"]
-
 // Add Y axis
 var y = d3.scaleBand()
     .domain(groups)
@@ -84,17 +100,19 @@ var myPadding = d3.scaleOrdinal()
 
 
 
-
-
 // ======================= //
 // BARS
 // ======================= //
+console.log("subgroups")
+console.log(subgroups)
 
 //stack the data? --> stack per subgroup
 var stackedData = d3.stack()
   .keys(subgroups)
   .offset(d3.stackOffsetDiverging)
   (data_filtered)
+console.log("stackedData")
+console.log(stackedData)
 
 // Show the bars
 svg.append("g")
@@ -114,6 +132,9 @@ svg.append("g")
 
 
 
+
+
+
 // ======================= //
 // LABELS ON TOP OF BARS
 // ======================= //
@@ -125,20 +146,22 @@ for( i in  stackedData){
   mean = (inter[0] + inter[1]) / 2
   myMeans.push(mean)
 }
+console.log("myMeans")
+console.log(myMeans)
 
 // Add label
 svg.selectAll("topLabels")
   .data(myMeans)
   .enter()
   .append("text")
-    .attr("x", function(d) { return x(d); })
+    .attr("x", 0)
     .text(function(d,i){ grp=subgroups[i] ; return(grp)})
     .attr("y", 0)
     .style("fill", function(d,i){ grp=subgroups[i] ; return(color(grp))})
     .style("font-size",12)
     .style("text-anchor", "start")
-    .attr("transform", function(d){ return( "translate(" + (x(d) + 18) + "," + (30) + ")rotate(-45)")})
-
+     .attr('transform', (d)=>{
+          return 'translate( '+x(d)+' , '+0+'),'+ 'rotate(-45)';})
 
 
 
@@ -148,7 +171,7 @@ svg.selectAll("topLabels")
 // X AXIS
 // ======================= //
 
-xTickPos = [-3,0,3,6,9,12]
+xTickPos = [0,3,6,9,12]
 
 // Vertical lines
 svg.selectAll("xTicks")
@@ -192,8 +215,41 @@ svg.append("text")
     .attr("y", height + 30+32)
     .text("Life Years Lost (LYL)");
 
+
+
+
+
+
+// ======================= //
+// Y LABELS ON LEFT SIDE
+// ======================= //
+
+console.log("data filtered")
+console.log(data_filtered)
+
+// Compute center of each bar of the first top group
+var myMins = []
+for( i in  stackedData[0]){
+  min = stackedData[0][i][0]
+  myMins.push(min)
 }
 
+// Add label
+svg.selectAll("leftLabels")
+  .data(myMins)
+  .enter()
+  .append("text")
+    .attr("x", function(d,i){ return x(myMins[i])-15 })
+    .attr("y", function(d,i){return y(groups[i]) + myPadding(groups[i]) + 12})
+    .text(function(d,i){ return groups[i] })
+    .style("fill", "grey")
+    .style("font-size",14)
+    .style("text-anchor", "end")
 
+
+
+
+// Close chart function
+}
 
 plotStackedbar()
