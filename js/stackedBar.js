@@ -47,16 +47,8 @@ var subgroups = allCOD
 
 // List of colors: manually picked with 2 main groups
 var allColors = [
-
-//"#A7729A", "#B69EAA", "#C5CABA",
-"red", "red", "red",
-"#7872A7",
-"#857EAA",
-"#938BAD",
-"#A198B0",
-"#AEA4B3",
-"#BCB1B6",
-"#CABEBA"]
+  "#A7729A", "#B69EAA", "#C5CABA",
+  "#5D81F8","#518FF0","#459DE8","#39ABE0","#2EBAD9","#22C8D1","#16D6C9","#0BE5C2"]
 
 // color palette = one color per subgroup
 var color = d3.scaleOrdinal()
@@ -100,6 +92,46 @@ var myPadding = d3.scaleOrdinal()
 
 
 
+
+// ======================= //
+// TOOLTIP
+// ======================= //
+
+// create a tooltip
+var tooltip = d3.select("#my_stackedBar")
+  .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("font-size", "16px")
+
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseover = function(d) {
+  tooltip
+      .html(d.data.mentalDis + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
+      .style("top", (event.pageY)+"px")
+      .style("left",(event.pageX+20)+"px")
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 1)
+}
+var mousemove = function(d) {
+  tooltip
+    .style("top", (event.pageY)+"px")
+    .style("left",(event.pageX+20)+"px")
+}
+var mouseleave = function(d) {
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 0)
+}
+
+
+
+
+
+
 // ======================= //
 // BARS
 // ======================= //
@@ -129,6 +161,13 @@ svg.append("g")
       .attr("height", y.bandwidth())
       .attr("x", function(d) {  return x(d[0]); })
       .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
+
+
+
+
 
 
 
@@ -227,12 +266,15 @@ svg.append("text")
 console.log("data filtered")
 console.log(data_filtered)
 
-// Compute center of each bar of the first top group
+// Compute the most left position of each mental disorder
+// TODO : find a cleaner way to isolate the min of each group
 var myMins = []
-for( i in  stackedData[0]){
-  min = stackedData[0][i][0]
+for (i = 0; i < 11; i++) {
+  min = stackedData[4][i][0]
   myMins.push(min)
 }
+console.log("myMins")
+console.log(myMins)
 
 // Add label
 svg.selectAll("leftLabels")
