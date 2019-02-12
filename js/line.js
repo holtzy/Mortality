@@ -147,51 +147,57 @@ svgLeft.append("line")
 // CURVES OF LEFT AND RIGHT
 // ======================= //
 
-// Add the diagnosed line
-var diagnosedLine = svgLeft.append("path")
-  .datum( data_filter )
-  .attr("fill", "none")
-  .attr("stroke", "steelblue")
-  .attr("stroke-width", 1.5)
-  .attr("d", d3.line()
-    .x(function(d) { return x(d.specific) })
-    .y(function(d) { return yLeft(d.diagnosed) })
-    )
+function updateChart(data){
 
-// Add the UNdiagnosed line
-svgLeft.append("path")
-  .datum( data_filter )
-  .attr("fill", "none")
-  .attr("stroke", "steelblue")
-  .attr("stroke-width", 1.5)
-  .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
-  .attr("d", d3.line()
-    .x(function(d) { return x(d.specific) })
-    .y(function(d) { return yLeft(d.undiagnosed) })
-    )
+  // Add the diagnosed line
+  var diagnosedLine = svgLeft.append("path")
+    .datum( data )
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.specific) })
+      .y(function(d) { return yLeft(d.diagnosed) })
+      )
 
-// Add confindence interval
-svgRight.append("path")
-  .datum( data_filter )
-  .attr("fill", "#cce5df")
-  .attr("stroke", "none")
-  .attr("stroke-width", 1.5)
-  .attr("d", d3.area()
-    .x(function(d) { return x(d.specific) })
-    .y0(function(d) { return yRight(d.left) })
-    .y1(function(d) { return yRight(d.right) })
-    )
+  // Add the UNdiagnosed line
+  svgLeft.append("path")
+    .datum( data )
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.specific) })
+      .y(function(d) { return yLeft(d.undiagnosed) })
+      )
 
-// Add the diagnosed line
-svgRight.append("path")
-  .datum( data_filter )
-  .attr("fill", "none")
-  .attr("stroke", "steelblue")
-  .attr("stroke-width", 1.5)
-  .attr("d", d3.line()
-    .x(function(d) { return x(d.specific) })
-    .y(function(d) { return yRight(d.irr) })
-    )
+  // Add confindence interval
+  svgRight.append("path")
+    .datum( data )
+    .attr("fill", "#cce5df")
+    .attr("stroke", "none")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.area()
+      .x(function(d) { return x(d.specific) })
+      .y0(function(d) { return yRight(d.left) })
+      .y1(function(d) { return yRight(d.right) })
+      )
+
+  // Add the diagnosed line
+  svgRight.append("path")
+    .datum( data )
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.specific) })
+      .y(function(d) { return yRight(d.irr) })
+      )
+}
+
+// Initialise the chart
+updateChart(data_filter)
 
 
 
