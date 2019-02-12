@@ -108,6 +108,26 @@ svgRight.append("text")
     .style("opacity", ".6")
 
 
+// Add legend
+svgLeft.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 130)
+    .attr("y", 300)
+    .style("fill", "steelblue")
+    .text("No diagnosis")
+    .style("alignment-baseline", "middle")
+svgLeft.append("line")
+    .attr("x1", 80)
+    .attr("x2", 120)
+    .attr("y1", 300)
+    .attr("y2", 300)
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
+
+
+
+
 
 // ======================= //
 // CURVES OF LEFT AND RIGHT
@@ -177,6 +197,13 @@ var focusRight = svgRight.append('g')
     .attr('r', 8.5)
     .style("opacity", 0)
 
+// Create the text along the curve of left chart
+var textRight = svgRight.append('g')
+  .append('text')
+    .style("fill", "black")
+    .style("opacity", 0)
+    .attr("text-anchor", "middle")
+
 // Create the circle that travels along the curve of left chart
 var focusLeftTop = svgLeft.append('g')
   .append('circle')
@@ -184,12 +211,26 @@ var focusLeftTop = svgLeft.append('g')
     .attr('r', 3.5)
     .style("opacity", 0)
 
+// Create the text along the curve of left chart
+var textLeftTop = svgLeft.append('g')
+  .append('text')
+    .style("fill", "black")
+    .style("opacity", 0)
+    .attr("text-anchor", "end")
+
 // Create the circle that travels along the curve of left chart
 var focusLeftBottom = svgLeft.append('g')
   .append('circle')
     .style("fill", "black")
     .attr('r', 3.5)
     .style("opacity", 0)
+
+// Create the text along the curve of left chart
+var textLeftBottom = svgLeft.append('g')
+  .append('text')
+    .style("fill", "black")
+    .style("opacity", 0)
+    .attr("text-anchor", "start")
 
 // Create the Line that travels along both curves of left chart
 var focusLeftLine = svgLeft.append('g')
@@ -222,6 +263,9 @@ function mouseover() {
   focusLeftTop.style("opacity", 1)
   focusLeftBottom.style("opacity", 1)
   focusLeftLine.style("opacity", 1)
+  textLeftTop.style("opacity", 1)
+  textLeftBottom.style("opacity", 1)
+  textRight.style("opacity",1)
 }
 
 function mousemove() {
@@ -232,6 +276,14 @@ function mousemove() {
   focusRight
     .attr("cx", x(selectedData.specific))
     .attr("cy", yRight(selectedData.irr))
+  textRight
+    .text(Math.round(selectedData.irr)+" %")
+    .attr("x", function(){ if(selectedData.specific<35){
+        return x(selectedData.specific)-25
+      }else{
+        return x(selectedData.specific)+25
+    }})
+    .attr("y", yRight(selectedData.irr))
   focusLeftTop
     .attr("cx", x(selectedData.specific))
     .attr("cy", yLeft(selectedData.undiagnosed))
@@ -243,12 +295,23 @@ function mousemove() {
     .attr("x2", x(selectedData.specific))
     .attr("y1", yLeft(selectedData.undiagnosed))
     .attr("y2", yLeft(selectedData.diagnosed))
+  textLeftTop
+    .text(Math.round(selectedData.diagnosed))
+    .attr("x",x(selectedData.specific)-10)
+    .attr("y", yLeft(selectedData.diagnosed))
+  textLeftBottom
+    .text(Math.round(selectedData.undiagnosed))
+    .attr("x",x(selectedData.specific)+10)
+    .attr("y", yLeft(selectedData.undiagnosed))
 }
 function mouseout() {
   focusRight.style("opacity", 0)
   focusLeftTop.style("opacity", 0)
   focusLeftBottom.style("opacity", 0)
   focusLeftLine.style("opacity", 0)
+  textLeftTop.style("opacity", 0)
+  textLeftBottom.style("opacity", 0)
+  textRight.style("opacity",0)
 }
 
 

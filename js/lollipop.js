@@ -189,31 +189,6 @@ function updateChart(selectedGroup, selectedSex) {
     .style("opacity",0)
     .remove()
 
-
-  //
-  // // Add confidence interval
-  // var w = svg.selectAll(".myLolliBaseline")
-  //   .data(selectedData)
-  // w
-  //   .enter()
-  //   .append("line")
-  //   .merge(w)
-  //   .transition()
-  //   .duration(1000)
-  //     .attr("x1", function(d) { return 10; })
-  //     .attr("x2", function(d) { return x(d.MRR); })
-  //     .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-  //     .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] })
-  //     .attr("stroke", "grey")
-  //     .style('opacity', function(d,i){ if(typeCOD.includes(d.COD)){opacity = 1}else{opacity = 0} ; return opacity  })
-  //     .style("stroke-dasharray", ("3, 3"))
-  // w
-  //   .exit()
-  //   .transition()
-  //   .duration(1000)
-  //   .style("opacity",0)
-  //   .remove()
-
   }
 
 // Listen to the mental disorder selection button
