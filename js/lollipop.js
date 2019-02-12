@@ -2,7 +2,7 @@ function plotLoli(){
 
 
 // ======================= //
-// DATA AND SVG AREAS
+//  SVG AREAS
 // ======================= //
 
 // set the dimensions and margins of the graph

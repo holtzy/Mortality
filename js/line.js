@@ -111,19 +111,33 @@ svgRight.append("text")
 // Add legend
 svgLeft.append("text")
     .attr("text-anchor", "start")
-    .attr("x", 130)
-    .attr("y", 300)
+    .attr("x", 270)
+    .attr("y", 350)
     .style("fill", "steelblue")
     .text("No diagnosis")
     .style("alignment-baseline", "middle")
 svgLeft.append("line")
-    .attr("x1", 80)
-    .attr("x2", 120)
-    .attr("y1", 300)
-    .attr("y2", 300)
+    .attr("x1", 230)
+    .attr("x2", 260)
+    .attr("y1", 350)
+    .attr("y2", 350)
     .attr("stroke", "steelblue")
     .attr("stroke-width", 1.5)
     .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
+svgLeft.append("text")
+    .attr("text-anchor", "start")
+    .attr("x", 270)
+    .attr("y", 320)
+    .style("fill", "steelblue")
+    .text("Mental disorder")
+    .style("alignment-baseline", "middle")
+svgLeft.append("line")
+    .attr("x1", 230)
+    .attr("x2", 260)
+    .attr("y1", 320)
+    .attr("y2", 320)
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
 
 
 
@@ -134,7 +148,7 @@ svgLeft.append("line")
 // ======================= //
 
 // Add the diagnosed line
-svgLeft.append("path")
+var diagnosedLine = svgLeft.append("path")
   .datum( data_filter )
   .attr("fill", "none")
   .attr("stroke", "steelblue")
@@ -178,6 +192,9 @@ svgRight.append("path")
     .x(function(d) { return x(d.specific) })
     .y(function(d) { return yRight(d.irr) })
     )
+
+
+
 
 
 
@@ -313,6 +330,28 @@ function mouseout() {
   textLeftBottom.style("opacity", 0)
   textRight.style("opacity",0)
 }
+
+
+
+
+
+
+// ======================= //
+// SHOW 2 LINES FOR SEX IF BUTTON IS CLICKED
+// ======================= //
+
+// A function to switch to complete color scale
+var showSexLinechartFunction = function(){
+  diagnosedLine
+    .transition()
+    .duration(1000)
+    .style("opacity",0)
+};
+
+document.getElementById("showSexLinechart").onclick = showSexLinechartFunction;
+
+
+
 
 
 
