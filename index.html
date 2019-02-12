@@ -133,7 +133,7 @@
     </div>
 
     <!-- Charts -->
-    <button type="button" id='showSexLinechart'>Show sex</button>
+    <button type="button" id='showAllGrouped'>Group All</button>
     <div class="row" style="padding-bottom: 20px">
       <center><div class="col-lg-6" id="my_MR"></div></center>
       <center><div class="col-lg-6" id="my_MRR"></div></center>
@@ -142,7 +142,7 @@
     <!-- Second text -->
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
-        <center><p style="text-align: justify" class="threeColumns"><a onclick="showSexSpecificLine">Sex-specific</a> mortality rate ratio for those with any mental disorder showed a similar trend for males and females, although males had a higher ratio than females after age 20 years.</center>
+        <center><p style="text-align: justify" class="threeColumns"><span class="showSexLinechart persoBtn">Sex-specific</span> mortality rate ratio for those with any mental disorder showed a similar trend for <span class="showSexLinechart maleStyle">males</span> and <span class="showSexLinechart femaleStyle">females</span>, although males had a higher ratio than females after age 20 years. Causes of death can also be <span class="persoBtn">split</span> between natural and artifical cause of death. It appears that unnatural cause of death are highly more frequent for people with mental disorders, notably because of the effect of suicide. The next part of this document allows to dig this concept further.</center>
       </div>
     </div>
 
@@ -171,7 +171,7 @@
 
     <!-- Plot title -->
     <div>
-      <p style="display: inline-block; padding-left: 20px; border-width: .5px; border-left: solid; margin-left: 5em; font-size: 15px; text-align: left; max-width:400px">Mortality rates per specific cause of death for people with <select id="controlLolliDisorder"></select></p>
+      <p style="display: inline-block; padding-left: 20px; border-width: .5px; border-left: solid; margin-left: 5em; font-size: 15px; text-align: left; max-width:400px">Mortality rates per specific cause of death for people with <select class="persoBtn" id="controlLolliDisorder"></select></p>
       <!-- Radio button that controls sex: split or both? -->
       <div id="controlLolliSex" style="display: inline-block; position: absolute; right: 270px; font-size: 15px; text-align: right">
         <span>You can study sex together or separately:</span>

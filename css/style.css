@@ -155,8 +155,6 @@ select {
    appearance: none;       /* remove default arrow */
    background-image: url(...);   /* add custom arrow */
    border: none;
-   color: red;
-   text-decoration: underline;
 }
 
 
@@ -464,4 +462,28 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   margin-left: auto;
   margin-right: auto;
   width: 800px;
+}
+
+
+
+
+
+/* ---------- CUSTOM STYLE FOR THIS PROJECT ----------------- */
+
+.maleStyle{
+  color: #1E8F89;
+  cursor: pointer;
+}
+.femaleStyle{
+  color: #EE5A45;
+  cursor: pointer;
+}
+.persoBtn{
+  border: solid;
+  border-color: #ED3A3B;
+  border-width: 0.7px;
+  border-radius: 3px;
+  padding: 3px;
+  cursor: pointer;
+  background-color: rgba(237,58,59,0.1);
 }

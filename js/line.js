@@ -2,11 +2,13 @@ function plotLine(){
 
 
 // ======================= //
-// DATA, SVG AREAS
+// DATA, SVG AREAS, GENERAL STUFF
 // ======================= //
 
 // Get filtered data
-data_filter = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Males" & d.specific > 15})
+data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15})
+data_sexSpecific = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & (d.sex2 == "Males" || d.sex2 == "Females") & d.specific > 15})
+data_codSpecific = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label != "All Causes" & d.sex2 == "Persons" & d.specific > 15})
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 50, left: 60},
@@ -31,15 +33,18 @@ var svgRight = d3.select("#my_MRR")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+var mySexColor = d3.scaleOrdinal()
+  .domain(["Persons", "Males", "Females"])
+  .range(["steelblue", "#1E8F89", "#EE5A45"])
 
 
 // ======================= //
-// X and Y AXIS AND SCALES
+// X AXIS
 // ======================= //
 
 // Add X axis
 var x = d3.scaleLinear()
-  .domain([5, d3.max(data_filter, function(d) { return +d.specific; }) ])
+  .domain([5, 100 ])
   .range([ 0, width ]);
 svgLeft.append("g")
   .attr("transform", "translate(0," + height + ")")
@@ -59,6 +64,14 @@ svgRight.append("text")
     .attr("x", width)
     .attr("y", height + margin.top + 30)
     .text("Age (in years)");
+
+
+
+
+
+// ======================= //
+// Y AXIS
+// ======================= //
 
 // Left: Add Y axis and scales
 var yLeft = d3.scaleLog()
@@ -108,12 +121,18 @@ svgRight.append("text")
     .style("opacity", ".6")
 
 
+
+
+// ======================= //
+// LEGEND
+// ======================= //
+
 // Add legend
 svgLeft.append("text")
     .attr("text-anchor", "start")
     .attr("x", 270)
     .attr("y", 350)
-    .style("fill", "steelblue")
+    .style("fill", "black")
     .text("No diagnosis")
     .style("alignment-baseline", "middle")
 svgLeft.append("line")
@@ -121,14 +140,14 @@ svgLeft.append("line")
     .attr("x2", 260)
     .attr("y1", 350)
     .attr("y2", 350)
-    .attr("stroke", "steelblue")
+    .attr("stroke", "black")
     .attr("stroke-width", 1.5)
     .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
 svgLeft.append("text")
     .attr("text-anchor", "start")
     .attr("x", 270)
     .attr("y", 320)
-    .style("fill", "steelblue")
+    .style("fill", "black")
     .text("Mental disorder")
     .style("alignment-baseline", "middle")
 svgLeft.append("line")
@@ -136,78 +155,151 @@ svgLeft.append("line")
     .attr("x2", 260)
     .attr("y1", 320)
     .attr("y2", 320)
-    .attr("stroke", "steelblue")
+    .attr("stroke", "black")
     .attr("stroke-width", 1.5)
 
 
 
 
 
+
+
 // ======================= //
-// CURVES OF LEFT AND RIGHT
+// CURVES BOTH SIDES
 // ======================= //
 
 function updateChart(data){
 
+  console.log("input data")
+  console.log(data)
+
+  // Nest the data = group per sex and COD
+  var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+    .key(function(d){ return d.sex2;})
+    .entries(data);
+
+  console.log("nested data")
+  console.log(sumstat)
+
   // Add the diagnosed line
-  var diagnosedLine = svgLeft.append("path")
-    .datum( data )
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.specific) })
-      .y(function(d) { return yLeft(d.diagnosed) })
-      )
+  var diagnosedLine = svgLeft
+      .selectAll(".lineDiag")
+      .data(sumstat)
+  diagnosedLine
+      .enter()
+      .append("path")
+      .merge(diagnosedLine)
+      .transition()
+      .duration(1000)
+        .attr("class", "lineDiag")
+        .attr("fill", "none")
+        .attr("stroke", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("stroke-width", 1.5)
+        .style("opacity", 1)
+        .attr("d", function(d){
+          return d3.line()
+            .x(function(d) { return x(d.specific) })
+            .y(function(d) { return yLeft(d.diagnosed) })
+            (d.values)
+        })
+  diagnosedLine
+      .exit()
+      .transition()
+      .duration(1000)
+      .style("opacity",0)
+      .remove()
+
 
   // Add the UNdiagnosed line
-  svgLeft.append("path")
-    .datum( data )
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 1.5)
-    .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.specific) })
-      .y(function(d) { return yLeft(d.undiagnosed) })
-      )
+  var undiagnosedLine = svgLeft
+      .selectAll(".lineUndiag")
+      .data(sumstat)
+  undiagnosedLine
+      .enter()
+      .append("path")
+      .merge(undiagnosedLine)
+      .transition()
+      .duration(1000)
+        .attr("class", "lineUndiag")
+        .attr("fill", "none")
+        .attr("stroke", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("stroke-width", 1.5)
+        .style("opacity", 1)
+        .attr("d", function(d){
+          return d3.line()
+            .x(function(d) { return x(d.specific) })
+            .y(function(d) { return yLeft(d.undiagnosed) })
+            (d.values)
+        })
+  undiagnosedLine
+      .exit()
+      .transition()
+      .duration(1000)
+      .style("opacity",0)
+      .remove()
+
 
   // Add confindence interval
-  svgRight.append("path")
-    .datum( data )
-    .attr("fill", "#cce5df")
-    .attr("stroke", "none")
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.area()
-      .x(function(d) { return x(d.specific) })
-      .y0(function(d) { return yRight(d.left) })
-      .y1(function(d) { return yRight(d.right) })
-      )
-
-  // Add the diagnosed line
-  svgRight.append("path")
-    .datum( data )
-    .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.specific) })
-      .y(function(d) { return yRight(d.irr) })
-      )
-}
-
-// Initialise the chart
-updateChart(data_filter)
-
-
-
-
+  var confidenceLine = svgRight
+      .selectAll(".lineConfidence")
+      .data(sumstat)
+  confidenceLine
+      .enter()
+      .append("path")
+      .merge(confidenceLine)
+      .style("opacity", .5)
+      .transition()
+      .duration(1000)
+        .attr("class", "lineConfidence")
+        .attr("fill", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("stroke", "none")
+        .attr("stroke-width", 1.5)
+        .attr("d", function(d){
+          return d3.area()
+          .x(function(d) { return x(d.specific) })
+          .y0(function(d) { return yRight(d.left) })
+          .y1(function(d) { return yRight(d.right) })
+          (d.values)
+        })
+  confidenceLine
+      .exit()
+      .transition()
+      .duration(1000)
+      .style("opacity",0)
+      .remove()
 
 
 
-// ======================= //
-// ADD THE ANNOTATION WHEN HOVER
-// ======================= //
+
+  // Add the MRR line
+  var mrrLine = svgRight
+      .selectAll(".lineMrr")
+      .data(sumstat)
+  mrrLine
+      .enter()
+      .append("path")
+      .merge(mrrLine)
+      .transition()
+      .duration(1000)
+        .attr("class", "lineMrr")
+        .attr("fill", "none")
+        .attr("stroke", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("stroke-width", 1.5)
+        .style("opacity", 1)
+        .attr("d", function(d){
+          return d3.line()
+            .x(function(d) { return x(d.specific) })
+            .y(function(d) { return yRight(d.irr) })
+            (d.values)
+        })
+  mrrLine
+      .exit()
+      .transition()
+      .duration(1000)
+      .style("opacity",0)
+      .remove()
+
 
 // This allows to find the closest X index of the mouse:
 var bisect = d3.bisector(function(d) { return d.specific; }).left;
@@ -294,8 +386,8 @@ function mouseover() {
 function mousemove() {
   // recover coordinate we need
   var x0 = x.invert(d3.mouse(this)[0]);
-  var i = bisect(data_filter, x0, 1);
-  selectedData = data_filter[i]
+  var i = bisect(data, x0, 1);
+  selectedData = data[i]
   focusRight
     .attr("cx", x(selectedData.specific))
     .attr("cy", yRight(selectedData.irr))
@@ -338,6 +430,22 @@ function mouseout() {
 }
 
 
+}
+
+// Initialise the chart
+updateChart(data_allGrouped)
+
+
+
+
+
+
+
+// ======================= //
+// ADD THE ANNOTATION WHEN HOVER
+// ======================= //
+
+
 
 
 
@@ -346,15 +454,14 @@ function mouseout() {
 // SHOW 2 LINES FOR SEX IF BUTTON IS CLICKED
 // ======================= //
 
-// A function to switch to complete color scale
-var showSexLinechartFunction = function(){
-  diagnosedLine
-    .transition()
-    .duration(1000)
-    .style("opacity",0)
-};
 
-document.getElementById("showSexLinechart").onclick = showSexLinechartFunction;
+// If user clicks on something with the class  showSex.. -> show sex
+var anchors = document.getElementsByClassName("showSexLinechart")
+for(var i = 0; i < anchors.length; i++) {
+  anchors[i].onclick = function(){ updateChart(data_sexSpecific)}
+}
+// And for grouping everything
+document.getElementById("showAllGrouped").onclick = function(){ updateChart(data_allGrouped)} ;
 
 
 

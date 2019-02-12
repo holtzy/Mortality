@@ -115,9 +115,6 @@ var tooltip = d3.select("#my_stackedBar")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
-  console.log(d)
-  console.log(d.key)
-  console.log(d.data)
   tooltip
       .html(d.data.mentalDis + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
       .style("top", (event.pageY)+"px")
@@ -147,16 +144,12 @@ var mouseleave = function(d) {
 // ======================= //
 // BARS
 // ======================= //
-console.log("subgroups")
-console.log(subgroups)
 
 //stack the data? --> stack per subgroup
 var stackedData = d3.stack()
   .keys(subgroups)
   .offset(d3.stackOffsetDiverging)
   (data_filtered)
-console.log("stackedData")
-console.log(stackedData)
 
 // Show the bars
 var allBars = svg.append("g")
@@ -195,8 +188,6 @@ for( i in  stackedData){
   mean = (inter[0] + inter[1]) / 2
   myMeans.push(mean)
 }
-console.log("myMeans")
-console.log(myMeans)
 
 // Add label
 var topLabels = svg.selectAll("topLabels")
@@ -225,7 +216,7 @@ var doFunction = function(){
   allBars
     .transition()
     .duration(1000)
-    .attr("fill", function(d) { console.log(d) ; return color(d.key); })
+    .attr("fill", function(d) { return color(d.key); })
   topLabels
     .transition()
     .duration(1000)
