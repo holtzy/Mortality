@@ -133,7 +133,18 @@
     </div>
 
     <!-- Charts -->
-    <button type="button" id='showAllGrouped'>Group All</button>
+    <div class="dropdown float-right">
+      <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <span class="dropdown-item showSexLinechart" >Show males and females</span>
+        <span class="dropdown-item" >Show causes of death</span>
+        <span class="dropdown-item" id='showAllGrouped'>Group all</span>
+      </div>
+    </div>
+
+
     <div class="row" style="padding-bottom: 20px">
       <center><div class="col-lg-6" id="my_MR"></div></center>
       <center><div class="col-lg-6" id="my_MRR"></div></center>
