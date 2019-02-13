@@ -174,7 +174,7 @@
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
         <p style="display:inline; font-size: 35px">Mortality rates by specific causes of death</p>
-        <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
+        <hr style="width: 100px; height: 1px; border-color: black">
         <center><p style="text-align: justify" class="threeColumns">People with mental disorders have an higher mortality rate <i>generally speaking</i>. It is possible to narrow the analysis, taking any cause of death separately (<u>cause of death specific</u> mortality rate ratio). Those ratios are always over 1, meaning that even for cause of death taken separately, being diagnosed with a mental disorder always increases the probability of death. Cause spectific MRR ranges from 1.4 for neoplasm to 11.8 for suicide. Alcohol Misuse is another important cause of death, with a MRR of 8.9.</p></center>
       </div>
       <br><br>
@@ -216,20 +216,36 @@
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
         <p style="display:inline; font-size: 35px">Excess in Life Year Lost</p>
-        <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
-        <center><p style="text-align: justify" class="threeColumns">Excess in life year losts is another way to study the premature component of mortality</p>Surprisingly, we found that men with all types of mental disorder had fewer LYLs associated with neoplasm-related deaths compared to the general population.</center>
+        <hr style="width: 100px; height: 1px; border-color: black">
+        <center><p style="text-align: justify" class="threeColumns">Excess in life year losts is another way to study the premature component of mortality. One sentence of explanation, how is it different from MRR. Being diagnosed with a mental disorder is almost always linked with life year lost, both for natural and unnatural cause of death. Substance use is the disorder the most associated with life year lost. Surprisingly, we found that people with all types of mental disorder had fewer LYLs associated with <span style="color: red">neoplasm-related</span> deaths compared to the general population.</center>
       </div>
       <br><br>
     </div>
-    <button type="button" id='changeAllCOD'>Show CODs</button>
-    <button type="button" id='change3Groups'>Show 3 groups</button>
+
+    <!-- show the chart  -->
+    <div class="dropdown float-right">
+      <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <span class="dropdown-item changeAllCOD" >Show all COD</span>
+        <span class="dropdown-item change3Groups" >group COD</span>
+      </div>
+    </div>
     <center><div id="my_stackedBar"></div></center>
+
+    <!-- Last text-->
+    <center><p style="text-align: justify" class="threeColumns">Once more it is possible to split this analysis per <span class="changeAllCOD persoBtn">specific cause of death</span>. It appears that <span class="persoBtn">Alcohol Misuse</span> is one of the cause of death the most involved with life years lost. (Together with suicide, accidents and other causes).</p></center>
+
   </div>
 </section>
 
 
-
-
+<style>
+.Suicide{
+  display: "none"
+}
+</style>
 
 <!-- ======================== HEATMAP ============================ -->
 <section id="explore" class="bg">

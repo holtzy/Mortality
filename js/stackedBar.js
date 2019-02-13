@@ -49,16 +49,19 @@ var subgroups = allCOD
 // List of colors: manually picked with 2 main groups
 var allColors = [
   "#A7729A", "#B69EAA", "#C5CABA",
-  "#5D81F8","#518FF0","#459DE8","#39ABE0","#2EBAD9","#22C8D1","#16D6C9","#0BE5C2"]
+  "#7FDBFF",    "red","#7FDBFF","#001f3f","#0074D9","#001f3f","#0074D9","#7FDBFF"]
 // color palette
 var color = d3.scaleOrdinal()
   .domain(subgroups)
   .range(allColors);
 
 // -----> Color to show the 3 categories
+var col1 = "#A7729A"
+var col2 = "red"
+var col3 = "#518FF0"
 var allColors3Groups = [
-  "#A7729A", "#A7729A", "#A7729A",
-  "#518FF0","red", "#518FF0","#518FF0","#518FF0","#518FF0","#518FF0","#518FF0"]
+  col1, col1, col1,
+  col3, col2, col3,col3,col3,col3,col3,col3]
 // color palette = one color per subgroup
 var color3Groups = d3.scaleOrdinal()
   .domain(subgroups)
@@ -115,14 +118,19 @@ var tooltip = d3.select("#my_stackedBar")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
+  console.log("mouseover")
+  var subgroupName = d3.select(this.parentNode).datum().key;
   tooltip
-      .html(d.data.mentalDis + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
+      .html(d.data.mentalDis + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
       .style("top", (event.pageY)+"px")
       .style("left",(event.pageX+20)+"px")
   tooltip
     .transition()
     .duration(200)
     .style("opacity", 1)
+  // And color of the rect
+  d3.selectAll(".myRect").style("opacity", 0.2)
+  d3.selectAll("."+subgroupName.replace(/\s/g, '')).style("opacity", 1)
 }
 var mousemove = function(d) {
   tooltip
@@ -134,6 +142,7 @@ var mouseleave = function(d) {
     .transition()
     .duration(200)
     .style("opacity", 0)
+  d3.selectAll(".myRect").style("opacity",0.8)
 }
 
 
@@ -158,11 +167,15 @@ var allBars = svg.append("g")
   .data(stackedData)
   .enter().append("g")
     .attr("fill", function(d) { return color3Groups(d.key); })
+    .style("opacity", .7)
+    .attr("stroke", function(d) { return color3Groups(d.key); })
+    .attr("class", function(d){return "myRect " + d.key.replace(/\s/g, '')})
 allBars
   .selectAll("rect")
     // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(function(d) { return d; })
-    .enter().append("rect")
+    .enter()
+    .append("rect")
       .attr("y", function(d) { return y(d.data.mentalDis)+myPadding(d.data.mentalDis) } )
       .attr("height", y.bandwidth())
       .attr("x", function(d) {  return x(d[0]); })
@@ -204,6 +217,30 @@ var topLabels = svg.selectAll("topLabels")
           return 'translate( '+x(d)+' , '+0+'),'+ 'rotate(-45)';})
     .style("opacity", 0)
 
+// Add label in 3 groups mode
+var grpLabels = ["Neoplasms", "Unnatural", "Natural"]
+var color3grp = d3.scaleOrdinal()
+  .domain(grpLabels)
+  .range([col2, col1, col3]);
+var xPos3grp = d3.scaleOrdinal()
+  .domain(grpLabels)
+  .range([x(-0.5), x(1.5), x(6)]);
+var topLabelsGrp = svg.selectAll("topLabelsGrp")
+  .data(grpLabels)
+  .enter()
+  .append("text")
+    .attr("x", 0)
+    .text(function(d){return d})
+    .attr("y", 0)
+    .style("fill", function(d){ return color3grp(d) })
+    .style("font-size",12)
+    .style("text-anchor", "start")
+    .attr('transform', (d)=>{
+          return 'translate( '+xPos3grp(d)+' , '+0+'),'+ 'rotate(-45)';})
+    .style("opacity", 1)
+
+
+
 
 
 
@@ -212,20 +249,48 @@ var topLabels = svg.selectAll("topLabels")
 // ======================= //
 
 // A function to switch to complete color scale
-var doFunction = function(){
+var showAllCODFunction = function(){
   allBars
     .transition()
     .duration(1000)
     .attr("fill", function(d) { return color(d.key); })
+    .attr("stroke", "black")
   topLabels
+    .transition()
+    .duration(1000)
+    .style("opacity", 1)
+  topLabelsGrp
+    .transition()
+    .duration(1000)
+    .style("opacity", 0)
+};
+
+// A function to switch to complete color scale
+var showGroupCODFunction = function(){
+  allBars
+    .transition()
+    .duration(1000)
+    .attr("fill", function(d) { return color3Groups(d.key); })
+  topLabels
+    .transition()
+    .duration(1000)
+    .style("opacity", 0)
+  topLabelsGrp
     .transition()
     .duration(1000)
     .style("opacity", 1)
 };
 
-document.getElementById("changeAllCOD").onclick = doFunction;
-
-
+// Button that triger all COD
+var anchors = document.getElementsByClassName("changeAllCOD")
+for(var i = 0; i < anchors.length; i++) {
+  anchors[i].onclick = function(){ showAllCODFunction() }
+}
+// Button that triger group
+var anchorsGrp = document.getElementsByClassName("change3Groups")
+for(var i = 0; i < anchorsGrp.length; i++) {
+  anchorsGrp[i].onclick = function(){ showGroupCODFunction() }
+}
 
 
 

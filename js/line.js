@@ -455,6 +455,7 @@ updateChart(data_allGrouped)
 // ======================= //
 
 
+
 // If user clicks on something with the class  showSex.. -> show sex
 var anchors = document.getElementsByClassName("showSexLinechart")
 for(var i = 0; i < anchors.length; i++) {
