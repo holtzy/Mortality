@@ -108,14 +108,60 @@ var myPositionLolliSex = d3.scaleOrdinal()
 // BUILD BUTTON
 // ======================= //
 
+// Add the option any disorder manually
+d3.select("#controlLolliDisorder")
+  .append('option')
+  .text("Any Disorder") // text showed in the menu
+  .attr("value", "Any Disorder") // corresponding value returned by the button
+// Add vertical separation
+d3.select("#controlLolliDisorder")
+  .append('hr')
 // add the options to the button
 d3.select("#controlLolliDisorder")
   .selectAll('myOptions')
-  .data(allDisorder)
+  .data(allDisorder.filter(function(d){return d!="Any Disorder"}))
   .enter()
   .append('option')
   .text(function (d) { return d }) // text showed in the menu
   .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+
+
+// ======================= //
+// TOOLTIP
+// ======================= //
+
+// create a tooltip
+var tooltip = d3.select("#my_loli")
+  .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("font-size", "16px")
+
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseover = function(d) {
+  console.log("kesako")
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 1)
+  tooltip
+      .html("<span style='color:grey'>M. Disorder: </span>" + d.mentalDis + "<br>" + "<span style='color:grey'>Cause of death: </span>" + d.COD + "<br>" + "MRR: " + Math.round(d.MRR*100)/100 + " [" + Math.round(d.MRR_left*100)/100 + "-" + Math.round(d.MRR_right*100)/100 + "]" + "<br>" + "<span style='color:grey'>Sex: </span>" + d.sex) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .style("top", (event.pageY)+"px")
+      .style("left",(event.pageX+20)+"px")
+}
+var mousemove = function(d) {
+  tooltip
+    .style("top", (event.pageY)+"px")
+    .style("left",(event.pageX+20)+"px")
+}
+var mouseleave = function(d) {
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 0)
+}
+
 
 
 
@@ -147,6 +193,9 @@ function updateChart(selectedGroup, selectedSex) {
   u
     .enter()
     .append("circle")
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)
     .merge(u)
     .transition()
     .duration(1000)
@@ -197,6 +246,20 @@ d3.select("#controlLolliDisorder").on("change", updateChart)
 // An event listener to the radio button for Lollipop SEX
 d3.select("#controlLolliSex").on("change", updateChart)
 
+
+// Listen to the button to show Substance use., behavioral or organic
+d3.select("#showSubstanceUse").on("click", function(){
+  document.getElementById("controlLolliDisorder").value = "Substance Use"
+  updateChart()
+})
+d3.select("#showOrganic").on("click", function(){
+  document.getElementById("controlLolliDisorder").value = "Organic Disorders"
+  updateChart()
+})
+d3.select("#showBehavioral").on("click", function(){
+  document.getElementById("controlLolliDisorder").value = "Behavioral Disorders"
+  updateChart()
+})
 // Run the updateChart function at loading
 updateChart()
 
