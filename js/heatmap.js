@@ -121,11 +121,23 @@ var myColorLYL = d3.scaleSequential()
 
 
 
+
+
 // ======================= //
 // TITLE
 // ======================= //
 
+svgLeft
+  .append("text")
+  .text("Mortality Rate Ratios")
+  .attr("x",70)
+  .attr("y", -20)
 
+svgRight
+  .append("text")
+  .text("Lost Years of Life")
+  .attr("x",70)
+  .attr("y", -20)
 
 
 // ======================= //
