@@ -170,16 +170,10 @@ svgLeft.append("line")
 
 function updateChart(data){
 
-  console.log("input data")
-  console.log(data)
-
   // Nest the data = group per sex and COD
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
     .key(function(d){ return d.sex2;})
     .entries(data);
-
-  console.log("nested data")
-  console.log(sumstat)
 
   // Add the diagnosed line
   var diagnosedLine = svgLeft

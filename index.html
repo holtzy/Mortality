@@ -133,14 +133,16 @@
     </div>
 
     <!-- Charts -->
-    <div class="dropdown float-right">
-      <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        +
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <span class="dropdown-item showSexLinechart" >Show males and females</span>
-        <span class="dropdown-item" >Show causes of death</span>
-        <span class="dropdown-item" id='showAllGrouped'>Group all</span>
+    <div class="container">
+      <div class="dropdown float-right">
+        <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          +
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <span class="dropdown-item showSexLinechart" >Show males and females</span>
+          <span class="dropdown-item" >Show causes of death</span>
+          <span class="dropdown-item" id='showAllGrouped'>Group all</span>
+        </div>
       </div>
     </div>
 
@@ -247,6 +249,13 @@
 }
 </style>
 
+
+
+
+
+
+
+
 <!-- ======================== HEATMAP ============================ -->
 <section id="explore" class="bg">
   <div class="container">
@@ -259,19 +268,28 @@
       <br><br>
     </div>
 
-    <!-- Add 2 buttons -->
-    <!-- <center>
-      <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary active">
-          <input type="radio" name="aaa" id="buttonShowMRR" autocomplete="off"> MRR
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="aaa" id="buttonShowLYL" autocomplete="off"> LYL
-        </label>
-      </form>
-    </center> -->
+    <!-- Button and plot -->
+    <div class="container">
+      <div class="dropdown float-right">
+        <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          +
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <span class="dropdown-item showMalesHeatmap">Males</span>
+          <span class="dropdown-item showFemalesHeatmap">Females</span>
+          <span class="dropdown-item showMBothSexHeatmap">All</span>
+        </div>
+      </div>
+    </div>
 
-    <center>
+    <div class="row" style="padding-bottom: 20px">
+      <center><div class="col-lg-6" id="my_heatmap_left"></div></center>
+      <center><div class="col-lg-6" id="my_heatmap_right"></div></center>
+    </div>
+
+
+
+    <!-- <center>
       <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary active">
           <input type="radio" name="controlHeatmapType" value="MRR" checked>MRR<br>
@@ -280,12 +298,13 @@
           <input type="radio" name="controlHeatmapType" value="LYL">LYL<br>
         </label>
       </form>
-    </center>
+    </center> -->
 
-    <!-- Chart -->
-    <center><div id="my_heatmap"></div></center>
   </div>
 </section>
+
+
+
 
 
 

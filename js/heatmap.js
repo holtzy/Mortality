@@ -6,23 +6,39 @@ function plotHeatmap(){
 // DATA, SVG AREAS
 // ======================= //
 
+// dimension LEFT
+var marginLeft = {top: 30, right: 80, bottom: 130, left: 160},
+  widthLeft = 500 - marginLeft.left - marginLeft.right,
+  heightLeft = 540 - marginLeft.top - marginLeft.bottom;
+
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 80, bottom: 130, left: 160},
-  width = 660 - margin.left - margin.right,
-  height = 540 - margin.top - margin.bottom;
+var marginRight = {top: 30, right: 160, bottom: 130, left: 10},
+  widthRight = 500 - marginRight.left - marginRight.right,
+  heightRight = 540 - marginRight.top - marginRight.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_heatmap")
+var svgLeft = d3.select("#my_heatmap_left")
 .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("width", widthLeft + marginLeft.left + marginLeft.right)
+  .attr("height", heightLeft + marginLeft.top + marginLeft.bottom)
 .append("g")
   .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + marginLeft.left + "," + marginLeft.top + ")");
+
+// append the svg object to the body of the page
+var svgRight = d3.select("#my_heatmap_right")
+.append("svg")
+  .attr("width", widthRight + marginRight.left + marginRight.right)
+  .attr("height", heightRight + marginRight.top + marginRight.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + marginRight.left + "," + marginRight.top + ")");
 
 // Labels of row and columns
 var myGroups = bothCOD
 var myVars = allDisorder
+
+
 
 
 
@@ -39,12 +55,12 @@ var myPadding = d3.scaleOrdinal()
 
 // Build X scales:
 var x = d3.scaleBand()
-  .range([ 0, width ])
+  .range([ 0, widthLeft ])
   .domain(myGroups)
   .padding(0.01);
 
 // add the X Labels
-var xLabels = svg
+var xLabels = svgLeft
   .selectAll("Xlabels")
   .data(bothCOD)
   .enter()
@@ -55,21 +71,37 @@ var xLabels = svg
     .style("text-anchor", "end")
     .style("font-size", 14)
     .style("fill", 'grey')
-    .attr("transform", function(d){ return( "translate(" + (x(d) + myPadding(d) + 18) + "," + (height+11) + ")rotate(-45)")})
+    .attr("transform", function(d){ return( "translate(" + (x(d) + myPadding(d) + 18) + "," + (heightLeft+11) + ")rotate(-45)")})
+    .attr('class', function(d,i){ cod = bothCOD[i] ; if( typeCOD.includes(cod)){return 'myMainLabel'} })
+
+// add the X Labels
+var xLabels = svgRight
+  .selectAll("Xlabels")
+  .data(bothCOD)
+  .enter()
+  .append("text")
+    .text(function(d){ return d})
+    .attr("x", 0)
+    .attr("y", 0)
+    .style("text-anchor", "end")
+    .style("font-size", 14)
+    .style("fill", 'grey')
+    .attr("transform", function(d){ return( "translate(" + (x(d) + myPadding(d) + 18) + "," + (heightLeft+11) + ")rotate(-45)")})
     .attr('class', function(d,i){ cod = bothCOD[i] ; if( typeCOD.includes(cod)){return 'myMainLabel'} })
 
 // Custom labels of main groups
-svg.selectAll('.myMainLabel')
+d3.selectAll('.myMainLabel')
     .style("font-size", 16)
     .style("fill", 'black')
     .attr('x', -10)
 
+
 // Build Y scales and axis:
 var y = d3.scaleBand()
-  .range([ height, 0 ])
+  .range([ heightLeft, 0 ])
   .domain(myVars)
   .padding(0.01);
-var yAxis = svg.append("g")
+var yAxis = svgLeft.append("g")
   .call(d3.axisLeft(y).tickSize(0))
 yAxis.selectAll("text")
     .style("font-size", 14)
@@ -129,16 +161,18 @@ var mouseleave = function(d) {
 
 
 
+
+
 // ======================= //
 // SHAPES
 // ======================= //
 
 // Prepare data
 var data_MRR_filter = data_MRR.filter(function(d){ return d.sex == "women" })
-var data_LYL_filter = data_LYL_long.filter(function(d){ return d.sex == "women" })
+var data_LYL_filter = data_LYL_long.filter(function(d){ return d.sex == "Females" })
 
-// Add squares for MRR
-svg.selectAll()
+// Add squares for MRR (LEFT)
+svgLeft.selectAll()
     .data(data_MRR_filter)
     .enter()
     .append("rect")
@@ -151,25 +185,25 @@ svg.selectAll()
       .attr("opacity", 1)
       .style("stroke-width", 1)
       .style("stroke", "black")
-      .style("opacity", 0.8)
+      .style("opacity", 1)
       .attr("rx", 0)
       .attr("ry", 0)
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
 
-// Add squares for LYL
-svg.selectAll()
+// Add squares for LYL (RIGHT)
+svgRight.selectAll()
     .data(data_LYL_filter)
     .enter()
     .append("rect")
       .attr("class", "LYL")
-      .attr("x", function(d) { return x(d.COD)+myPadding(d.COD) })
+      .attr("x", function(d) { console.log(d) ; return x(d.COD)+myPadding(d.COD) })
       .attr("y", function(d) { return y(d.mentalDis) })
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColorLYL(+d.LYL)} )
-      .attr("opacity", 0)
+      .attr("opacity", 1)
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
