@@ -47,7 +47,7 @@ var myVars = allDisorder
 // ======================= //
 
 // A scale to add padding between groups
-var gap = 20
+var gap = 10
 var gaps = [0, gap, gap, gap, gap, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2 ]
 var myPadding = d3.scaleOrdinal()
   .domain(myGroups)
@@ -121,6 +121,9 @@ var myColorLYL = d3.scaleSequential()
 
 
 
+// ======================= //
+// TITLE
+// ======================= //
 
 
 
@@ -130,35 +133,52 @@ var myColorLYL = d3.scaleSequential()
 // ======================= //
 
 // create a tooltip
-var tooltip = d3.select("#my_heatmap")
+var tooltipLeft = d3.select("#my_heatmap_left")
   .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
     .style("font-size", "16px")
-
 // Three function that change the tooltip when user hover / move / leave a cell
-var mouseover = function(d) {
-  tooltip
-    .transition()
-    .duration(200)
+var mouseoverLeft = function(d) {
+  tooltipLeft
     .style("opacity", 1)
-  tooltip
+
+}
+var mousemoveLeft = function(d) {
+  tooltipLeft
       .html("<span style='color:grey'>M. Disorder: </span>" + d.mentalDis + "<br>" + "<span style='color:grey'>Cause of death: </span>" + d.COD + "<br>" + "MRR: " + Math.round(d.MRR*100)/100 + " [" + Math.round(d.MRR_left*100)/100 + "-" + Math.round(d.MRR_right*100)/100 + "]") // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
-      .style("top", (event.pageY)+"px")
-      .style("left",(event.pageX+20)+"px")
+      .style("left", (d3.mouse(this)[0]+220) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
 }
-var mousemove = function(d) {
-  tooltip
-    .style("top", (event.pageY)+"px")
-    .style("left",(event.pageX+20)+"px")
-}
-var mouseleave = function(d) {
-  tooltip
-    .transition()
-    .duration(200)
+var mouseleaveLeft = function(d) {
+  tooltipLeft
     .style("opacity", 0)
 }
 
+
+
+// create a tooltip
+var tooltipRight = d3.select("#my_heatmap_right")
+  .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("font-size", "16px")
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseoverRight = function(d) {
+  tooltipRight
+    .style("opacity", 1)
+
+}
+var mousemoveRight = function(d) {
+  tooltipRight
+      .html("<span style='color:grey'>M. Disorder: </span>" + d.mentalDis + "<br>" + "<span style='color:grey'>Cause of death: </span>" + d.COD + "<br>" + "LYL: " + Math.round(d.LYL*100)/100 ) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .style("left", (d3.mouse(this)[0]+70) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+}
+var mouseleaveRight = function(d) {
+  tooltipRight
+    .style("opacity", 0)
+}
 
 
 
@@ -183,14 +203,14 @@ svgLeft.selectAll()
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColorMRR(d.MRR)} )
       .attr("opacity", 1)
-      .style("stroke-width", 1)
-      .style("stroke", "black")
+      .style("stroke-width", 0)
+      .style("stroke", "white")
       .style("opacity", 1)
       .attr("rx", 0)
       .attr("ry", 0)
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave)
+    .on("mouseover", mouseoverLeft)
+    .on("mousemove", mousemoveLeft)
+    .on("mouseleave", mouseleaveLeft)
 
 // Add squares for LYL (RIGHT)
 svgRight.selectAll()
@@ -204,9 +224,9 @@ svgRight.selectAll()
       .attr("height", y.bandwidth() )
       .style("fill", function(d) { return myColorLYL(+d.LYL)} )
       .attr("opacity", 1)
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave)
+    .on("mouseover", mouseoverRight)
+    .on("mousemove", mousemoveRight)
+    .on("mouseleave", mouseleaveRight)
 
 }
 
