@@ -30,3 +30,26 @@ bothCOD = ["All Causes",
               "Heart Diseases",
               "Neoplasms"
           ]
+
+// Color scale for type of death
+colCOD1 = "steelblue"
+colCOD2 = "#5F9EA0"
+colCOD3 = "#D87093"
+vec = [colCOD1,
+            colCOD2,
+              colCOD2,
+              colCOD2,
+              colCOD2,
+            colCOD3,
+              colCOD3,
+              colCOD3,
+              colCOD3,
+              colCOD3,
+              colCOD3,
+              colCOD3,
+              colCOD3,
+              colCOD3
+          ]
+myColorCOD = d3.scaleOrdinal()
+  .domain(bothCOD)
+  .range(vec)

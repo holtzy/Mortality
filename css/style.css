@@ -488,3 +488,31 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   cursor: pointer;
   background-color: rgba(237,58,59,0.1);
 }
+
+
+
+
+
+
+
+
+
+
+circle.highlightLollipop{
+  opacity: 1 !important;
+  fill: red !important;
+}
+text.highlightLollipop{
+  opacity: 1 !important;
+  fill: red !important;
+  font-size: 14px !important;
+}
+line.highlightLollipop{
+  opacity: 1 !important;
+  fill: red !important;
+  stroke: red !important;
+}
+
+.hideLollipop{
+  opacity: 0.2 !important;
+}

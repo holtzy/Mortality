@@ -54,14 +54,14 @@ svg
 
 
 // ======================= //
-// SCALES AND AXIS
+// X SCALE AND AXIS
 // ======================= //
 
 // Add X axis
 var x = d3.scaleLinear()
-  .domain([0, 20])
+  .domain([0, 22])
   .range([ 0, width]);
-xTickPos = [0,5,10,15]
+xTickPos = [0,5,10,15,20]
 svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
@@ -72,6 +72,27 @@ svg.selectAll("xTicks")
     .attr("y2", height-20)
     .attr("stroke", "#F8F8F8")
     .attr("stroke-width", 2)
+
+// Add the labels
+svg
+  .filter(function(d){return (d.key=="Intellectual Disabilities" || d.key=="Developmental Disorders" || d.key == "Behavioral Disorders" || d.key == "Personality Disorders" ) })
+  .selectAll("myXLabels")
+  .data(xTickPos)
+  .enter()
+  .append("text")
+    .attr('x', function(d){ return x(d) })
+    .attr('y', height+12)
+    .text( function(d){return d} )
+    .attr("text-anchor", "center")
+    .style("font-size", 9)
+    .style("fill", 'grey')
+
+
+
+
+// ======================= //
+// Y SCALE AND AXIS
+// ======================= //
 
 // Y 'axis': prepare position of each group
 var smallGap = 13
@@ -95,7 +116,7 @@ var myYLabels = svg
       cod = bothCOD[i] ;
       cod_clean = cod.replace(/\s/g, '')
       if( typeCOD.includes(cod)){
-        return 'myMainLabel'+cod_clean
+        return 'myMainLabel'+ ' ' + cod_clean
       }else{
         return cod_clean
       }
@@ -108,16 +129,16 @@ svg.selectAll('.myMainLabel')
     .style("fill", 'black')
     .attr('x', -20)
 
-// Color scale for dots
-var myColorLolliSex = d3.scaleOrdinal()
-  .domain(["both", "men", "women"])
-  .range(["steelblue", "#1E8F89", "#EE5A45"])
+
+
+
+
+
 
 // Scale to slightly modify sexes on the Y axis
 var myPositionLolliSex = d3.scaleOrdinal()
   .domain(["both", "men", "women"])
   .range([0, -3, 3])
-
 
 
 
@@ -131,32 +152,21 @@ var myPositionLolliSex = d3.scaleOrdinal()
 var mouseover = function(d) {
   // recover the class = the COD of the circle
   selectedClass = d3.select(this).attr("class")
-  // Turn every circle grey
+
   svg
-    .selectAll("circle")
-    .transition()
-    .duration(300)
-    .style("fill", "#B8B8B8")
-  // Turn red the good circle
+    .selectAll("circle:not(." + selectedClass + ")")
+    .classed('hideLollipop', true)
   svg
     .selectAll("."+selectedClass)
-    .transition()
-    .duration(300)
-    .style("fill", "red")
-    .style("opacity", 1)
+    .classed('highlightLollipop', true)
   }
 var mouseleave = function(d) {
-  selectedClass = d3.select(this).attr("class")
   svg
-    .selectAll("circle")
-    .transition()
-    .duration(300)
-    .style("fill", "black")
-  horizLines
-    .transition()
-    .duration(300)
-    .style("opacity", 0)
-
+    .selectAll(".hideLollipop")
+    .classed("hideLollipop", false)
+  svg
+    .selectAll(".highlightLollipop")
+    .classed("highlightLollipop", false)
   }
 
 
@@ -174,10 +184,24 @@ svg
   .append("circle")
     .attr("cx", x(0))
     .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 8}else{size=4} ; return size  })
+    .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 5}else{size=5} ; return size  })
+    .style("fill", function(d){ return myColorCOD(d.COD) })
     .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
     .on("mouseover", mouseover)
     .on("mouseleave", mouseleave)
+
+// Add text annotation
+svg
+  .selectAll('myAnnot')
+  .data( function(d){ return(d.values)} )
+  .enter()
+  .append("text")
+    .text( function(d) { return Math.round(d.MRR*100)/100; } )
+    .attr("x", function(d) { return x(d.MRR)+15; })
+    .attr("y", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+    .attr("alignment-baseline", "middle")
+    .style("opacity", 0)
 
 // When the modal loads, activate circle position
 svg
@@ -193,26 +217,28 @@ var horizLines = svg
   .data( function(d){ return(d.values)} )
   .enter()
   .append("line")
+    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
     .attr("x1", 0)
     .attr("x2", function(d) { return x(d.MRR); })
     .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
     .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
     .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-    .attr("stroke", "red")
-    .style("opacity",0)
+    .attr("stroke", function(d) { return myColorCOD(d.COD) })
+    .attr("stroke-width", 1)
+    .style("opacity",.5)
 
 
 
 
 
+// Add an empty svg at the very end to make the total number of plot dividible by 4.
+d3.select("#my_loliAll")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
 
 
-
-
-
-
-
-
+// Close the plotLoliAll function
 }
 
 plotLoliAll()
