@@ -248,22 +248,7 @@ var topLabelsGrp = svg.selectAll("topLabelsGrp")
 // CHANGE COLOR and TOP LABELS IF BUTTON IS CLICKED
 // ======================= //
 
-// A function to switch to complete color scale
-var showAllCODFunction = function(){
-  allBars
-    .transition()
-    .duration(1000)
-    .attr("fill", function(d) { return color(d.key); })
-    .attr("stroke", "black")
-  topLabels
-    .transition()
-    .duration(1000)
-    .style("opacity", 1)
-  topLabelsGrp
-    .transition()
-    .duration(1000)
-    .style("opacity", 0)
-};
+
 
 // A function to switch to complete color scale
 var showGroupCODFunction = function(){
