@@ -188,7 +188,7 @@ function updateChart(data){
       .duration(1000)
         .attr("class", "lineDiag")
         .attr("fill", "none")
-        .attr("stroke", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("stroke", function(d){ return mySexColor(d.key) })
         .attr("stroke-width", 1.5)
         .style("opacity", 1)
         .attr("d", function(d){
@@ -217,7 +217,7 @@ function updateChart(data){
       .duration(1000)
         .attr("class", "lineUndiag")
         .attr("fill", "none")
-        .attr("stroke", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("stroke", function(d){ return mySexColor(d.key) })
         .style("stroke-dasharray", ("3, 3"))
         .attr("stroke-width", 1.5)
         .style("opacity", 1)
@@ -247,7 +247,7 @@ function updateChart(data){
       .transition()
       .duration(1000)
         .attr("class", "lineConfidence")
-        .attr("fill", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("fill", function(d){ return mySexColor(d.key) })
         .attr("stroke", "none")
         .attr("stroke-width", 1.5)
         .attr("d", function(d){
@@ -279,7 +279,7 @@ function updateChart(data){
       .duration(1000)
         .attr("class", "lineMrr")
         .attr("fill", "none")
-        .attr("stroke", function(d){ console.log(d) ; return mySexColor(d.key) })
+        .attr("stroke", function(d){ return mySexColor(d.key) })
         .attr("stroke-width", 1.5)
         .style("opacity", 1)
         .attr("d", function(d){
