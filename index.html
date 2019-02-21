@@ -90,23 +90,21 @@
 
 
 <!-- =======================  LANDING SECTION ======================= -->
-<header id="intro" class="masthead">
-  <div style="margin-top: 10%; margin-bottom: 1%;">
+<section id="intro" style="padding-top: calc(6rem + 72px); padding-bottom: 10px">
+  <div class="container">
     <center><p style="font-size: 35px; max-width: 900px">Association between mortality-related health metrics and mental disorders</p></center>
     <hr style="width: 100px; height: 1px; border:none;color:#333;background-color:#333;">
     <br>
-    <img src="img/people.png" width="400px"></img>
+    <center><img src="img/people.png" width="400px"></img></center>
     <br><br>
     <center><p style="max-width: 700px; text-align: justify" class="threeColumns">Systematic reviews have consistently demonstrated that those with mental disorders have an increased risk of premature mortality. We provide a comprehensive analysis of mortality by different types of mental disorders, presenting both mortality rate ratios and premature mortality based on Life Years Lost</p></center>
     <br><br><br>
     <center><p style="max-width: 700px; color: #808080"><i>A study by O. Plana Ripoll et al.</i></p></center>
-
-  </div>
     <div class="arrowlanding">
-      <a class="js-scroll-trigger" href="#mortality" style="text-decoration: none"><p style="font-size: 80px; color: #ED3A3B">&#xfe40;</p></a>
+      <center><a class="js-scroll-trigger" href="#mortality" style="text-decoration: none"><p style="font-size: 80px; color: #ED3A3B">&#xfe40;</p></a></center>
     </div>
-
-</header>
+  </div>
+</section>
 
 
 
@@ -132,7 +130,20 @@
       </div>
     </div>
 
-    <!-- Charts -->
+    <!-- Charts GENERAL -->
+    <div class="row" style="padding-bottom: 30px">
+      <center><div class="col-lg-6" id="my_MR"></div></center>
+      <center><div class="col-lg-6" id="my_MRR"></div></center>
+    </div>
+
+    <!-- Second text -->
+    <div class="row">
+      <div class="col-lg-12 text-center" style="padding-bottom: 4%">
+        <center><p style="text-align: justify" class="threeColumns"><span class="showSexLinechart persoBtn">Sex-specific</span> mortality rate ratio for those with any mental disorder showed a similar trend for <span class="showSexLinechart maleStyle">males</span> and <span class="showSexLinechart femaleStyle">females</span>, although males had a higher ratio than females after age 20 years. Causes of death can also be <span class="persoBtn">split</span> between natural and artifical cause of death. It appears that mortality rate ratio linked with unnatural cause of death are highly more frequent for people with mental disorders, notably because of the effect of suicide. The next part of this document allows to dig this concept further.</center>
+      </div>
+    </div>
+
+    <!-- buttons -->
     <div class="container">
       <div class="dropdown float-right">
         <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,17 +157,10 @@
       </div>
     </div>
 
-
+    <!-- Charts FOCUS SEX OR COD-->
     <div class="row" style="padding-bottom: 20px">
-      <center><div class="col-lg-6" id="my_MR"></div></center>
-      <center><div class="col-lg-6" id="my_MRR"></div></center>
-    </div>
-
-    <!-- Second text -->
-    <div class="row">
-      <div class="col-lg-12 text-center" style="padding-bottom: 3%">
-        <center><p style="text-align: justify" class="threeColumns"><span class="showSexLinechart persoBtn">Sex-specific</span> mortality rate ratio for those with any mental disorder showed a similar trend for <span class="showSexLinechart maleStyle">males</span> and <span class="showSexLinechart femaleStyle">females</span>, although males had a higher ratio than females after age 20 years. Causes of death can also be <span class="persoBtn">split</span> between natural and artifical cause of death. It appears that mortality rate ratio linked with unnatural cause of death are highly more frequent for people with mental disorders, notably because of the effect of suicide. The next part of this document allows to dig this concept further.</center>
-      </div>
+      <center><div class="col-lg-6" id="my_MR_focus"></div></center>
+      <center><div class="col-lg-6" id="my_MRR_focus"></div></center>
     </div>
 
   </div>
@@ -512,6 +516,7 @@
     <script src="js/lollipop.js"></script>
     <script src="js/lollipopAll.js"></script>
     <script src="js/line.js"></script>
+    <script src="js/lineFocus.js"></script>
     <script src="js/stackedBar.js"></script>
 
 
