@@ -18,15 +18,15 @@ typeCOD = ["Natural Causes","Unnatural Causes","All Causes"]
 bothCOD = ["All Causes",
             "Unnatural Causes",
               "Suicide",
-              "Accidents",
               "Homicide",
+              "Accidents",
             "Natural Causes",
-              "Infectious Diseases",
-              "Neoplasms",
-              "Diabetes Mellitus",
-              "Heart Diseases",
-              "Respiratory Diseases",
-              "Digestive Diseases",
               "Alcohol Misuse",
-              "Other Causes"
+              "Other Causes",
+              "Infectious Diseases",
+              "Respiratory Diseases",
+              "Diabetes Mellitus",
+              "Digestive Diseases",
+              "Heart Diseases",
+              "Neoplasms"
           ]

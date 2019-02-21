@@ -150,9 +150,8 @@
           +
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <span class="dropdown-item showSexLinechart" >Show males and females</span>
-          <span class="dropdown-item" >Show causes of death</span>
-          <span class="dropdown-item" id='showAllGrouped'>Group all</span>
+          <span class="dropdown-item showSexLinechart" >Split by Sex</span>
+          <span class="dropdown-item" >Split by Cause of Death</span>
         </div>
       </div>
     </div>
@@ -203,10 +202,12 @@
     <!-- Show Chart-->
     <center><div id="my_loli"></div></center>
 
-
-
     <!-- Last text-->
-    <center><p style="text-align: justify" class="threeColumns"><u>Sex-specific</u> MRR were systematically higher among males except for the association between any mental disorder and suicide that was higher for females (MRR=17·3) than for males. Last but not least, it is possible to split this analysis at the mental disorder level. For instance, it appears that <span id="showSubstanceUse" class="persoBtn">substance-use</span> is associated with very high MRRs, notably concerning unnatural causes of death and alcohol misuse. Inversely, <span id="showOrganic" class="persoBtn">organic</span> or <span id="showBehavioral" class="persoBtn">behavioral</span> disorders are linked with MRR always under 5. or To compare more efficiently all the links between mental disorders and cause of death, explore the <a data-toggle="modal" href="#allLolli" class="persoBtn">general overview</a>.</p></center>
+    <center><p style="text-align: justify" class="threeColumns"><u>Sex-specific</u> MRR were systematically higher among males except for the association between any mental disorder and suicide that was higher for females (MRR=17·3) than for males. Last but not least, it is possible to split this analysis at the mental disorder level. For instance, it appears that <span id="showSubstanceUse" class="persoBtn">substance-use</span> is associated with very high MRRs, notably concerning unnatural causes of death and alcohol misuse. Inversely, <span id="showOrganic" class="persoBtn">organic</span> or <span id="showBehavioral" class="persoBtn">behavioral</span> disorders are linked with MRR always under 5. or To compare more efficiently all the links between mental disorders and cause of death, explore the general overview.</p></center>
+    <br><br>
+
+    <!-- Chart with everybody -->
+    <center><div id="my_loliAll"></div></center>
 
   </div>
 </section>
@@ -480,7 +481,6 @@
         </div>
       </div>
       <div class="container">
-        <div id="my_loliAll"></div>
       </div>
     </div>
   </div>

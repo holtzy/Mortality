@@ -180,13 +180,12 @@ svg
     .on("mouseleave", mouseleave)
 
 // When the modal loads, activate circle position
-$('#allLolli').on('shown.bs.modal', function (e) {
-  svg
-    .selectAll('circle')
-    .transition()
-    .duration(1000)
-    .attr("cx", function(d) { return x(d.MRR); })
-})
+svg
+  .selectAll('circle')
+  .transition()
+  .duration(1000)
+  .attr("cx", function(d) { return x(d.MRR); })
+
 
 // Add Baseline
 var horizLines = svg

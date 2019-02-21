@@ -202,7 +202,7 @@ function updateChart(selectedGroup, selectedSex) {
       .attr("class", "myLolliCircles")
       .attr("cx", function(d) { return x(d.MRR); })
       .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-      .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 12}else{size=6} ; return size  })
+      .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 7}else{size=6} ; return size  })
       .style("fill", function(d){ return myColorLolliSex(d.sex) })
       .style("stroke", "black")
       .style("fill-opacity", 1)
