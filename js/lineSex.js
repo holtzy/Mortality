@@ -605,15 +605,14 @@ updateChart(data_sexSpecific)
 // ======================= //
 
 
-
-// If user clicks on something with the class  showSex.. -> show sex
-var anchors = document.getElementsByClassName("showSexLinechart")
-for(var i = 0; i < anchors.length; i++) {
-  anchors[i].onclick = function(){ updateChart(data_sexSpecific)}
-}
-// And for grouping everything
-document.getElementById("showAllGrouped").onclick = function(){ updateChart(data_allGrouped)} ;
-
+// // If user clicks on something with the class  showSex.. -> show sex
+// var anchors = document.getElementsByClassName("showSexLinechart")
+// for(var i = 0; i < anchors.length; i++) {
+//   anchors[i].onclick = function(){ updateChart(data_sexSpecific)}
+// }
+// // And for grouping everything
+// document.getElementById("showAllGrouped").onclick = function(){ updateChart(data_allGrouped)} ;
+//
 
 
 

@@ -33,8 +33,8 @@ bothCOD = ["All Causes",
 
 // Color scale for type of death
 colCOD1 = "steelblue"
-colCOD2 = "#5F9EA0"
-colCOD3 = "#D87093"
+colCOD2 = "#A7729A"
+colCOD3 = "#518FF0"
 vec = [colCOD1,
             colCOD2,
               colCOD2,
