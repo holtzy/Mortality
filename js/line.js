@@ -6,7 +6,7 @@ function plotLine(){
 // ======================= //
 
 // Get filtered data
-data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15})
+data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90 })
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 50, left: 60},
@@ -106,7 +106,7 @@ var yRight = d3.scaleLinear()
   .domain([0, 13])
   .range([ height, 0 ]);
 svgRight.append("g")
-  .call(d3.axisLeft(yRight).ticks(5).tickFormat(function(d) { return d + "%"; }).tickSizeOuter(0))
+  .call(d3.axisLeft(yRight).ticks(5).tickFormat(function(d) { return d; }).tickSizeOuter(0))
 
 // Left Add Y axis labels:
 svgRight.append("text")

@@ -30,6 +30,16 @@ h6 {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+h1 {
+  font-size: 35px
+}
+h2 {
+  font-size: 15px;
+  font-family: SFMono-Regular,Menlo;
+  color: #e83e8c;
+
+}
+
 section {
   padding: 100px 0;
 }
@@ -283,9 +293,9 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 /* ---------- WRITE TEXT IN SEVERAL COLUMNS ----------------- */
 .threeColumns{
-    -webkit-column-gap: 20px;
-       -moz-column-gap: 20px;
-            column-gap: 20px;
+    -webkit-column-gap: 36px;
+       -moz-column-gap: 36px;
+            column-gap: 36px;
     -webkit-column-count: 3;
        -moz-column-count: 3;
             column-count: 3;
@@ -493,10 +503,18 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 
 
+/* ---------- BIG LETTER START PARAGRAPH ----------------- */
+
+.drop-cap::first-letter {
+  -webkit-initial-letter: 2;
+          initial-letter: 2;
+  margin-right: .7em;
+}
 
 
 
 
+/* ---------- CSS MULTI LOLLIPOP ----------------- */
 
 circle.highlightLollipop{
   opacity: 1 !important;
