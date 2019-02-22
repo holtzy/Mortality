@@ -1,17 +1,5 @@
 function plotStackedbar(){
 
-// IDEAS
-// color palette = one for natural, one for unatural, one for neoplasm
-// toggle natural/unatural or list of diseases.
-// Hover: show tooltip with barplot to see ranking
-// Click: reorder bars to see vertical ranking
-// order general bars
-// Y scale: any disorder should be separated
-
-
-
-
-
 
 // ======================= //
 // DATA, SVG AREAS
@@ -19,6 +7,9 @@ function plotStackedbar(){
 
 // List of groups = List of Mental Disorder
 var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eating Disorders","Schizophrenia", "Developmental Disorders","Personality Disorders", "Behavioral Disorders", "Mood Disorders", "Neurotic Disorders", "Organic Disorders"]
+
+// List of subgroups
+var subgroups = ["Natural Causes","Unnatural Causes"]
 
 // Get filtered data
 data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
@@ -30,10 +21,10 @@ var data_filtered = data_filtered.sort(function(a,b) {
 
 // set the dimensions and margins of the graph
 var margin = {top: 100, right: 30, bottom: 90, left: 150},
-    width = 960 - margin.left - margin.right,
+    width = 600 - margin.left - margin.right,
     height = 560 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
+// svg = for the stacked Barchart
 var svg = d3.select("#my_stackedBar")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -42,30 +33,16 @@ var svg = d3.select("#my_stackedBar")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-// List of subgroups = Cause of Death
-var subgroups = allCOD
+// And this is for the barplot
+var svgBar = d3.select("#my_stackedBarFocus")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-// -----> Color to show the 11 categories
-// List of colors: manually picked with 2 main groups
-var allColors = [
-  "#A7729A", "#B69EAA", "#C5CABA",
-  "#7FDBFF",    "red","#7FDBFF","#001f3f","#0074D9","#001f3f","#0074D9","#7FDBFF"]
-// color palette
-var color = d3.scaleOrdinal()
-  .domain(subgroups)
-  .range(allColors);
 
-// -----> Color to show the 3 categories
-var col1 = "#A7729A"
-var col2 = "red"
-var col3 = "#518FF0"
-var allColors3Groups = [
-  col1, col1, col1,
-  col3, col2, col3,col3,col3,col3,col3,col3]
-// color palette = one color per subgroup
-var color3Groups = d3.scaleOrdinal()
-  .domain(subgroups)
-  .range(allColors3Groups);
 
 
 
@@ -74,11 +51,23 @@ var color3Groups = d3.scaleOrdinal()
 // X AXIS AND SCALE
 // ======================= //
 
-// Add X axis
+// Add X axis for stacked bar
 var x = d3.scaleLinear()
-  .domain([-3, 15])
+  .domain([0, 15])
   .range([0, width])
 
+// Add X axis for Barchart
+// X axis
+var xBar = d3.scaleBand()
+  .range([ 0, width ])
+  .domain(bothCOD)
+  .padding(0.2);
+svgBar.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(xBar))
+  .selectAll("text")
+    .attr("transform", "translate(-10,0)rotate(-45)")
+    .style("text-anchor", "end");
 
 
 
@@ -100,6 +89,12 @@ var myPadding = d3.scaleOrdinal()
   .domain(groups)
   .range(gaps);
 
+// For barplot
+var yBar = d3.scaleLinear()
+  .domain([-3, 15])
+  .range([height, 0])
+svgBar.append("g")
+    .call(d3.axisLeft(yBar))
 
 
 
@@ -118,31 +113,30 @@ var tooltip = d3.select("#my_stackedBar")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
-  console.log("mouseover")
-  var subgroupName = d3.select(this.parentNode).datum().key;
-  tooltip
-      .html(d.data.mentalDis + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
-      .style("top", (event.pageY)+"px")
-      .style("left",(event.pageX+20)+"px")
-  tooltip
-    .transition()
-    .duration(200)
-    .style("opacity", 1)
-  // And color of the rect
-  d3.selectAll(".myRect").style("opacity", 0.2)
-  d3.selectAll("."+subgroupName.replace(/\s/g, '')).style("opacity", 1)
+  // var subgroupName = d3.select(this.parentNode).datum().key;
+  // tooltip
+  //     .html(d.data.mentalDis + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
+  //     .style("top", (event.pageY)+"px")
+  //     .style("left",(event.pageX+20)+"px")
+  // tooltip
+  //   .transition()
+  //   .duration(200)
+  //   .style("opacity", 1)
+  // // And color of the rect
+  // d3.selectAll(".myRect").style("opacity", 0.2)
+  // d3.selectAll("."+subgroupName.replace(/\s/g, '')).style("opacity", 1)
 }
 var mousemove = function(d) {
-  tooltip
-    .style("top", (event.pageY)+"px")
-    .style("left",(event.pageX+20)+"px")
+  // tooltip
+  //   .style("top", (event.pageY)+"px")
+  //   .style("left",(event.pageX+20)+"px")
 }
 var mouseleave = function(d) {
-  tooltip
-    .transition()
-    .duration(200)
-    .style("opacity", 0)
-  d3.selectAll(".myRect").style("opacity",0.8)
+  // tooltip
+  //   .transition()
+  //   .duration(200)
+  //   .style("opacity", 0)
+  // d3.selectAll(".myRect").style("opacity",0.8)
 }
 
 
@@ -151,13 +145,12 @@ var mouseleave = function(d) {
 
 
 // ======================= //
-// BARS
+// BARS OF STACKED BARPLOT
 // ======================= //
 
 //stack the data? --> stack per subgroup
 var stackedData = d3.stack()
   .keys(subgroups)
-  .offset(d3.stackOffsetDiverging)
   (data_filtered)
 
 // Show the bars
@@ -166,9 +159,9 @@ var allBars = svg.append("g")
   // Enter in the stack data = loop key per key = group per group
   .data(stackedData)
   .enter().append("g")
-    .attr("fill", function(d) { return color3Groups(d.key); })
+    .attr("fill", function(d) { return myColorCOD(d.key); })
     .style("opacity", .7)
-    .attr("stroke", function(d) { return color3Groups(d.key); })
+    .attr("stroke", function(d) { return myColorCOD(d.key); })
     .attr("class", function(d){return "myRect " + d.key.replace(/\s/g, '')})
 allBars
   .selectAll("rect")
@@ -191,7 +184,51 @@ allBars
 
 
 // ======================= //
-// LABELS ON TOP OF BARS
+// BARS OF BARPLOT
+// ======================= //
+
+// Get appropriatte data
+var dataBar = data_filtered
+  .filter(function(d){return d.mentalDis == "Any Disorder"})
+  [0]
+delete dataBar.sex
+delete dataBar.mentalDis
+
+// First step: reformatting the data
+var data_long = [];
+for (prop in dataBar) {
+  data_long.push({
+    COD: prop,
+    value: dataBar[prop],
+  });
+}
+
+// Bars
+svgBar.selectAll("myBar")
+  .data(data_long)
+  .enter()
+  .append("rect")
+    .attr("x", function(d) { return xBar(d.COD); })
+    .attr("width", xBar.bandwidth())
+    .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
+    .attr("y", function(d) {
+            if (d.value > 0){
+                return yBar(d.value);
+            } else {
+                return yBar(0);
+            }
+    })
+    .attr("fill", "#69b3a2")
+
+
+
+
+
+
+
+
+// ======================= //
+// LABELS ON TOP OF STACKED  BARS
 // ======================= //
 
 // Compute center of each bar of the first top group
@@ -210,89 +247,12 @@ var topLabels = svg.selectAll("topLabels")
     .attr("x", 0)
     .text(function(d,i){ grp=subgroups[i] ; return(grp)})
     .attr("y", 0)
-    .style("fill", function(d,i){ grp=subgroups[i] ; return(color(grp))})
+    .style("fill", function(d,i){ grp=subgroups[i] ; return(myColorCOD(grp))})
     .style("font-size",12)
     .style("text-anchor", "start")
     .attr('transform', (d)=>{
           return 'translate( '+x(d)+' , '+0+'),'+ 'rotate(-45)';})
-    .style("opacity", 0)
-
-// Add label in 3 groups mode
-var grpLabels = ["Neoplasms", "Unnatural", "Natural"]
-var color3grp = d3.scaleOrdinal()
-  .domain(grpLabels)
-  .range([col2, col1, col3]);
-var xPos3grp = d3.scaleOrdinal()
-  .domain(grpLabels)
-  .range([x(-0.5), x(1.5), x(6)]);
-var topLabelsGrp = svg.selectAll("topLabelsGrp")
-  .data(grpLabels)
-  .enter()
-  .append("text")
-    .attr("x", 0)
-    .text(function(d){return d})
-    .attr("y", 0)
-    .style("fill", function(d){ return color3grp(d) })
-    .style("font-size",12)
-    .style("text-anchor", "start")
-    .attr('transform', (d)=>{
-          return 'translate( '+xPos3grp(d)+' , '+0+'),'+ 'rotate(-45)';})
     .style("opacity", 1)
-
-
-
-
-
-
-// ======================= //
-// CHANGE COLOR and TOP LABELS IF BUTTON IS CLICKED
-// ======================= //
-
-// A function to switch to complete color scale
-var showAllCODFunction = function(){
-  allBars
-    .transition()
-    .duration(1000)
-    .attr("fill", function(d) { return color(d.key); })
-    .attr("stroke", "black")
-  topLabels
-    .transition()
-    .duration(1000)
-    .style("opacity", 1)
-  topLabelsGrp
-    .transition()
-    .duration(1000)
-    .style("opacity", 0)
-};
-
-// A function to switch to complete color scale
-var showGroupCODFunction = function(){
-  allBars
-    .transition()
-    .duration(1000)
-    .attr("fill", function(d) { return color3Groups(d.key); })
-  topLabels
-    .transition()
-    .duration(1000)
-    .style("opacity", 0)
-  topLabelsGrp
-    .transition()
-    .duration(1000)
-    .style("opacity", 1)
-};
-
-// Button that triger all COD
-var anchors = document.getElementsByClassName("changeAllCOD")
-for(var i = 0; i < anchors.length; i++) {
-  anchors[i].onclick = function(){ showAllCODFunction() }
-}
-// Button that triger group
-var anchorsGrp = document.getElementsByClassName("change3Groups")
-for(var i = 0; i < anchorsGrp.length; i++) {
-  anchorsGrp[i].onclick = function(){ showGroupCODFunction() }
-}
-
-
 
 
 
@@ -355,23 +315,14 @@ svg.append("text")
 // Y LABELS ON LEFT SIDE
 // ======================= //
 
-
-// Compute the most left position of each mental disorder
-// TODO : find a cleaner way to isolate the min of each group
-var myMins = []
-for (i = 0; i < 11; i++) {
-  min = stackedData[4][i][0]
-  myMins.push(min)
-}
-
 // Add label
 svg.selectAll("leftLabels")
-  .data(myMins)
+  .data(groups)
   .enter()
   .append("text")
-    .attr("x", function(d,i){ return x(myMins[i])-15 })
-    .attr("y", function(d,i){return y(groups[i]) + myPadding(groups[i]) + 12})
-    .text(function(d,i){ return groups[i] })
+    .attr("x", -20)
+    .attr("y", function(d){return y(d) + myPadding(d) + 12})
+    .text(function(d){ return d })
     .style("fill", "grey")
     .style("font-size",14)
     .style("text-anchor", "end")
