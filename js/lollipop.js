@@ -21,8 +21,11 @@ var svg = d3.select("#my_loli")
 
 
 
+
+
+
 // ======================= //
-// AXIS AND SCALES
+// X AXIS
 // ======================= //
 
 // Add X axis
@@ -33,6 +36,8 @@ var xAxis = svg.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
 xAxis.select(".domain").remove()
+
+// vertical lines
 svg.selectAll(".tick line").attr("stroke", "#B0B0B0")
 xTickPos = [0,5,10,15,20]
 svg.selectAll("xTicks")
@@ -41,17 +46,40 @@ svg.selectAll("xTicks")
   .append("line")
     .attr("x1", function(d) { return x(d); })
     .attr("x2", function(d) { return x(d); })
-    .attr("y1", -20 )
-    .attr("y2", height-20)
+    .attr("y1", height-20 )
+    .attr("y2", -20)
     .attr("stroke", "#B0B0B0")
 
-
-// Add X axis title:
+// Vert line value = 1
+svg
+  .append("line")
+    .attr("x1", function(d) { return x(1); })
+    .attr("x2", function(d) { return x(1); })
+    .attr("y1", -20 )
+    .attr("y2", height-20)
+    .attr("stroke", "orange")
+    .style("stroke-dasharray", ("8, 6"))
 svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 30)
     .text("Mortality Rate Ratio");
+
+// Add X axis title:
+svg.append("text")
+    .attr("text-anchor", "center")
+    .attr("x", x(0))
+    .attr("y", -25)
+    .text("MRR = 1")
+    .style("fill", "orange")
+
+
+
+
+
+// ======================= //
+// Y AXIS
+// ======================= //
 
 // Y 'axis': prepare position of each group
 var smallGap = 30
