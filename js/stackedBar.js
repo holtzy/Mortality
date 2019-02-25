@@ -90,7 +90,7 @@ var myPadding = d3.scaleOrdinal()
 
 // For barplot
 var yBar = d3.scaleLinear()
-  .domain([-3, 15])
+  .domain([-10, 15])
   .range([height, 0])
 // svgBar.append("g")
 //     .call(d3.axisLeft(yBar))
@@ -143,10 +143,19 @@ var mouseleave = function(d) {
 
 
 var mouseclick = function(d) {
-  console.log("there is a click event")
+
+  // Remove the empty tab on the left to put stack chart on the left
+  d3.select("#myGhostCol")
+    .style("display", "none")
+
+  // Make bar chart visible
+  d3.select("#my_stackedBarFocus")
+    .style("display", "inline")
+
+  // Build the barplot for the good group
   var subgroupName = d3.select(this.parentNode).datum().key;
-  console.log(d.data.mentalDis)
   updateBar(d.data.mentalDis)
+
 }
 
 
@@ -197,8 +206,6 @@ allBars
 
 function updateBar(mentalDis){
 
-  console.log("run Update Bar function")
-
   // Get appropriatte data
   var dataBar = data_filtered
     .filter(function(d){return d.mentalDis == mentalDis})
@@ -223,10 +230,12 @@ function updateBar(mentalDis){
     .enter()
     .append("rect")
     .merge(u)
+      .attr("x", function(d) { return xBar(d.COD); })
+      .attr("height",0)
+      .attr("y",yBar(0))
     .transition()
     .duration(1000)
       .attr("class", "myBarsBarplot")
-      .attr("x", function(d) { return xBar(d.COD); })
       .attr("width", xBar.bandwidth())
       .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
       .attr("y", function(d) {
@@ -237,6 +246,8 @@ function updateBar(mentalDis){
               }
       })
       .attr("fill", "#69b3a2")
+      .attr("rx", "2")
+      .attr("ry", "2")
 
   // Labels
   var v = svgBar
@@ -289,8 +300,6 @@ function updateBar(mentalDis){
 
 
 }
-
-updateBar("Substance Use")
 
 
 
