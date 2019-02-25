@@ -239,13 +239,13 @@ function updateBar(mentalDis){
       .attr("width", xBar.bandwidth())
       .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
       .attr("y", function(d) {
-              if (d.value > 0){
+              if (d.value >= 0){
                   return yBar(d.value);
               } else {
                   return yBar(0);
               }
       })
-      .attr("fill", "#69b3a2")
+      .attr("fill", function(d){return myColorCOD(d.COD)})
       .attr("rx", "2")
       .attr("ry", "2")
 
@@ -261,17 +261,24 @@ function updateBar(mentalDis){
     .duration(1000)
       .attr("class", "myLabelsBarplot")
       .attr("text-anchor", (d)=>{
-        if( d.value>0 ){ return("end") }else{ return("start")} })
+        if( d.value>=0 ){ return("end") }else{ return("start")} })
       .attr("x", 0)
       .attr("y", 0)
       .text(function(d){ return d.COD })
       .attr('transform', (d)=>{
-        if( d.value>0 ){
+        if( d.value>=0 ){
           return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)'
         }else{
           return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)-10) +'),'+ 'rotate(-90)'
         }
       })
+      .attr('fill', function(d){
+        if( typeCOD.includes(d.COD)){
+          return 'black'
+        }else{
+          return "grey"}
+      })
+
 
   // Numbers
   var w = svgBar
@@ -290,7 +297,7 @@ function updateBar(mentalDis){
       .attr("font-size", 10)
       .attr("x", function(d){return (xBar(d.COD)+xBar.bandwidth()/2) })
       .attr("y",  (d)=>{
-        if( d.value>0 ){
+        if( d.value>=0 ){
           return yBar(d.value)-10
         }else{
           return yBar(d.value)+10
