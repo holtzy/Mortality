@@ -27,7 +27,6 @@ close(fileConn)
 # get a wide format
 wide <- LYL %>%
   filter(n>3) %>%
-  filter(COD!="All Causes") %>%
   select(mentalDis, sex, COD, LYL) %>%
   spread(COD, LYL, -4, fill=0)
 tosave <- paste("data_LYL = ", toJSON(wide))

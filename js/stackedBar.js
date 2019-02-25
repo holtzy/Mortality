@@ -11,8 +11,10 @@ var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eati
 // List of subgroups
 var subgroups = ["Natural Causes","Unnatural Causes"]
 
+console.log(data_LYL)
 // Get filtered data
 data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
+console.log(data_filtered)
 
 // Order data following groups
 var data_filtered = data_filtered.sort(function(a,b) {
