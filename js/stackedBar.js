@@ -194,6 +194,7 @@ allBars
 // BARS OF BARPLOT
 // ======================= //
 
+// Initialize the bars
 function updateBar(mentalDis){
 
   // Get appropriatte data
