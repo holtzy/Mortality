@@ -351,7 +351,7 @@ var closeBarButton = svgBar
         .style("display", "inline")
       d3.select("#my_stackedBarFocus")
         .style("display", "none")
-      d3.selectAll("rect")
+      d3.selectAll(".myRect")
         .transition()
         .duration(1000)
         .style("opacity",1)
