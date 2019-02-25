@@ -154,7 +154,6 @@ var tooltipLeft = d3.select("#my_heatmap_left")
 var mouseoverLeft = function(d) {
   tooltipLeft
     .style("opacity", 1)
-
 }
 var mousemoveLeft = function(d) {
   tooltipLeft

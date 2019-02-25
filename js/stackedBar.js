@@ -11,10 +11,8 @@ var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eati
 // List of subgroups
 var subgroups = ["Natural Causes","Unnatural Causes"]
 
-console.log(data_LYL)
 // Get filtered data
 data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
-console.log(data_filtered)
 
 // Order data following groups
 var data_filtered = data_filtered.sort(function(a,b) {
@@ -26,11 +24,17 @@ var margin = {top: 100, right: 30, bottom: 90, left: 150},
     width = 600 - margin.left - margin.right,
     height = 560 - margin.top - margin.bottom;
 
+// set the dimensions and margins of the graph
+var marginBar = {top: 100, right: 30, bottom: 90, left: 75},
+    widthBar = 560 - marginBar.left - marginBar.right,
+    heightBar = 560 - marginBar.top - marginBar.bottom;
+
 // svg = for the stacked Barchart
 var svg = d3.select("#my_stackedBar")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style("overflow", "visible")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
@@ -38,11 +42,11 @@ var svg = d3.select("#my_stackedBar")
 // And this is for the barplot
 var svgBar = d3.select("#my_stackedBarFocus")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", widthBar + marginBar.left + marginBar.right)
+    .attr("height", heightBar + marginBar.top + marginBar.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + marginBar.left + "," + marginBar.top + ")");
 
 
 
@@ -63,13 +67,13 @@ var xBar = d3.scaleBand()
   .range([ 0, width ])
   .domain(bothCOD)
   .padding(0.2);
-// svgBar.append("g")
-//   .attr("transform", "translate(0," + height + ")")
-//   .call(d3.axisBottom(xBar))
-//   .selectAll("text")
-//     .attr("transform", "translate(-10,0)rotate(-45)")
-//     .style("text-anchor", "end");
 
+// A scale to add padding between groups
+var gap = 25
+var gaps = [0, gap, gap, gap, gap, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2, gap*2 ]
+var myPaddingBar = d3.scaleOrdinal()
+  .domain(bothCOD)
+  .range(gaps);
 
 
 
@@ -111,33 +115,47 @@ var tooltip = d3.select("#my_stackedBar")
     .style("opacity", 0)
     .attr("class", "tooltip")
     .style("font-size", "16px")
+    .style("max-width", "250px")
+
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
   var subgroupName = d3.select(this.parentNode).datum().key;
   tooltip
       .html(
-        "Being diagnosed with " + d.data.mentalDis + " results in " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + " Years of life lost" + "<br>" +
-        "<ul><li>" + Math.round(d.data["Natural Causes"]*10)/10 + " years are lost due to natural causes of death</li><li>" + Math.round(d.data["Unnatural Causes"]*10)/10 + " to Unnatural causes of death</li></ul>" +
+         d.data.mentalDis + "<br>" +
+        "Years of Life Lost: " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + "<br>" +
         "Click the bar for more details"
+
+        // // "Being diagnosed with " + d.data.mentalDis + " results in " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + " Years of life lost" + "<br>" +
+        // "<ul><li>" + Math.round(d.data["Natural Causes"]*10)/10 + " years are lost due to natural causes of death</li><li>" + Math.round(d.data["Unnatural Causes"]*10)/10 + " to Unnatural causes of death</li></ul>" +
         )
-      // + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
       .style("opacity", 1)
 }
 var mousemove = function(d) {
   tooltip
-      .style("top", d3.mouse(this)[1]-1600)
-      .style("left", d3.mouse(this)[0])
+    .style("top", d3.mouse(this)[1]+40+"px" )
+    .style("left", d3.mouse(this)[0]+200+"px")
 }
 var mouseleave = function(d) {
   tooltip
-    .transition()
-    .duration(200)
     .style("opacity", 0)
 }
 
 
 var mouseclick = function(d) {
+  // What is the mentalDisorder
+  mentalDis = d.data.mentalDis
+  // Highlight the selected mental disorder
+  d3.selectAll(".myRect")
+    .transition()
+    .duration(1000)
+    .style("opacity", .1)
+  d3.selectAll("." + d.data.mentalDis.replace(/\s/g, ''))
+    .transition()
+    .duration(1000)
+    .style("opacity",1)
+
   // Remove the empty tab on the left to put stack chart on the left
   d3.select("#myGhostCol")
     .style("display", "none")
@@ -145,7 +163,6 @@ var mouseclick = function(d) {
   d3.select("#my_stackedBarFocus")
     .style("display", "inline")
   // Build the barplot for the good group
-  var subgroupName = d3.select(this.parentNode).datum().key;
   updateBar(d.data.mentalDis)
 }
 
@@ -167,15 +184,15 @@ var allBars = svg.append("g")
   .data(stackedData)
   .enter().append("g")
     .attr("fill", function(d) { return myColorCOD(d.key); })
-    .style("opacity", .7)
+    .style("opacity", 1)
     .attr("stroke", function(d) { return myColorCOD(d.key); })
-    .attr("class", function(d){return "myRect " + d.key.replace(/\s/g, '')})
 allBars
   .selectAll("rect")
-    // enter a second time = loop subgroup per subgroup to add all rectangles
     .data(function(d) { return d; })
+    // enter a second time = loop subgroup per subgroup to add all rectangles
     .enter()
     .append("rect")
+      .attr("class", function(d){return "myRect " + d.data.mentalDis.replace(/\s/g, '')})
       .attr("y", function(d) { return y(d.data.mentalDis)+myPadding(d.data.mentalDis) } )
       .attr("height", y.bandwidth())
       .attr("x", function(d) {  return x(d[0]); })
@@ -201,7 +218,7 @@ svgBar
   .data(bothCOD)
     .enter()
     .append("rect")
-      .attr("x", function(d) { return xBar(d); })
+      .attr("x", function(d) { return (xBar(d)+myPaddingBar(d)) })
       .attr("height",0)
       .attr("y",yBar(0))
       .attr("class", "myBarsBarplot")
@@ -226,8 +243,8 @@ svgBar
         }else{
           return "grey"}
       })
-      .attr('transform', function(d){ return 'translate( '+ (xBar(d)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)' })
-      .style("opacity", 1)
+      .attr('transform', function(d){ return 'translate( '+ (xBar(d)+myPaddingBar(d)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)' })
+      .style("opacity", 0)
 
 // Initialize the numbers
 svgBar
@@ -236,9 +253,9 @@ svgBar
     .enter()
     .append("text")
       .attr("class", "myNumbersBarplot")
-      .attr("x", function(d){return (xBar(d)+xBar.bandwidth()/2) })
+      .attr("x", function(d){return (xBar(d)+myPaddingBar(d)+xBar.bandwidth()/2) })
       .attr("y", yBar(0))
-      .style("opacity", 1)
+      .style("opacity", 0)
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
       .attr("font-size", 10)
@@ -253,7 +270,6 @@ function updateBar(mentalDis){
     .filter(function(d){return d.mentalDis == mentalDis})
     [0]
   dataBar
-  console.log(dataBar)
   delete dataBar.sex
   delete dataBar.mentalDis
 
@@ -265,7 +281,6 @@ function updateBar(mentalDis){
       value: dataBar[bothCOD[i]],
     });
   }
-  console.log(data_long)
 
   //Bars
   svgBar
@@ -293,32 +308,60 @@ function updateBar(mentalDis){
         if( d.value>=0 ){ return("end") }else{ return("start")} })
       .attr('transform', (d)=>{
         if( d.value>=0 ){
-          return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)'
+          return 'translate( '+ (xBar(d.COD)+myPaddingBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)'
         }else{
-          return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)-10) +'),'+ 'rotate(-90)'
+          return 'translate( '+ (xBar(d.COD)+myPaddingBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)-10) +'),'+ 'rotate(-90)'
         }
       })
-  //
-  // // Numbers
-  // svgBar
-  //   .selectAll(".myNumbersBarplot")
-  //   .data(data_long)
-  //   .transition()
-  //   .duration(1000)
-  //     .style("opacity", 1)
-  //     .attr("x", function(d){return (xBar(d.COD)+xBar.bandwidth()/2) })
-  //     .attr("y",  (d)=>{
-  //       if( d.value>=0 ){
-  //         return yBar(d.value)-10
-  //       }else{
-  //         return yBar(d.value)+10
-  //       }
-  //     })
-  //     .text(function(d){ return Math.round(d.value*10)/10 })
-  //
+
+  // Numbers
+  svgBar
+    .selectAll(".myNumbersBarplot")
+    .data(data_long)
+    .transition()
+    .duration(1000)
+      .style("opacity", 1)
+      .attr("y",  (d)=>{
+        if( d.value>=0 ){
+          return yBar(d.value)-10
+        }else{
+          return yBar(d.value)+10
+        }
+      })
+      .text(function(d){ return Math.round(d.value*10)/10 })
+
 
 }
 
+
+
+// ======================= //
+// CLOSE BARPLOT
+// ======================= //
+
+var closeBarButton = svgBar
+  .append("text")
+    .attr("x", width)
+    .attr("cy", 70)
+    .html("&#10005;")
+    .style("font-size", "22px")
+    .style("cursor", "pointer")
+    .on("click", function(){
+      d3.select("#myGhostCol")
+        .style("display", "inline")
+      d3.select("#my_stackedBarFocus")
+        .style("display", "none")
+      d3.selectAll("rect")
+        .transition()
+        .duration(1000)
+        .style("opacity",1)
+    })
+
+
+var closeBar = function(d) {
+  console.log("okkkkkk")
+
+}
 
 
 
