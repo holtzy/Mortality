@@ -17,6 +17,8 @@ library(jsonlite)
 LYL <- read.table("LYL.txt", header=T)
 #improve colnames
 colnames(LYL) <- c("mentalDis", "COD", "sex", "n", "LYL")
+# Circulatory Diseases, not heart disease or something like that
+LYL$COD <- gsub("Dis. Circulatory System", "Circulatory Diseases", LYL$COD)
 # Save this long format
 tosave <- paste("data_LYL_long = ", toJSON(LYL))
 fileConn<-file("LYLlong.js")
@@ -40,8 +42,8 @@ clean <- MRR %>%
   filter(!is.na(MRR)) %>%
   select(sex, dx2, cod_label, MRR, MRR_left, MRR_right)
 colnames(clean) <- c("sex", "mentalDis", "COD", "MRR", "MRR_left", "MRR_right")
-# TOCHECK: heart disease is the same as circularory system?
-clean$COD <- gsub("Dis. Circulatory System", "Heart Diseases", clean$COD)
+# Special case for circulatory diseases
+clean$COD <- gsub("Dis. Circulatory System", "Circulatory Diseases", clean$COD)
 tosave <- paste("data_MRR = ", toJSON(clean))
 fileConn<-file("MRR.js")
 writeLines(tosave, fileConn)
@@ -55,6 +57,15 @@ tosave <- paste("data_MRRage = ", toJSON(clean))
 fileConn<-file("MRRage.js")
 writeLines(tosave, fileConn)
 close(fileConn)
+
+
+
+
+
+
+
+
+
 
 
 

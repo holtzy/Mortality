@@ -8,7 +8,7 @@ allCOD = ["Suicide",
           "Infectious Diseases",
               "Neoplasms",
               "Diabetes Mellitus",
-              "Heart Diseases",
+              "Circulatory Diseases",
               "Respiratory Diseases",
               "Digestive Diseases",
               "Alcohol Misuse",
@@ -27,7 +27,7 @@ bothCOD = ["All Causes",
               "Respiratory Diseases",
               "Diabetes Mellitus",
               "Digestive Diseases",
-              "Heart Diseases",
+              "Circulatory Diseases",
               "Neoplasms"
           ]
 

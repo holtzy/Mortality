@@ -195,39 +195,84 @@ allBars
 // ======================= //
 
 // Initialize the bars
+svgBar
+  .selectAll(".myBarsBarplot")
+  .data(bothCOD)
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return xBar(d); })
+      .attr("height",0)
+      .attr("y",yBar(0))
+      .attr("class", "myBarsBarplot")
+      .attr("fill", function(d){return myColorCOD(d)})
+      .attr("rx", "2")
+      .attr("ry", "2")
+      .attr("width", xBar.bandwidth())
+
+// Initialize the labels
+svgBar
+  .selectAll(".myLabelsBarplot")
+  .data(bothCOD)
+    .enter()
+    .append("text")
+      .attr("class", "myLabelsBarplot")
+      .attr("x", 0)
+      .attr("y", 0)
+      .text(function(d){ return d })
+      .attr('fill', function(d){
+        if( typeCOD.includes(d)){
+          return 'black'
+        }else{
+          return "grey"}
+      })
+      .attr('transform', function(d){ return 'translate( '+ (xBar(d)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)' })
+      .style("opacity", 1)
+
+// Initialize the numbers
+svgBar
+  .selectAll(".myNumbersBarplot")
+  .data(bothCOD)
+    .enter()
+    .append("text")
+      .attr("class", "myNumbersBarplot")
+      .attr("x", function(d){return (xBar(d)+xBar.bandwidth()/2) })
+      .attr("y", yBar(0))
+      .style("opacity", 1)
+      .attr("text-anchor", "middle")
+      .attr("alignment-baseline", "middle")
+      .attr("font-size", 10)
+
+
+
+// update the barplot
 function updateBar(mentalDis){
 
   // Get appropriatte data
   var dataBar = data_filtered
     .filter(function(d){return d.mentalDis == mentalDis})
     [0]
+  dataBar
   delete dataBar.sex
   delete dataBar.mentalDis
 
   // First step: reformatting the data
   var data_long = [];
-  for (prop in dataBar) {
+  for (i in bothCOD) {
+    console.log(i)
+    console.log( bothCOD[i] )
     data_long.push({
-      COD: prop,
-      value: dataBar[prop],
+      COD: bothCOD[i],
+      value: dataBar[bothCOD[i]],
     });
   }
+  console.log(data_long)
 
-  // Bars
-  var u = svgBar
+  //Bars
+  svgBar
     .selectAll(".myBarsBarplot")
     .data(data_long)
-  u
-    .enter()
-    .append("rect")
-    .merge(u)
-      .attr("x", function(d) { return xBar(d.COD); })
-      .attr("height",0)
-      .attr("y",yBar(0))
     .transition()
     .duration(1000)
-      .attr("class", "myBarsBarplot")
-      .attr("width", xBar.bandwidth())
       .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
       .attr("y", function(d) {
               if (d.value >= 0){
@@ -236,26 +281,16 @@ function updateBar(mentalDis){
                   return yBar(0);
               }
       })
-      .attr("fill", function(d){return myColorCOD(d.COD)})
-      .attr("rx", "2")
-      .attr("ry", "2")
 
   // Labels
-  var v = svgBar
+  svgBar
     .selectAll(".myLabelsBarplot")
     .data(data_long)
-  v
-    .enter()
-    .append("text")
-    .merge(v)
     .transition()
     .duration(1000)
-      .attr("class", "myLabelsBarplot")
+      .style("opacity", 1)
       .attr("text-anchor", (d)=>{
         if( d.value>=0 ){ return("end") }else{ return("start")} })
-      .attr("x", 0)
-      .attr("y", 0)
-      .text(function(d){ return d.COD })
       .attr('transform', (d)=>{
         if( d.value>=0 ){
           return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)'
@@ -263,39 +298,24 @@ function updateBar(mentalDis){
           return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)-10) +'),'+ 'rotate(-90)'
         }
       })
-      .attr('fill', function(d){
-        if( typeCOD.includes(d.COD)){
-          return 'black'
-        }else{
-          return "grey"}
-      })
-
-
-  // Numbers
-  var w = svgBar
-    .selectAll(".myNumbersBarplot")
-    .data(data_long)
-  w
-    .enter()
-    .append("text")
-    .merge(w)
-    .transition()
-    .delay(200)
-    .duration(1000)
-      .attr("class", "myNumbersBarplot")
-      .attr("text-anchor", "middle")
-      .attr("alignment-baseline", "middle")
-      .attr("font-size", 10)
-      .attr("x", function(d){return (xBar(d.COD)+xBar.bandwidth()/2) })
-      .attr("y",  (d)=>{
-        if( d.value>=0 ){
-          return yBar(d.value)-10
-        }else{
-          return yBar(d.value)+10
-        }
-      })
-      .text(function(d){ return Math.round(d.value*10)/10 })
-
+  //
+  // // Numbers
+  // svgBar
+  //   .selectAll(".myNumbersBarplot")
+  //   .data(data_long)
+  //   .transition()
+  //   .duration(1000)
+  //     .style("opacity", 1)
+  //     .attr("x", function(d){return (xBar(d.COD)+xBar.bandwidth()/2) })
+  //     .attr("y",  (d)=>{
+  //       if( d.value>=0 ){
+  //         return yBar(d.value)-10
+  //       }else{
+  //         return yBar(d.value)+10
+  //       }
+  //     })
+  //     .text(function(d){ return Math.round(d.value*10)/10 })
+  //
 
 }
 
