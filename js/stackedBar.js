@@ -61,12 +61,12 @@ var xBar = d3.scaleBand()
   .range([ 0, width ])
   .domain(bothCOD)
   .padding(0.2);
-svgBar.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(xBar))
-  .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
+// svgBar.append("g")
+//   .attr("transform", "translate(0," + height + ")")
+//   .call(d3.axisBottom(xBar))
+//   .selectAll("text")
+//     .attr("transform", "translate(-10,0)rotate(-45)")
+//     .style("text-anchor", "end");
 
 
 
@@ -92,8 +92,8 @@ var myPadding = d3.scaleOrdinal()
 var yBar = d3.scaleLinear()
   .domain([-3, 15])
   .range([height, 0])
-svgBar.append("g")
-    .call(d3.axisLeft(yBar))
+// svgBar.append("g")
+//     .call(d3.axisLeft(yBar))
 
 
 
@@ -237,6 +237,57 @@ function updateBar(mentalDis){
               }
       })
       .attr("fill", "#69b3a2")
+
+  // Labels
+  var v = svgBar
+    .selectAll(".myLabelsBarplot")
+    .data(data_long)
+  v
+    .enter()
+    .append("text")
+    .merge(v)
+    .transition()
+    .duration(1000)
+      .attr("class", "myLabelsBarplot")
+      .attr("text-anchor", (d)=>{
+        if( d.value>0 ){ return("end") }else{ return("start")} })
+      .attr("x", 0)
+      .attr("y", 0)
+      .text(function(d){ return d.COD })
+      .attr('transform', (d)=>{
+        if( d.value>0 ){
+          return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)'
+        }else{
+          return 'translate( '+ (xBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)-10) +'),'+ 'rotate(-90)'
+        }
+      })
+
+  // Numbers
+  var w = svgBar
+    .selectAll(".myNumbersBarplot")
+    .data(data_long)
+  w
+    .enter()
+    .append("text")
+    .merge(w)
+    .transition()
+    .delay(200)
+    .duration(1000)
+      .attr("class", "myNumbersBarplot")
+      .attr("text-anchor", "middle")
+      .attr("alignment-baseline", "middle")
+      .attr("font-size", 10)
+      .attr("x", function(d){return (xBar(d.COD)+xBar.bandwidth()/2) })
+      .attr("y",  (d)=>{
+        if( d.value>0 ){
+          return yBar(d.value)-10
+        }else{
+          return yBar(d.value)+10
+        }
+      })
+      .text(function(d){ return Math.round(d.value*10)/10 })
+
+
 }
 
 updateBar("Substance Use")
