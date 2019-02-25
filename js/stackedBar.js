@@ -57,7 +57,6 @@ var x = d3.scaleLinear()
   .range([0, width])
 
 // Add X axis for Barchart
-// X axis
 var xBar = d3.scaleBand()
   .range([ 0, width ])
   .domain(bothCOD)
@@ -113,7 +112,10 @@ var tooltip = d3.select("#my_stackedBar")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
+  // console.log("there is an hover event")
   // var subgroupName = d3.select(this.parentNode).datum().key;
+  // console.log(d.data.mentalDis)
+  // updateBar(d.data.mentalDis)
   // tooltip
   //     .html(d.data.mentalDis + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
   //     .style("top", (event.pageY)+"px")
@@ -140,7 +142,12 @@ var mouseleave = function(d) {
 }
 
 
-
+var mouseclick = function(d) {
+  console.log("there is a click event")
+  var subgroupName = d3.select(this.parentNode).datum().key;
+  console.log(d.data.mentalDis)
+  updateBar(d.data.mentalDis)
+}
 
 
 
@@ -176,6 +183,7 @@ allBars
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
+    .on("click", mouseclick)
 
 
 
@@ -187,39 +195,51 @@ allBars
 // BARS OF BARPLOT
 // ======================= //
 
-// Get appropriatte data
-var dataBar = data_filtered
-  .filter(function(d){return d.mentalDis == "Any Disorder"})
-  [0]
-delete dataBar.sex
-delete dataBar.mentalDis
+function updateBar(mentalDis){
 
-// First step: reformatting the data
-var data_long = [];
-for (prop in dataBar) {
-  data_long.push({
-    COD: prop,
-    value: dataBar[prop],
-  });
+  console.log("run Update Bar function")
+
+  // Get appropriatte data
+  var dataBar = data_filtered
+    .filter(function(d){return d.mentalDis == mentalDis})
+    [0]
+  delete dataBar.sex
+  delete dataBar.mentalDis
+
+  // First step: reformatting the data
+  var data_long = [];
+  for (prop in dataBar) {
+    data_long.push({
+      COD: prop,
+      value: dataBar[prop],
+    });
+  }
+
+  // Bars
+  var u = svgBar
+    .selectAll(".myBarsBarplot")
+    .data(data_long)
+  u
+    .enter()
+    .append("rect")
+    .merge(u)
+    .transition()
+    .duration(1000)
+      .attr("class", "myBarsBarplot")
+      .attr("x", function(d) { return xBar(d.COD); })
+      .attr("width", xBar.bandwidth())
+      .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
+      .attr("y", function(d) {
+              if (d.value > 0){
+                  return yBar(d.value);
+              } else {
+                  return yBar(0);
+              }
+      })
+      .attr("fill", "#69b3a2")
 }
 
-// Bars
-svgBar.selectAll("myBar")
-  .data(data_long)
-  .enter()
-  .append("rect")
-    .attr("x", function(d) { return xBar(d.COD); })
-    .attr("width", xBar.bandwidth())
-    .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
-    .attr("y", function(d) {
-            if (d.value > 0){
-                return yBar(d.value);
-            } else {
-                return yBar(0);
-            }
-    })
-    .attr("fill", "#69b3a2")
-
+updateBar("Substance Use")
 
 
 
@@ -310,10 +330,24 @@ svg.append("text")
 
 
 
-
+`
+`
 // ======================= //
 // Y LABELS ON LEFT SIDE
 // ======================= //
+
+// Add label
+svg.selectAll("leftLabels")
+  .data(groups)
+  .enter()
+  .append("text")
+    .attr("x", -20)
+    .attr("y", function(d){return y(d) + myPadding(d) + 12})
+    .text(function(d){ return d })
+    .style("fill", "grey")
+    .style("font-size",14)
+    .style("text-anchor", "end")
+
 
 
 
