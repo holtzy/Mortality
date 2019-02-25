@@ -112,50 +112,40 @@ var tooltip = d3.select("#my_stackedBar")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
-  // console.log("there is an hover event")
-  // var subgroupName = d3.select(this.parentNode).datum().key;
-  // console.log(d.data.mentalDis)
-  // updateBar(d.data.mentalDis)
-  // tooltip
-  //     .html(d.data.mentalDis + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
-  //     .style("top", (event.pageY)+"px")
-  //     .style("left",(event.pageX+20)+"px")
-  // tooltip
-  //   .transition()
-  //   .duration(200)
-  //   .style("opacity", 1)
-  // // And color of the rect
-  // d3.selectAll(".myRect").style("opacity", 0.2)
-  // d3.selectAll("."+subgroupName.replace(/\s/g, '')).style("opacity", 1)
+  var subgroupName = d3.select(this.parentNode).datum().key;
+  console.log(d.data)
+  tooltip
+      .html(
+        "Being diagnosed with " + d.data.mentalDis + " results in " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + " Years of life lost" + "<br>" +
+        "<ul><li>" + Math.round(d.data["Natural Causes"]*10)/10 + " years are lost due to natural causes of death</li><li>" + Math.round(d.data["Unnatural Causes"]*10)/10 + " to Unnatural causes of death</li></ul>" +
+        "Click the bar for more details"
+        )
+      // + " &rarr; " + subgroupName + "<br>" + "<span style='color:grey'>Here I could add a barplot to <br>efficiently compare the different cause<br> of death linked to this mental<br> disorder</span>")
+      .style("opacity", 1)
 }
 var mousemove = function(d) {
-  // tooltip
-  //   .style("top", (event.pageY)+"px")
-  //   .style("left",(event.pageX+20)+"px")
+  tooltip
+      .style("top", d3.mouse(this)[1]-1600)
+      .style("left", d3.mouse(this)[0])
 }
 var mouseleave = function(d) {
-  // tooltip
-  //   .transition()
-  //   .duration(200)
-  //   .style("opacity", 0)
-  // d3.selectAll(".myRect").style("opacity",0.8)
+  tooltip
+    .transition()
+    .duration(200)
+    .style("opacity", 0)
 }
 
 
 var mouseclick = function(d) {
-
   // Remove the empty tab on the left to put stack chart on the left
   d3.select("#myGhostCol")
     .style("display", "none")
-
   // Make bar chart visible
   d3.select("#my_stackedBarFocus")
     .style("display", "inline")
-
   // Build the barplot for the good group
   var subgroupName = d3.select(this.parentNode).datum().key;
   updateBar(d.data.mentalDis)
-
 }
 
 
