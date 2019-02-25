@@ -315,19 +315,6 @@ svg.append("text")
 // Y LABELS ON LEFT SIDE
 // ======================= //
 
-// Add label
-svg.selectAll("leftLabels")
-  .data(groups)
-  .enter()
-  .append("text")
-    .attr("x", -20)
-    .attr("y", function(d){return y(d) + myPadding(d) + 12})
-    .text(function(d){ return d })
-    .style("fill", "grey")
-    .style("font-size",14)
-    .style("text-anchor", "end")
-
-
 
 
 // Close chart function
