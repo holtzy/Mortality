@@ -113,7 +113,6 @@ var tooltip = d3.select("#my_stackedBar")
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
   var subgroupName = d3.select(this.parentNode).datum().key;
-  console.log(d.data)
   tooltip
       .html(
         "Being diagnosed with " + d.data.mentalDis + " results in " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + " Years of life lost" + "<br>" +
@@ -252,14 +251,13 @@ function updateBar(mentalDis){
     .filter(function(d){return d.mentalDis == mentalDis})
     [0]
   dataBar
+  console.log(dataBar)
   delete dataBar.sex
   delete dataBar.mentalDis
 
   // First step: reformatting the data
   var data_long = [];
   for (i in bothCOD) {
-    console.log(i)
-    console.log( bothCOD[i] )
     data_long.push({
       COD: bothCOD[i],
       value: dataBar[bothCOD[i]],
