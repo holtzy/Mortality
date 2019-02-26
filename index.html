@@ -261,16 +261,13 @@
       <br><br>
     </div>
 
-    <!-- show the chart  -->
-    <div class="dropdown float-right">
-      <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        +
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <span class="dropdown-item changeAllCOD" >Show all COD</span>
-        <span class="dropdown-item change3Groups" >group COD</span>
-      </div>
+    <!-- Radio button that controls sex -->
+    <div id="controlBarSex" class="float-left" style="font-size: 15px; text-align: left">
+      <input type="radio" name="controlBarSex" value="males" checked> Males<br>
+      <input type="radio" name="controlBarSex" value="females"> Females<br>
     </div>
+
+    <!-- show the chart  -->
     <div class="row">
       <div class="col-md-3" id="myGhostCol"></div>
       <div class="col-md-6" id="my_stackedBar"></div>

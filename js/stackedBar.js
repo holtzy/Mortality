@@ -2,7 +2,7 @@ function plotStackedbar(){
 
 
 // ======================= //
-// DATA, SVG AREAS
+// DATA
 // ======================= //
 
 // List of groups = List of Mental Disorder = Order on stacked barplot
@@ -11,13 +11,35 @@ var groups = ["Any Disorder","Substance Use","Intellectual Disabilities", "Eatin
 // List of subgroups
 var subgroups = ["Natural Causes","Unnatural Causes"]
 
-// Get filtered data
-data_filtered = data_LYL.filter(function(d){ return d.sex == "Males" })
-
-// Order data following groups
-var data_filtered = data_filtered.sort(function(a,b) {
+// MALES
+data_filteredM = data_LYL
+  .filter(function(d){ return d.sex == "Males" })
+  .sort(function(a,b) {
     return groups.indexOf( a.mentalDis ) > groups.indexOf( b.mentalDis );
-});
+  });
+//stack the data? --> stack per subgroup
+var stackedDataMales = d3.stack()
+  .keys(subgroups)
+  (data_filteredM)
+
+// FEMALES
+data_filteredF = data_LYL
+  .filter(function(d){ return d.sex == "Females" })
+  .sort(function(a,b) {
+    return groups.indexOf( a.mentalDis ) > groups.indexOf( b.mentalDis );
+  });
+//stack the data? --> stack per subgroup
+var stackedDataFemales = d3.stack()
+  .keys(subgroups)
+  (data_filteredF)
+
+
+
+
+
+// ======================= //
+// SVG AREAS
+// ======================= //
 
 // set the dimensions and margins of the graph
 var margin = {top: 100, right: 30, bottom: 90, left: 150},
@@ -128,7 +150,6 @@ var mouseover = function(d) {
         "<span style='color:grey'>Natural: </span>" + Math.round(d.data["Natural Causes"]*10)/10 + " - " +   "<span style='color:grey'>Unnatural: </span>" + Math.round(d.data["Unnatural Causes"]*10)/10 +
         "<br><br>" +
         "Click the bar for more details"
-
         // // "Being diagnosed with " + d.data.mentalDis + " results in " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + " Years of life lost" + "<br>" +
         // "<ul><li>" + Math.round(d.data["Natural Causes"]*10)/10 + " years are lost due to natural causes of death</li><li>" + Math.round(d.data["Unnatural Causes"]*10)/10 + " to Unnatural causes of death</li></ul>" +
         )
@@ -174,36 +195,48 @@ var mouseclick = function(d) {
 // BARS OF STACKED BARPLOT
 // ======================= //
 
-//stack the data? --> stack per subgroup
-var stackedData = d3.stack()
-  .keys(subgroups)
-  (data_filtered)
+function updateStackedBar(){
 
-// Show the bars
-var allBars = svg.append("g")
-  .selectAll("g")
-  // Enter in the stack data = loop key per key = group per group
-  .data(stackedData)
-  .enter().append("g")
-    .attr("fill", function(d) { return myColorCOD(d.key); })
-    .style("opacity", 1)
-    .attr("stroke", function(d) { return myColorCOD(d.key); })
-allBars
-  .selectAll("rect")
-    .data(function(d) { return d; })
-    // enter a second time = loop subgroup per subgroup to add all rectangles
-    .enter()
-    .append("rect")
-      .attr("class", function(d){return "myRect " + d.data.mentalDis.replace(/\s/g, '')})
-      .attr("y", function(d) { return y(d.data.mentalDis)+myPadding(d.data.mentalDis) } )
-      .attr("height", y.bandwidth())
-      .attr("x", function(d) {  return x(d[0]); })
-      .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave)
-    .on("click", mouseclick)
+  // Recover the SEX option?
+  selectedSexOption = $("input[name='controlBarSex']:checked").val();
+  if( selectedSexOption == "males" ){
+    dataToUse = stackedDataMales
+  }else{
+    dataToUse = stackedDataFemales
+  }
 
+  // remove all bars
+  d3.selectAll(".myRect").remove()
+  
+  // Show the bars
+  var allBars = svg.append("g")
+    .selectAll("g")
+    // Enter in the stack data = loop key per key = group per group
+    .data(dataToUse)
+    .enter().append("g")
+      .attr("fill", function(d) { return myColorCOD(d.key); })
+      .style("opacity", 1)
+      .attr("stroke", function(d) { return myColorCOD(d.key); })
+    .selectAll(".myRect")
+      .data(function(d) { return d; })
+
+    allBars  // enter a second time = loop subgroup per subgroup to add all rectangles
+      .enter()
+      .append("rect")
+        .attr("class", function(d){return "myRect " + d.data.mentalDis.replace(/\s/g, '')})
+        .attr("y", function(d) { return y(d.data.mentalDis)+myPadding(d.data.mentalDis) } )
+        .attr("height", y.bandwidth())
+        .attr("x", function(d) {  return x(d[0]); })
+        .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)
+      .on("click", mouseclick)
+
+
+}
+
+updateStackedBar()
 
 
 
@@ -268,7 +301,7 @@ svgBar
 function updateBar(mentalDis){
 
   // Get appropriatte data
-  var dataBar = data_filtered
+  var dataBar = data_filteredM
     .filter(function(d){return d.mentalDis == mentalDis})
     [0]
   dataBar
@@ -376,8 +409,8 @@ var closeBar = function(d) {
 
 // Compute center of each bar of the first top group
 var myMeans = []
-for( i in  stackedData){
-  inter = stackedData[i][0]
+for( i in  stackedDataMales){
+  inter = stackedDataMales[i][0]
   mean = (inter[0] + inter[1]) / 2
   myMeans.push(mean)
 }
@@ -470,6 +503,16 @@ svg.selectAll("leftLabels")
     .style("fill", "grey")
     .style("font-size",14)
     .style("text-anchor", "end")
+
+
+
+
+// ======================= //
+// EVENT LISTENER TO SEX CHANGE
+// ======================= //
+
+// An event listener to the radio button for Lollipop SEX
+d3.select("#controlBarSex").on("change", updateStackedBar)
 
 
 
