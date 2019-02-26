@@ -129,12 +129,6 @@ svg.selectAll('.myMainLabel')
     .style("fill", 'black')
     .attr('x', -20)
 
-
-
-
-
-
-
 // Scale to slightly modify sexes on the Y axis
 var myPositionLolliSex = d3.scaleOrdinal()
   .domain(["both", "men", "women"])
@@ -226,6 +220,8 @@ var horizLines = svg
     .attr("stroke", function(d) { return myColorCOD(d.COD) })
     .attr("stroke-width", 1)
     .style("opacity",.5)
+    .on("mouseover", mouseover)
+    .on("mouseleave", mouseleave)
 
 
 

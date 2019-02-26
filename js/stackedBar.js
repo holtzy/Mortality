@@ -5,8 +5,8 @@ function plotStackedbar(){
 // DATA, SVG AREAS
 // ======================= //
 
-// List of groups = List of Mental Disorder
-var groups = ["Any Disorder","Intellectual Disabilities", "Substance Use", "Eating Disorders","Schizophrenia", "Developmental Disorders","Personality Disorders", "Behavioral Disorders", "Mood Disorders", "Neurotic Disorders", "Organic Disorders"]
+// List of groups = List of Mental Disorder = Order on stacked barplot
+var groups = ["Any Disorder","Substance Use","Intellectual Disabilities", "Eating Disorders","Schizophrenia","Personality Disorders", "Behavioral Disorders", "Neurotic Disorders","Mood Disorders",  "Organic Disorders", "Developmental Disorders"]
 
 // List of subgroups
 var subgroups = ["Natural Causes","Unnatural Causes"]
@@ -116,6 +116,7 @@ var tooltip = d3.select("#my_stackedBar")
     .attr("class", "tooltip")
     .style("font-size", "16px")
     .style("max-width", "250px")
+    .style("min-width", "250px")
 
 
 // Three function that change the tooltip when user hover / move / leave a cell
@@ -123,8 +124,9 @@ var mouseover = function(d) {
   var subgroupName = d3.select(this.parentNode).datum().key;
   tooltip
       .html(
-         d.data.mentalDis + "<br>" +
-        "Years of Life Lost: " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + "<br>" +
+        "<span style='color:grey'>Years of Life Lost: </span>" + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + "<br>" +
+        "<span style='color:grey'>Natural: </span>" + Math.round(d.data["Natural Causes"]*10)/10 + " - " +   "<span style='color:grey'>Unnatural: </span>" + Math.round(d.data["Unnatural Causes"]*10)/10 +
+        "<br><br>" +
         "Click the bar for more details"
 
         // // "Being diagnosed with " + d.data.mentalDis + " results in " + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + " Years of life lost" + "<br>" +
