@@ -207,7 +207,7 @@ function updateStackedBar(){
 
   // remove all bars
   d3.selectAll(".myRect").remove()
-  
+
   // Show the bars
   var allBars = svg.append("g")
     .selectAll("g")
@@ -300,8 +300,16 @@ svgBar
 // update the barplot
 function updateBar(mentalDis){
 
+  // Recover the SEX option?
+  selectedSexOption = $("input[name='controlBarSex']:checked").val();
+  if( selectedSexOption == "males" ){
+    dataToUse = data_filteredM
+  }else{
+    dataToUse = data_filteredF
+  }
+
   // Get appropriatte data
-  var dataBar = data_filteredM
+  var dataBar = dataToUse
     .filter(function(d){return d.mentalDis == mentalDis})
     [0]
   dataBar
