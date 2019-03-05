@@ -324,6 +324,107 @@
 
 
 
+
+
+
+
+
+
+
+<a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
+
+
+<script type="text/javascript">
+    var stockData = [
+        {
+            Symbol: "AAPL",
+            Company: "Apple Inc.",
+            Price: "132.54"
+        },
+        {
+            Symbol: "INTC",
+            Company: "Intel Corporation",
+            Price: "33.45"
+        },
+        {
+            Symbol: "GOOG",
+            Company: "Google Inc",
+            Price: "554.52"
+        },
+    ];
+
+    function convertArrayOfObjectsToCSV(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
+
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
+
+        keys = Object.keys(data[0]);
+
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
+
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
+
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
+
+        return result;
+    }
+
+    function downloadCSV(args) {
+        console.log("oooooo")
+        var data, filename, link;
+
+        var csv = convertArrayOfObjectsToCSV({
+            data: stockData
+        });
+        console.log(csv)
+        if (csv == null) return;
+
+        filename = args.filename || 'export.csv';
+        console.log(filename)
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+        console.log(data)
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+        console.log("okkkk")
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- ======================= LOGO SECTION =============================== -->
 
 <section id="logo"  class="bg-light" style="padding-top: 4%; padding-bottom: 4%; background-color: white">
