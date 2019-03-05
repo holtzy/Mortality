@@ -327,91 +327,31 @@
 
 
 
+<a href="DATA/MRR.txt" download="fileMRR.txt">Download SO Logo</a>
 
 
 
+<button class="btn btn-secondary btn-md text-uppercase" onclick="myCodeDownload('input_data_LYL.csv')">Download code</button>
 
-<a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
+<script>
+function myCodeDownload(filename, idHTML, idJS) {
 
 
-<script type="text/javascript">
-    var stockData = [
-        {
-            Symbol: "AAPL",
-            Company: "Apple Inc.",
-            Price: "132.54"
-        },
-        {
-            Symbol: "INTC",
-            Company: "Intel Corporation",
-            Price: "33.45"
-        },
-        {
-            Symbol: "GOOG",
-            Company: "Google Inc",
-            Price: "554.52"
-        },
-    ];
+  var myText = data_MRR
 
-    function convertArrayOfObjectsToCSV(args) {
-        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+  // create a hidden element and click on it:
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + myText);
+  element.setAttribute('download', filename);
 
-        data = args.data || null;
-        if (data == null || !data.length) {
-            return null;
-        }
+  element.style.display = 'none';
+  document.body.appendChild(element);
 
-        columnDelimiter = args.columnDelimiter || ',';
-        lineDelimiter = args.lineDelimiter || '\n';
+  element.click();
 
-        keys = Object.keys(data[0]);
-
-        result = '';
-        result += keys.join(columnDelimiter);
-        result += lineDelimiter;
-
-        data.forEach(function(item) {
-            ctr = 0;
-            keys.forEach(function(key) {
-                if (ctr > 0) result += columnDelimiter;
-
-                result += item[key];
-                ctr++;
-            });
-            result += lineDelimiter;
-        });
-
-        return result;
-    }
-
-    function downloadCSV(args) {
-        console.log("oooooo")
-        var data, filename, link;
-
-        var csv = convertArrayOfObjectsToCSV({
-            data: stockData
-        });
-        console.log(csv)
-        if (csv == null) return;
-
-        filename = args.filename || 'export.csv';
-        console.log(filename)
-
-        if (!csv.match(/^data:text\/csv/i)) {
-            csv = 'data:text/csv;charset=utf-8,' + csv;
-        }
-        data = encodeURI(csv);
-        console.log(data)
-
-        link = document.createElement('a');
-        link.setAttribute('href', data);
-        link.setAttribute('download', filename);
-        link.click();
-        console.log("okkkk")
-    }
+  document.body.removeChild(element);
+}
 </script>
-
-
 
 
 
