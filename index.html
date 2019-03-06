@@ -37,6 +37,9 @@
   <script src="LIB/jquery/jquery.min.js"></script>
   <script src="LIB/jquery-easing/jquery.easing.min.js"></script>
 
+  <!-- d3.js annotation -->
+  <script src="js/d3-annotation.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -154,12 +157,13 @@
     <!-- Second text -->
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 4%">
-        <h2 class="text-left">Sex-specific Mortality rates</h2>
+        <h2 class="text-left">Sex-specific and Cause of death-specific Mortality rates</h2>
         <center><div style="text-align: justify" class="threeColumns">
-          <p class="drop-cap">Sex-specific mortality rate ratio for those with any mental disorder showed a similar pattern for males and females, although males had a higher Mortality Rate Ratio compared to females after age 20 years. Causes of death can also be <span class="persoBtn">split</span> between natural and artifical cause of death. It appears that mortality rate ratio linked with unnatural cause of death are highly more frequent for people with mental disorders, notably because of the effect of suicide. The next part of this document allows to dig this concept further.</p>
+          <p class="drop-cap">Sex-specific mortality rate ratio for those with any mental disorder showed a similar pattern for males and females, although males had a higher Mortality Rate Ratio compared to females after age 20 years. Causes of death can also be split between natural and artifical cause of death. It appears that mortality rate ratio linked with unnatural cause of death are highly more frequent for people with mental disorders, notably because of the effect of suicide. The next part of this document allows to dig this concept further.</p>
         </div></center>
       </div>
     </div></center>
+    <br>
 
     <!-- Charts FOCUS SEX-->
     <center><div class="row" style="padding-bottom: 80px">
@@ -167,16 +171,6 @@
       <div class="col-lg-4" id="my_MR_focusRight"></div>
       <div class="col-lg-4" id="my_MRR_focus"></div>
     </div></center>
-
-    <!-- Second text -->
-    <div class="row">
-      <div class="col-lg-12 text-center" style="padding-bottom: 4%">
-        <h2 class="text-left">Cause-of-death specific Mortality rates</h2>
-        <center><div style="text-align: justify" class="threeColumns">
-          <p class="drop-cap">Sex-specific mortality rate ratio for those with any mental disorder showed a similar trend for <span class="showSexLinechart maleStyle">males</span> and <span class="showSexLinechart femaleStyle">females</span>, although males had a higher ratio than females after age 20 years. Causes of death can also be divided into Natural and Unnatural. It appears that Mortality Rate Ratios linked with Unnatural cause of death are higher amongst young people. This reflects the increased risk of suicide.</p>
-        </div></center>
-      </div>
-    </div>
 
     <!-- Charts FOCUS COD-->
     <center><div class="row" style="padding-bottom: 20px">
