@@ -311,48 +311,12 @@
               <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://www.nbepi.com">NB Epi.com</a>
               <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://www.nbepi.com">Paper</a>
               <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="mailto:j.mcgrath@uq.edu.au">Mail</a>
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="mailto:j.mcgrath@uq.edu.au">Data</a>
+              <a class="btn btn-primary btn-xl text-uppercase" data-toggle="modal" href="#dataDownload">Data</a>
             </div>
          </div>
        </div>
     </div>
   </section>
-
-
-
-
-
-
-
-
-
-
-<a href="DATA/MRR.txt" download="fileMRR.txt">Download SO Logo</a>
-
-
-
-<button class="btn btn-secondary btn-md text-uppercase" onclick="myCodeDownload('input_data_LYL.csv')">Download code</button>
-
-<script>
-function myCodeDownload(filename, idHTML, idJS) {
-
-
-  var myText = data_MRR
-
-  // create a hidden element and click on it:
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + myText);
-  element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
-}
-
-</script>
 
 
 
@@ -497,16 +461,18 @@ function myCodeDownload(filename, idHTML, idJS) {
 
 
 
-<!-- MODAL LOLLI-->
-<div class="portfolio-modal modal fade" id="allLolli" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog h-100">
+<!-- MODAL DATA DOWNLOAD-->
+<div class="modal fade" id="dataDownload" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <div class="close-modal" data-dismiss="modal">
-        <div class="lr">
-          <div class="rl"></div>
+      <div class="row justify-content-center" style="padding: 70px; text-align: center;">
+        <h1>Data Download</h1>
+        <p>Three datasets are used in this webpage, all available for download using the buttons below. <u>Mortality Rates Ratios</u> (MRR) are available by age range and for the whole population. <u>Life Year Lost</u> (LYL) are available for the whole population only.</p>
+        <div>
+          <a class="btn btn-secondary btn-xl text-uppercase" href="DATA/MRR_age.txt" download="fileMRR.txt">MRR per age</a>
+          <a class="btn btn-secondary btn-xl text-uppercase" href="DATA/MRR.txt" download="fileMRR.txt">MRR</a>
+          <a class="btn btn-secondary btn-xl text-uppercase" href="DATA/LYL.txt" download="fileMRR.txt">LYL</a>
         </div>
-      </div>
-      <div class="container">
       </div>
     </div>
   </div>

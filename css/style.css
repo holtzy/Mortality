@@ -401,6 +401,38 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 
 
+/* -------------------- MODAL DATA DOWNLOAD------------------ */
+
+/* width of modal: different following the device: small (100%), medium(50%), large(30%); */
+/* #dataDownload.portfolio-modal .modal-dialog {
+  margin: 1rem;
+  max-width: 50vw;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+#dataDownload @media (min-width: 1000px) {
+  .portfolio-modal .modal-dialog {
+    max-width: 50vw;
+  }
+}
+#dataDownload @media (min-width: 1800px) {
+  .portfolio-modal .modal-dialog {
+    max-width: 50vw;
+  }
+}
+#dataDownload .portfolio-modal .modal-content {
+  padding: 10px 0;
+} */
+
+
+
+
+
+
+
+
+
+
 /* -------------------- CLOSING MODAL ------------------ */
 
 
