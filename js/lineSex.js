@@ -156,37 +156,36 @@ svgRight.append("text")
 // ======================= //
 // LEGEND
 // ======================= //
-
-// Add legend
-svgLeft.append("text")
-    .attr("text-anchor", "start")
-    .attr("x", 220)
-    .attr("y", 250)
-    .style("fill", "black")
-    .text("No diagnosis")
-    .style("alignment-baseline", "middle")
-svgLeft.append("line")
-    .attr("x1", 170)
-    .attr("x2", 210)
-    .attr("y1", 250)
-    .attr("y2", 250)
-    .attr("stroke", "black")
-    .attr("stroke-width", 1.5)
-    .style("stroke-dasharray", ("3, 3"))  // <== This line here!!
-svgLeft.append("text")
-    .attr("text-anchor", "start")
-    .attr("x", 220)
-    .attr("y", 230)
-    .style("fill", "black")
-    .text("Mental disorder")
-    .style("alignment-baseline", "middle")
-svgLeft.append("line")
-    .attr("x1", 170)
-    .attr("x2", 210)
-    .attr("y1", 230)
-    .attr("y2", 230)
-    .attr("stroke", "black")
-    .attr("stroke-width", 1.5)
+svgLeft
+  .append("text")
+  .text("Dis.")
+  .attr("x", 272)
+  .attr("y", 50)
+  .attr("fill", mySexColor("Females"))
+  .style("font-size", 12)
+svgLeft
+  .append("text")
+  .text("No Dis.")
+  .attr("x", 272)
+  .attr("y", 80)
+  .attr("fill", mySexColor("Females"))
+  .attr("opacity", .8)
+  .style("font-size", 12)
+svgCenter
+  .append("text")
+  .text("Dis.")
+  .attr("x", 272)
+  .attr("y", 48)
+  .attr("fill", mySexColor("Males"))
+  .style("font-size", 12)
+svgCenter
+  .append("text")
+  .text("No Dis.")
+  .attr("x", 272)
+  .attr("y", 75)
+  .attr("fill", mySexColor("Males"))
+  .attr("opacity", .8)
+  .style("font-size", 12)
 
 
 

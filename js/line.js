@@ -18,6 +18,7 @@ var svgLeft = d3.select("#my_MR")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style("overflow", "visible")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
@@ -27,6 +28,7 @@ var svgRight = d3.select("#my_MRR")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .style("overflow", "visible")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
@@ -128,9 +130,19 @@ svgRight.append("text")
 // LEGEND
 // ======================= //
 
-
-
-
+svgLeft
+  .append("text")
+  .text("Mental disorder")
+  .attr("x", 343)
+  .attr("y", 70)
+  .attr("fill", mySexColor("both"))
+svgLeft
+  .append("text")
+  .text("No diagnosis")
+  .attr("x", 343)
+  .attr("y", 102)
+  .attr("fill", mySexColor("both"))
+  .attr("opacity", .8)
 
 
 // ======================= //
