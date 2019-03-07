@@ -38,8 +38,8 @@ xAxis.select(".domain").remove()
 
 // vertical lines
 svg.selectAll(".tick line").attr("stroke", "#B0B0B0")
-xTickPos = [0,5,10,15,20]
-svg.selectAll("xTicks")
+xTickPos = [0,5,10,15,20,25,30,35,40]
+var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
   .append("line")
@@ -213,6 +213,29 @@ function updateChart(selectedGroup, selectedSex) {
   }else{
     selectedData = selectedData.filter(function(d){ return d.sex != "both" })
   }
+
+  // What is the upper limit of the axis?
+  if(selectedMentalDisOption=="Substance Use"){
+    upperLimit = 35
+  }else{
+    upperLimit = 20
+  }
+
+  // Update the axis
+  x.domain([0,upperLimit])
+  xAxis
+    .transition()
+    .duration(1000)
+    .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
+  xAxis.select(".domain").remove()
+
+  // Update vertical bars
+  verticalLines
+    .transition()
+    .duration(1000)
+      .attr("x1", function(d) { return x(d); })
+      .attr("x2", function(d) { return x(d); })
+
 
   // Update circle position
   var u = svg.selectAll(".myLolliCircles")
