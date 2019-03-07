@@ -212,7 +212,7 @@
     <div>
       <p style="display: inline-block; padding-left: 20px; border-width: .5px; border-left: solid; margin-left: 5em; font-size: 15px; text-align: left; max-width:400px">Mortality rates per specific cause of death for people with <select class="persoBtn" id="controlLolliDisorder"></select></p>
       <!-- Radio button that controls sex: split or both? -->
-      <div id="controlLolliSex" class="float-right" style="font-size: 15px; text-align: right">
+      <div id="controlLolliSex" class="float-right">
         <span>You can study sex together or separately:</span>
         <br>
         <input type="radio" name="controlLolliSex" value="both" checked> Together<br>
@@ -220,6 +220,18 @@
         </div>
       </p>
     </div>
+
+    <style>
+    #controlLolliSex {
+      font-size: 15px;
+      text-align: right;
+    }
+    @media (max-width: 1000px) {
+      #controlLolliSex {
+        text-align: center;
+      }
+    }
+    </style>
 
     <!-- Show Chart-->
     <center><div id="my_loli"></div></center>
