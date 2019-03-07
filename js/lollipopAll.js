@@ -116,9 +116,9 @@ var myYLabels = svg
       cod = bothCOD[i] ;
       cod_clean = cod.replace(/\s/g, '')
       if( typeCOD.includes(cod)){
-        return 'myMainLabel'+ ' ' + cod_clean
+        return 'yAxisLabel' + ' ' + 'myMainLabel'+ ' ' + cod_clean
       }else{
-        return cod_clean
+        return 'yAxisLabel' + ' ' + cod_clean
       }
     })
     .style('alignment-baseline', 'middle')
@@ -146,7 +146,8 @@ var myPositionLolliSex = d3.scaleOrdinal()
 var mouseover = function(d) {
   // recover the class = the COD of the circle
   selectedClass = d3.select(this).attr("class")
-
+  svg.selectAll(".yAxisLabel")
+    .style("opacity",0)
   svg
     .selectAll("circle:not(." + selectedClass + ")")
     .classed('hideLollipop', true)
@@ -155,6 +156,8 @@ var mouseover = function(d) {
     .classed('highlightLollipop', true)
   }
 var mouseleave = function(d) {
+  svg.selectAll(".yAxisLabel")
+    .style("opacity",1)
   svg
     .selectAll(".hideLollipop")
     .classed("hideLollipop", false)
