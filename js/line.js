@@ -128,40 +128,6 @@ svgRight.append("text")
 // LEGEND
 // ======================= //
 
-const annotations = [
-  {
-    note: {
-      title: "No diagnosis",
-      label: "Lower Mortality Rate",
-      align: "left",
-      wrap: 200,
-      padding: 10         // more = text lower
-    },
-    type: d3.annotationCalloutCircle,
-    connector: {
-      end: "dot",        // Can be none, or arrow or dot
-      type: "line",
-      points: 10,
-      lineType : "vertical"
-    },
-    subject: {
-      radius: 10,
-      radiusPadding: 5
-    },
-    x: 170,
-    y: 230,
-    dy: 37,
-    dx: 62
-  }].map(function(d){ d.color = mySexColor("both"); return d})
-
-  const makeAnnotations = d3.annotation()
-    //.type(d3.annotationCalloutCurve)     // Allows to customize the subject // Different types of annotation: d3.annotationLabel / d3.annotationCalloutCircle / d3.annotationBadge
-    .annotations(annotations)
-
-svgLeft
-    .append("g")
-    .attr("class", "annotation-group")
-    .call(makeAnnotations)
 
 
 
