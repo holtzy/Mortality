@@ -155,6 +155,8 @@ var mouseover = function(d) {
     .selectAll("."+selectedClass)
     .classed('highlightLollipop', true)
   }
+
+// What happens when hover is over
 var mouseleave = function(d) {
   svg.selectAll(".yAxisLabel")
     .style("opacity",1)
