@@ -9,6 +9,7 @@ function plotLineFocus(){
 data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90})
 data_codSpecific = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label != "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90})
 
+console.log(data_allGrouped)
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 20, bottom: 50, left: 20},
     width = 340 - margin.left - margin.right,
@@ -137,7 +138,7 @@ svgRight.append("text")
     .attr("text-anchor", "start")
     .attr("x", 10)
     .attr("y", 10)
-    .text("Mortality rate ratio")
+    .text("MRR")
 svgRight.append("text")
     .attr("text-anchor", "start")
     .attr("x", 10)
@@ -154,35 +155,66 @@ svgRight.append("text")
 
 svgLeft
   .append("text")
-  .text("Dis.")
+  .text("Mental")
   .attr("x", 272)
-  .attr("y", 55)
+  .attr("y", 38)
   .attr("fill", myColorCOD("Natural"))
   .style("font-size", 12)
 svgLeft
   .append("text")
-  .text("No Dis.")
+  .text("disorder")
+  .attr("x", 272)
+  .attr("y", 55)
+  .attr("fill", myColorCOD("Natural"))
+  .style("font-size", 12)
+
+svgLeft
+  .append("text")
+  .text("No mental")
   .attr("x", 272)
   .attr("y", 80)
   .attr("fill", myColorCOD("Natural"))
   .attr("opacity", .8)
   .style("font-size", 12)
+svgLeft
+  .append("text")
+  .text("disorder")
+  .attr("x", 272)
+  .attr("y", 97)
+  .attr("fill", myColorCOD("Natural"))
+  .attr("opacity", .8)
+  .style("font-size", 12)
+
 svgCenter
   .append("text")
-  .text("Dis.")
+  .text("Mental")
+  .attr("x", 272)
+  .attr("y", 111)
+  .attr("fill", myColorCOD("Unnatural"))
+  .style("font-size", 12)
+svgCenter
+  .append("text")
+  .text("disorder")
   .attr("x", 272)
   .attr("y", 128)
   .attr("fill", myColorCOD("Unnatural"))
   .style("font-size", 12)
 svgCenter
   .append("text")
-  .text("No Dis.")
+  .text("No mental")
   .attr("x", 272)
   .attr("y", 148)
   .attr("fill", myColorCOD("Unnatural"))
   .attr("opacity", .8)
   .style("font-size", 12)
-
+svgCenter
+  .append("text")
+  .text("disorder")
+  .attr("x", 272)
+  .attr("y", 165)
+  .attr("fill", myColorCOD("Unnatural"))
+  .attr("opacity", .8)
+  .style("font-size", 12)
 
 
 
