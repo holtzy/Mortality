@@ -455,6 +455,12 @@ function updateChart(data){
     .append('line')
       .style("stroke", "black")
       .style("opacity", 0)
+  // and the age
+  var textLeftAge = svgLeft.append('g')
+    .append('text')
+      .style("fill", "black")
+      .style("opacity", 0)
+      .attr("text-anchor", "middle")
 
   // CENTER CHART: text and circles
   var focusCenterTop = svgCenter.append('g')
@@ -481,6 +487,12 @@ function updateChart(data){
     .append('line')
       .style("stroke", "black")
       .style("opacity", 0)
+  // and the age
+  var textCenterAge = svgCenter.append('g')
+    .append('text')
+      .style("fill", "black")
+      .style("opacity", 0)
+      .attr("text-anchor", "middle")
 
   // Create 3 rects on top of each of the svg areas: this rectangle recovers mouse position
   svgRight.append('rect')
@@ -520,12 +532,14 @@ function updateChart(data){
     focusLeftLine.style("opacity", 1)
     textLeftTop.style("opacity", 1)
     textLeftBottom.style("opacity", 1)
+    textLeftAge.style("opacity",1)
 
     focusCenterTop.style("opacity", 1)
     focusCenterBottom.style("opacity", 1)
     focusCenterLine.style("opacity", 1)
     textCenterTop.style("opacity", 1)
     textCenterBottom.style("opacity", 1)
+    textCenterAge.style("opacity",1)
   }
 
   function mousemove() {
@@ -542,7 +556,7 @@ function updateChart(data){
       .attr("cx", x(selectedDataMales.specific))
       .attr("cy", yRight(selectedDataMales.irr))
     textRightMales
-      .text(Math.round(selectedDataMales.irr)+" %")
+      .text(Math.round(selectedDataMales.irr*10)/10)
       .attr("x", function(){ if(selectedDataMales.specific<35){
           return x(selectedDataMales.specific)-25
         }else{
@@ -554,7 +568,7 @@ function updateChart(data){
       .attr("cx", x(selectedDataFemales.specific))
       .attr("cy", yRight(selectedDataFemales.irr))
     textRightFemales
-      .text(Math.round(selectedDataFemales.irr)+" %")
+      .text(Math.round(selectedDataFemales.irr*10)/10)
       .attr("x", function(){ if(selectedDataFemales.specific<35){
           return x(selectedDataFemales.specific)+25
         }else{
@@ -581,6 +595,10 @@ function updateChart(data){
       .text(Math.round(selectedDataFemales.undiagnosed))
       .attr("x",x(selectedDataFemales.specific)+10)
       .attr("y", yLeft(selectedDataFemales.undiagnosed))
+    textLeftAge
+      .text("Age: " + selectedDataFemales.specific)
+      .attr("x",x(selectedDataFemales.specific)+10)
+      .attr("y", yLeft(selectedDataFemales.undiagnosed)+25 )
 
     focusCenterTop
       .attr("cx", x(selectedDataMales.specific))
@@ -601,6 +619,10 @@ function updateChart(data){
       .text(Math.round(selectedDataMales.undiagnosed))
       .attr("x",x(selectedDataMales.specific)+10)
       .attr("y", yCenter(selectedDataMales.undiagnosed))
+    textCenterAge
+      .text("Age: " + selectedDataMales.specific)
+      .attr("x",x(selectedDataMales.specific)+10)
+      .attr("y", yLeft(selectedDataMales.undiagnosed)+25 )
   }
   function mouseout() {
     focusRightMales.style("opacity", 0)
@@ -617,6 +639,8 @@ function updateChart(data){
     focusCenterLine.style("opacity", 0)
     textCenterTop.style("opacity", 0)
     textCenterBottom.style("opacity", 0)
+    textLeftAge.style("opacity", 0)
+    textLeftCenter.style("opacity", 0)
   }
 
 // Close the update chart function

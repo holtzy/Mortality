@@ -377,7 +377,7 @@ function updateChart(data){
       .attr("cx", x(selectedData.specific))
       .attr("cy", yRight(selectedData.irr))
     textRight
-      .text(Math.round(selectedData.irr)+" %")
+      .text(Math.round(selectedData.irr*10)/10)
       .attr("x", function(){ if(selectedData.specific<35){
           return x(selectedData.specific)-25
         }else{
