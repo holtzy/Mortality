@@ -132,6 +132,47 @@ var myPositionLolliSex = d3.scaleOrdinal()
 
 
 // ======================= //
+// SEX LEGEND
+// ======================= //
+svg
+  .append("text")
+  .attr("x",440)
+  .attr("y",-25)
+  .text("Males")
+  .style("fill", myColorLolliSex("men"))
+  .attr("class", "sexLegend")
+  .style("opacity",0)
+svg
+  .append("circle")
+  .attr("cx",425)
+  .attr("cy",-29)
+  .attr("r", 6)
+  .style("fill", myColorLolliSex("men"))
+  .attr("stroke", "black")
+  .attr("class", "sexLegend")
+  .style("opacity",0)
+svg
+  .append("text")
+  .attr("x",535)
+  .attr("y",-25)
+  .text("Females")
+  .style("fill", myColorLolliSex("women"))
+  .attr("class", "sexLegend")
+  .style("opacity",0)
+svg
+  .append("circle")
+  .attr("cx",520)
+  .attr("cy",-29)
+  .attr("r", 6)
+  .style("fill", myColorLolliSex("women"))
+  .attr("stroke", "black")
+  .attr("class", "sexLegend")
+  .style("opacity",0)
+
+
+
+
+// ======================= //
 // BUILD BUTTON
 // ======================= //
 
@@ -167,13 +208,14 @@ var tooltip = d3.select("#my_loli")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
-  console.log("kesako")
+  tooltip
+    .style("display", "block")
   tooltip
     .transition()
     .duration(200)
     .style("opacity", 1)
   tooltip
-      .html("<span style='color:grey'>M. Disorder: </span>" + d.mentalDis + "<br>" + "<span style='color:grey'>Cause of death: </span>" + d.COD + "<br>" + "MRR: " + Math.round(d.MRR*100)/100 + " [" + Math.round(d.MRR_left*100)/100 + "-" + Math.round(d.MRR_right*100)/100 + "]" + "<br>" + "<span style='color:grey'>Sex: </span>" + d.sex) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .html("<span style='color:grey'>Disorder: </span>" + d.mentalDis + "<br>" + "<span style='color:grey'>Cause of death: </span>" + d.COD + "<br>" + "MRR: " + Math.round(d.MRR*100)/100 + " [" + Math.round(d.MRR_left*100)/100 + "-" + Math.round(d.MRR_right*100)/100 + "]" + "<br>" + "<span style='color:grey'>Sex: </span>" + d.sex.charAt(0).toUpperCase() + d.sex.slice(1) ) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
       .style("top", (event.pageY)+"px")
       .style("left",(event.pageX+20)+"px")
 }
@@ -187,6 +229,8 @@ var mouseleave = function(d) {
     .transition()
     .duration(200)
     .style("opacity", 0)
+  tooltip
+    .style("display", "none")
 }
 
 
@@ -215,6 +259,13 @@ function updateChart(selectedGroup, selectedSex) {
   }
 
   // What is the upper limit of the axis?
+  if(selectedSexOption == "both"){
+    svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 0)
+  }else{
+    svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 1)
+  }
+
+  // Show sex legend if needed
   if(selectedMentalDisOption=="Substance Use"){
     upperLimit = 35
   }else{
