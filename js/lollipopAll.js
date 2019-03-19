@@ -53,6 +53,7 @@ svg
 
 
 
+
 // ======================= //
 // X SCALE AND AXIS
 // ======================= //
@@ -87,6 +88,15 @@ svg
     .style("font-size", 9)
     .style("fill", 'grey')
 
+// add Vert line value = 1
+svg
+  .append("line")
+    .attr("x1", function(d) { return x(1); })
+    .attr("x2", function(d) { return x(1); })
+    .attr("y1", -10 )
+    .attr("y2", height)
+    .attr("stroke", "orange")
+    .style("stroke-dasharray", ("8, 6"))
 
 
 

@@ -139,12 +139,13 @@ var tooltip = d3.select("#my_stackedBar")
     .style("font-size", "16px")
     .style("max-width", "250px")
     .style("min-width", "250px")
-
+    .style("display", "none")
 
 // Three function that change the tooltip when user hover / move / leave a cell
 var mouseover = function(d) {
   var subgroupName = d3.select(this.parentNode).datum().key;
   tooltip
+      .style("display", "block")
       .html(
         "<span style='color:grey'>Years of Life Lost: </span>" + Math.round((d.data["Natural Causes"]+d.data["Unnatural Causes"])*10)/10 + "<br>" +
         "<span style='color:grey'>Natural: </span>" + Math.round(d.data["Natural Causes"]*10)/10 + " - " +   "<span style='color:grey'>Unnatural: </span>" + Math.round(d.data["Unnatural Causes"]*10)/10 +
@@ -162,6 +163,7 @@ var mousemove = function(d) {
 }
 var mouseleave = function(d) {
   tooltip
+    .style("display", "none")
     .style("opacity", 0)
 }
 
@@ -488,7 +490,7 @@ svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width-70)
     .attr("y", height + 30+32)
-    .text("Life Years Lost (LYL)");
+    .text("Life Years Lost");
 
 
 

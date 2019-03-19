@@ -58,11 +58,19 @@ svg
     .attr("y2", height-20)
     .attr("stroke", "orange")
     .style("stroke-dasharray", ("8, 6"))
+
+// Axis title
 svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 30)
     .text("Mortality Rate Ratio");
+svg.append("text")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 50)
+    .style("fill", "#C8C8C8")
+    .text("Estimates based on less than 4 cases are not shown");
 
 // Add X axis title:
 svg.append("text")
