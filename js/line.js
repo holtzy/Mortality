@@ -95,12 +95,12 @@ svgLeft.append("text")
     .attr("y", 30)
     .text("per 100,000 person-years")
     .style("opacity", ".6")
-svgLeft.append("text")
-    .attr("text-anchor", "start")
-    .attr("x", 10)
-    .attr("y", 50)
-    .text("(95% CI)")
-    .style("opacity", ".6")
+// svgLeft.append("text")
+//     .attr("text-anchor", "start")
+//     .attr("x", 10)
+//     .attr("y", 50)
+//     .text("(95% CI)")
+//     .style("opacity", ".6")
 
 
 // Right: Add Y axis and scale
