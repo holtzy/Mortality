@@ -9,7 +9,6 @@ function plotLineFocus(){
 data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90})
 data_codSpecific = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label != "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90})
 
-console.log(data_allGrouped)
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 20, bottom: 50, left: 20},
     width = 340 - margin.left - margin.right,

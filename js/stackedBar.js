@@ -12,7 +12,7 @@ var groups = ["Any Disorder","Substance Use","Intellectual Disabilities", "Eatin
 var subgroups = ["Natural Causes","Unnatural Causes"]
 
 // MALES
-data_filteredM = data_LYL
+var data_filteredM = data_LYL
   .filter(function(d){ return d.sex == "Males" })
   .sort(function(a,b) {
     return groups.indexOf( a.mentalDis ) > groups.indexOf( b.mentalDis );
@@ -23,7 +23,7 @@ var stackedDataMales = d3.stack()
   (data_filteredM)
 
 // FEMALES
-data_filteredF = data_LYL
+var data_filteredF = data_LYL
   .filter(function(d){ return d.sex == "Females" })
   .sort(function(a,b) {
     return groups.indexOf( a.mentalDis ) > groups.indexOf( b.mentalDis );
@@ -171,6 +171,7 @@ var mouseleave = function(d) {
 var mouseclick = function(d) {
   // What is the mentalDisorder
   mentalDis = d.data.mentalDis
+
   // Highlight the selected mental disorder
   d3.selectAll(".myRect")
     .transition()
@@ -297,26 +298,47 @@ svgBar
       .attr("alignment-baseline", "middle")
       .attr("font-size", 10)
 
+// Initialize title
+var titleBarplot = svgBar
+  .append("text")
+  .attr("x", 10)
+  .attr("y", -50)
+svgBar
+  .append("text")
+  .attr("x", 10)
+  .attr("y", -27)
+  .html("Detail per Cause of Death")
+
 
 
 // update the barplot
 function updateBar(mentalDis){
 
+  // update barchart title
+  titleBarplot
+    .html("Life Year Lost due to "+ mentalDis+":")
+
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlBarSex']:checked").val();
   if( selectedSexOption == "males" ){
-    dataToUse = data_filteredM
+    var dataToUse = data_filteredM
   }else{
-    dataToUse = data_filteredF
+    var dataToUse = data_filteredF
   }
 
   // Get appropriatte data
-  var dataBar = dataToUse
+  var dataBar2 = dataToUse
     .filter(function(d){return d.mentalDis == mentalDis})
     [0]
-  dataBar
-  delete dataBar.sex
-  delete dataBar.mentalDis
+
+  // delete 2 columns without mutating the object. A simple delete would delete fields in all above objects...
+  // see https://flaviocopes.com/how-to-remove-object-property-javascript/
+  const dataBar = Object.keys(dataBar2).reduce((object, key) => {
+    if (key !== 'sex' || key !== 'mentalDis') {
+      object[key] = dataBar2[key]
+    }
+    return object
+  }, {})
 
   // First step: reformatting the data
   var data_long = [];
@@ -496,8 +518,6 @@ svg.append("text")
 
 
 
-`
-`
 // ======================= //
 // Y LABELS ON LEFT SIDE
 // ======================= //
