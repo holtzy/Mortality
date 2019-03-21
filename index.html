@@ -202,7 +202,7 @@
 
 
 <!-- ======================== LOLLIPOP CAUSE OF DEATH ============================ -->
-<section id="causality" class="bg">
+<section id="causality" class="bg" style="margin-bottom: 0px; padding-bottom: 0px">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center" style="padding-bottom: 3%">
@@ -218,37 +218,51 @@
       </div>
       <br><br><br>
     </div>
+  </div>
+</section>
 
+
+
+<section  class="bg-light" style="padding: 30px; margin: 0px">
+  <div class="container">
     <!-- Button control On top of the chart -->
-    <div>
+    <div class="row bg-light">
       <!-- Choose disorder -->
-      <p style="display: inline-block; padding-left: 20px; border-width: .5px; border-left: solid; margin-left: 5em; font-size: 15px; text-align: left; max-width:400px">Mortality Rate Ratios per specific cause of death for people with <select class="persoBtn" id="controlLolliDisorder"></select></p>
+      <div class="col-md-4 colWidgetInputLolli" >
+        <p>Mortality Rate Ratios per specific cause of death for people with <select class="persoBtn" id="controlLolliDisorder"></select></p>
+      </div>
+
       <!-- Radio button that controls sex: split or both? -->
-      <div id="controlLolliSex" class="float-right">
+      <div id="controlLolliSex" class="col-md-4 colWidgetInputLolli">
         <span>You can study sex together or separately:</span>
         <br>
         <input type="radio" name="controlLolliSex" value="both" checked> Together<br>
         <input type="radio" name="controlLolliSex" value="split"> Separately<br>
       </div>
-      <div id="controlLolliLog" class="float-right">
-        <span>Log scale or not?</span>
+      <div id="controlLolliLog" class="col-md-4 colWidgetInputLolli">
+        <span>Select your kind of scale</span>
         <br>
         <input type="radio" name="controlLolliLog" value="normal" checked> Normal<br>
         <input type="radio" name="controlLolliLog" value="log"> Log<br>
       </div>
     </div>
+  </div>
+</section>
 
-    <style>
-    #controlLolliSex {
-      font-size: 15px;
-      text-align: right;
-    }
-    @media (max-width: 1000px) {
-      #controlLolliSex {
-        text-align: center;
-      }
-    }
-    </style>
+<style>
+.colWidgetInputLolli {
+  margin-left: 20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  border-left: solid;
+  border-width: .1px;
+}
+</style>
+
+
+
+<section style="margin-top: 0px; padding-top: 0px">
+  <div class="container">
 
     <!-- Show Chart-->
     <center><div id="my_loli"></div></center>
