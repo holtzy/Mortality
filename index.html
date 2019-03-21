@@ -219,8 +219,9 @@
       <br><br><br>
     </div>
 
-    <!-- Plot title -->
+    <!-- Button control On top of the chart -->
     <div>
+      <!-- Choose disorder -->
       <p style="display: inline-block; padding-left: 20px; border-width: .5px; border-left: solid; margin-left: 5em; font-size: 15px; text-align: left; max-width:400px">Mortality Rate Ratios per specific cause of death for people with <select class="persoBtn" id="controlLolliDisorder"></select></p>
       <!-- Radio button that controls sex: split or both? -->
       <div id="controlLolliSex" class="float-right">
@@ -228,8 +229,13 @@
         <br>
         <input type="radio" name="controlLolliSex" value="both" checked> Together<br>
         <input type="radio" name="controlLolliSex" value="split"> Separately<br>
-        </div>
-      </p>
+      </div>
+      <div id="controlLolliLog" class="float-right">
+        <span>Log scale or not?</span>
+        <br>
+        <input type="radio" name="controlLolliLog" value="normal" checked> Normal<br>
+        <input type="radio" name="controlLolliLog" value="log"> Log<br>
+      </div>
     </div>
 
     <style>

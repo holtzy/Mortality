@@ -27,18 +27,18 @@ var svg = d3.select("#my_loli")
 // X AXIS
 // ======================= //
 
-// Add X axis
+// Initialize X axis
 var x = d3.scaleLinear()
-  .domain([0, 20])
+  .domain([1, 20])
   .range([ 0, width]);
 var xAxis = svg.append("g")
   .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
+  .call(d3.axisBottom(x).tickSize(0).ticks(0))
 xAxis.select(".domain").remove()
 
 // vertical lines
 svg.selectAll(".tick line").attr("stroke", "#B0B0B0")
-xTickPos = [0,5,10,15,20,25,30,35,40]
+xTickPos = [5,10,15,20,25,30,35,40]
 var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
@@ -48,6 +48,17 @@ var verticalLines = svg.selectAll("xTicks")
     .attr("y1", height-20 )
     .attr("y2", -20)
     .attr("stroke", "#B0B0B0")
+
+// X axis labels
+var xAxisLabels = svg.selectAll("xLabels")
+  .data(xTickPos)
+  .enter()
+  .append("text")
+    .attr("x", function(d) { return x(d); })
+    .attr("y", height )
+    .text( function(d) { return d })
+    .attr("text-anchor", "middle")
+
 
 // Vert line value = 1
 svg
@@ -72,10 +83,10 @@ svg.append("text")
     .style("fill", "#C8C8C8")
     .text("Estimates based on less than 4 cases are not shown");
 
-// Add X axis title:
+// Add MRR=1 label
 svg.append("text")
-    .attr("text-anchor", "center")
-    .attr("x", x(0))
+    .attr("text-anchor", "middle")
+    .attr("x", 0)
     .attr("y", -25)
     .text("MRR = 1")
     .style("fill", "orange")
@@ -266,6 +277,15 @@ function updateChart(selectedGroup, selectedSex) {
     selectedData = selectedData.filter(function(d){ return d.sex != "both" })
   }
 
+  // Log scale or Linear scale?
+  selectedLogOption = $("input[name='controlLolliLog']:checked").val();
+  console.log(selectedLogOption)
+  if(selectedLogOption == "normal"){
+    var x = d3.scaleLinear().range([ 0, width]);
+  }else{
+    var x = d3.scaleLog().range([ 0, width]);
+  }
+
   // What is the upper limit of the axis?
   if(selectedSexOption == "both"){
     svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 0)
@@ -281,11 +301,11 @@ function updateChart(selectedGroup, selectedSex) {
   }
 
   // Update the axis
-  x.domain([0,upperLimit])
+  x.domain([1,upperLimit])
   xAxis
     .transition()
     .duration(1000)
-    .call(d3.axisBottom(x).tickSize(0)  .ticks(5))
+    .call(d3.axisBottom(x).tickSize(0).ticks(0))
   xAxis.select(".domain").remove()
 
   // Update vertical bars
@@ -295,6 +315,11 @@ function updateChart(selectedGroup, selectedSex) {
       .attr("x1", function(d) { return x(d); })
       .attr("x2", function(d) { return x(d); })
 
+  // Update X axis labels
+  xAxisLabels
+    .transition()
+    .duration(1000)
+      .attr("x", function(d) { return x(d); })
 
   // Update circle position
   var u = svg.selectAll(".myLolliCircles")
@@ -349,12 +374,24 @@ function updateChart(selectedGroup, selectedSex) {
 
   }
 
+
+
+
+
+
+// ======================= //
+// EVENT LISTENER
+// ======================= //
+
+
 // Listen to the mental disorder selection button
 d3.select("#controlLolliDisorder").on("change", updateChart)
 
 // An event listener to the radio button for Lollipop SEX
 d3.select("#controlLolliSex").on("change", updateChart)
 
+// An event listener to the radio button for Lollipop SEX
+d3.select("#controlLolliLog").on("change", updateChart)
 
 // Listen to the button to show Substance use., behavioral or organic
 d3.select("#showSubstanceUse").on("click", function(){
