@@ -178,6 +178,7 @@ var mouseleave = function(d) {
 // ======================= //
 
 var mouseclick = function(d) {
+
   // What is the mentalDisorder
   mentalDis = d.data.mentalDis
 
@@ -199,6 +200,9 @@ var mouseclick = function(d) {
     .style("display", "inline")
   // Build the barplot for the good group
   updateBar(d.data.mentalDis)
+
+  // Remove explanation text to make people click
+  d3.selectAll(".explanationClick").style("display", "none")
 }
 
 
@@ -240,6 +244,7 @@ function updateStackedBar(){
         .attr("height", y.bandwidth())
         .attr("x", function(d) {  return x(d[0]); })
         .attr("width", function(d) { return Math.abs(x(d[1]) - x(d[0])); })
+        .style("cursor", "pointer")
       .on("mouseover", mouseover)
       .on("mousemove", mousemove)
       .on("mouseleave", mouseleave)
@@ -524,6 +529,20 @@ svg.append("text")
     .text("Life Years Lost");
 
 
+// Explanation to make people click
+svg.append("text")
+    .attr("class", "explanationClick")
+    .attr("text-anchor", "start")
+    .attr("x", width-20)
+    .attr("y", height /2)
+    .text("Click on one of the bars to");
+// Explanation to make people click
+svg.append("text")
+    .attr("class", "explanationClick")
+    .attr("text-anchor", "start")
+    .attr("x", width-20)
+    .attr("y", height/2+20)
+    .text("see the specific causes of death");
 
 
 
