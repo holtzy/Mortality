@@ -168,6 +168,15 @@ var mouseleave = function(d) {
 }
 
 
+
+
+
+
+
+// ======================= //
+// REACTION TO CLICK
+// ======================= //
+
 var mouseclick = function(d) {
   // What is the mentalDisorder
   mentalDis = d.data.mentalDis
@@ -316,7 +325,7 @@ function updateBar(mentalDis){
 
   // update barchart title
   titleBarplot
-    .html("Life Year Lost due to "+ mentalDis+":")
+    .html("Life Years Lost associated with "+ mentalDis+":")
 
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlBarSex']:checked").val();

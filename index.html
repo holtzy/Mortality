@@ -83,7 +83,7 @@
           <a class="nav-link js-scroll-trigger" href="#causality">Cause of Death</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#lyl">Life Year Lost</a>
+          <a class="nav-link js-scroll-trigger" href="#lyl">Life Years Lost</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" href="#method">Methods</a>
@@ -170,7 +170,7 @@
       <div class="col-lg-12 text-center" style="padding-bottom: 4%">
         <h2 class="text-left">Sex-specific and Cause of death-specific Mortality Rates and Ratios</h2>
         <center><div style="text-align: justify" class="threeColumns">
-          <p class="drop-cap">Sex-specific Mortality Rate Ratios for those with any mental disorder showed a similar pattern for males and females, although males had a higher Mortality Rate Ratio compared to females after age 20 years. Causes of death can also be categorised between natural and unnatural causes of death (see list of causes in each category). Mortality Rate Ratios linked with unnatural causes of death are much higher for people with mental disorders because of the impact of suicide. The next part of this webpage will explore the links between mental disorders and causes of death in more detail.</p>
+          <p class="drop-cap">Sex-specific Mortality Rate Ratios for those with any mental disorder showed a similar pattern for males and females, although males had a higher Mortality Rate Ratio compared to females after age 20 years. Causes of death can also be categorised between natural and unnatural causes of death (see <a class="persoBtn" data-toggle="modal" href="#explanationCOD">list of causes</a> in each category). Mortality Rate Ratios linked with unnatural causes of death are much higher for people with mental disorders because of the impact of suicide. The next part of this webpage will explore the links between mental disorders and causes of death in more detail.</p>
         </div></center>
       </div>
     </div></center>
@@ -506,7 +506,7 @@
     <div class="modal-content">
       <div class="row justify-content-center" style="padding: 70px; text-align: center;">
         <h1>Data Download</h1>
-        <p>Three datasets are used in this webpage, all available for download using the buttons below. <u>Mortality Rates Ratios</u> (MRR) are available by age range and for the whole population. <u>Life Year Lost</u> (LYL) are available for the whole population only.</p>
+        <p>Three datasets are used in this webpage, all available for download using the buttons below. <u>Mortality Rates Ratios</u> (MRR) are available by age range and for the whole population. <u>Life Years Lost</u> (LYL) are available for the whole population only.</p>
         <div>
           <a class="btn btn-secondary btn-xl text-uppercase" href="DATA/MRR_age.txt" download="fileMRR.txt">MRR per age</a>
           <a class="btn btn-secondary btn-xl text-uppercase" href="DATA/MRR.txt" download="fileMRR.txt">MRR</a>
@@ -518,7 +518,20 @@
 </div>
 
 
-
+<!-- MODAL EXPLANATION COD-->
+<div class="modal fade" id="explanationCOD" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="row" style="padding: 70px; text-align: left;">
+        <p>For historical reasons, Causes of Death are often divided into broad categories.<br><br>Under the overall category “Any Cause”, there are two broad subcategories:</p>
+        <ul>
+          <li>“Unnatural Causes” which includes suicide, accidents and being the victim of homicide</li>
+          <li>“Natural Causes” which includes all other causes, e.g. cancer (i.e. neoplasms), infectious diseases, and circulatory disorders.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
