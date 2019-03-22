@@ -64,7 +64,7 @@ var x = d3.scaleLinear()
   .range([ 0, width]);
 
 // Add vertical lines
-xTickPos = [0,5,10,15,20]
+xTickPos = [5,10,15,20]
 var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
@@ -91,7 +91,7 @@ var xAxisLabels = svg
     .style("fill", 'grey')
 
 // add Vert line value = 1
-svg
+var vertLine1 = svg
   .append("line")
     .attr("x1", function(d) { return x(1); })
     .attr("x2", function(d) { return x(1); })
@@ -99,8 +99,6 @@ svg
     .attr("y2", height)
     .attr("stroke", "orange")
     .style("stroke-dasharray", ("8, 6"))
-
-
 
 // ======================= //
 // Y SCALE AND AXIS
@@ -187,7 +185,6 @@ var mouseleave = function(d) {
 // SHAPES
 // ======================= //
 
-
 function updateChart() {
 
   // Log scale or Linear scale?
@@ -210,6 +207,13 @@ function updateChart() {
     .transition()
     .duration(1000)
       .attr("x", function(d) { return x(d); })
+
+  // update MRR=1 line
+  vertLine1
+    .transition()
+    .duration(1000)
+    .attr("x1", function(d) { return x(1); })
+    .attr("x2", function(d) { return x(1); })
 
   // Update circle position
   var u = svg.selectAll('circle')

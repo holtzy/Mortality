@@ -61,7 +61,7 @@ var xAxisLabels = svg.selectAll("xLabels")
 
 
 // Vert line value = 1
-svg
+var vertLine1 = svg
   .append("line")
     .attr("x1", function(d) { return x(1); })
     .attr("x2", function(d) { return x(1); })
@@ -69,6 +69,14 @@ svg
     .attr("y2", height-20)
     .attr("stroke", "orange")
     .style("stroke-dasharray", ("8, 6"))
+
+// Add MRR=1 label
+svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", 0)
+    .attr("y", -25)
+    .text("MRR = 1")
+    .style("fill", "orange")
 
 // Axis title
 svg.append("text")
@@ -83,13 +91,6 @@ svg.append("text")
     .style("fill", "#C8C8C8")
     .text("Estimates based on less than 4 cases are not shown");
 
-// Add MRR=1 label
-svg.append("text")
-    .attr("text-anchor", "middle")
-    .attr("x", 0)
-    .attr("y", -25)
-    .text("MRR = 1")
-    .style("fill", "orange")
 
 
 
