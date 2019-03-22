@@ -72,7 +72,7 @@ var verticalLines = svg.selectAll("xTicks")
     .attr("x1", function(d) { return x(d); })
     .attr("x2", function(d) { return x(d); })
     .attr("y1", -20 )
-    .attr("y2", height-20)
+    .attr("y2", height)
     .attr("stroke", "#F8F8F8")
     .attr("stroke-width", 2)
 
