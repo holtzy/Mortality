@@ -193,9 +193,9 @@ function updateChart() {
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLogAll']:checked").val();
   if(selectedLogOption == "normal"){
-    var x = d3.scaleLinear().range([ 0, width]).domain([0, 22]);
+    var x = d3.scaleLinear().range([ 0, width]).domain([0, 25]);
   }else{
-    var x = d3.scaleLog().range([ 0, width]).domain([1, 22]);
+    var x = d3.scaleLog().range([ 0, width]).domain([1, 25]);
   }
 
   // Update vertical bars
@@ -275,8 +275,8 @@ function updateChart() {
   //
 
 
-  // Update circle position
-  var v = svg.selectAll('line')
+  // lolli horiz line position
+  var v = svg.selectAll('.lolliHorizLine')
     .data( function(d){ return(d.values)} )
   v
     .enter()
@@ -291,7 +291,7 @@ function updateChart() {
       .attr("x2", function(d) { return x(d.MRR); })
       .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
       .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-      .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+      .attr("class", function(d) { return "lolliHorizLine " + d.COD.replace(/\s/g, ''); })
       .attr("stroke", function(d) { return myColorCOD(d.COD) })
       .attr("stroke-width", 1)
       .style("opacity",.5)
