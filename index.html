@@ -261,7 +261,7 @@
 
 
 
-<section style="margin-top: 0px; padding-top: 0px">
+<section style="margin-top: 0px; padding-top: 0px; margin-bottom: 0px; padding-bottom: 0px;">
   <div class="container">
 
     <!-- Show Chart-->
@@ -277,6 +277,33 @@
       </div>
     </center>
     <br><br>
+  </div>
+</section>
+
+
+<section  class="bg-light" style="padding: 30px; margin: 0px">
+  <div class="container">
+    <!-- Button control On top of the chart -->
+    <div class="row bg-light">
+      <!-- Radio button that controls sex: split or both? -->
+      <div id="controlLolliSexAll" class="col-md-4 colWidgetInputLolli">
+        <span>You can study sex together or separately:</span>
+        <br>
+        <input type="radio" name="controlLolliSexAll" value="both" checked> Together<br>
+        <input type="radio" name="controlLolliSexAll" value="split"> Separately<br>
+      </div>
+      <div id="controlLolliLogAll" class="col-md-4 colWidgetInputLolli">
+        <span>Select your kind of scale</span>
+        <br>
+        <input type="radio" name="controlLolliLogAll" value="normal" checked> Normal<br>
+        <input type="radio" name="controlLolliLogAll" value="log"> Log<br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top: 30px; padding-top: 0px">
+  <div class="container">
 
     <!-- Chart with everybody -->
     <center><div id="my_loliAll"></div></center>

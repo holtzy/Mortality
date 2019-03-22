@@ -260,7 +260,7 @@ var mouseleave = function(d) {
 // ======================= //
 
 // Function that update the chart for a disorder
-function updateChart(selectedGroup, selectedSex) {
+function updateChart() {
 
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlLolliSex']:checked").val();
@@ -279,21 +279,20 @@ function updateChart(selectedGroup, selectedSex) {
 
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLog']:checked").val();
-  console.log(selectedLogOption)
   if(selectedLogOption == "normal"){
     var x = d3.scaleLinear().range([ 0, width]);
   }else{
     var x = d3.scaleLog().range([ 0, width]);
   }
 
-  // What is the upper limit of the axis?
+  // Do we need sex legend?
   if(selectedSexOption == "both"){
     svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 0)
   }else{
     svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 1)
   }
 
-  // Show sex legend if needed
+  // Different X axis limit for substance use
   if(selectedMentalDisOption=="Substance Use"){
     upperLimit = 35
   }else{
@@ -390,7 +389,7 @@ d3.select("#controlLolliDisorder").on("change", updateChart)
 // An event listener to the radio button for Lollipop SEX
 d3.select("#controlLolliSex").on("change", updateChart)
 
-// An event listener to the radio button for Lollipop SEX
+// An event listener to the radio button for LOG choice
 d3.select("#controlLolliLog").on("change", updateChart)
 
 // Listen to the button to show Substance use., behavioral or organic

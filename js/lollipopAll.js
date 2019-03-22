@@ -60,10 +60,12 @@ svg
 
 // Add X axis
 var x = d3.scaleLinear()
-  .domain([0, 22])
+  .domain([1, 22])
   .range([ 0, width]);
+
+// Add vertical lines
 xTickPos = [0,5,10,15,20]
-svg.selectAll("xTicks")
+var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
   .append("line")
@@ -75,7 +77,7 @@ svg.selectAll("xTicks")
     .attr("stroke-width", 2)
 
 // Add the labels
-svg
+var xAxisLabels = svg
   .filter(function(d){return (d.key=="Intellectual Disabilities" || d.key=="Developmental Disorders" || d.key == "Behavioral Disorders" || d.key == "Personality Disorders" ) })
   .selectAll("myXLabels")
   .data(xTickPos)
@@ -185,58 +187,142 @@ var mouseleave = function(d) {
 // SHAPES
 // ======================= //
 
-// Add circles
-svg
-  .selectAll('circle')
-  .data( function(d){ return(d.values)} )
-  .enter()
-  .append("circle")
-    .attr("cx", x(0))
-    .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 5}else{size=5} ; return size  })
-    .style("fill", function(d){ return myColorCOD(d.COD) })
-    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-    .on("mouseover", mouseover)
-    .on("mouseleave", mouseleave)
 
-// Add text annotation
-svg
-  .selectAll('myAnnot')
-  .data( function(d){ return(d.values)} )
-  .enter()
-  .append("text")
-    .text( function(d) { return Math.round(d.MRR*100)/100; } )
-    .attr("x", function(d) { return x(d.MRR)+15; })
-    .attr("y", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-    .attr("alignment-baseline", "middle")
-    .style("opacity", 0)
+function updateChart() {
 
-// When the modal loads, activate circle position
-svg
-  .selectAll('circle')
-  .transition()
-  .duration(1000)
-  .attr("cx", function(d) { return x(d.MRR); })
+  // Log scale or Linear scale?
+  selectedLogOption = $("input[name='controlLolliLogAll']:checked").val();
+  if(selectedLogOption == "normal"){
+    var x = d3.scaleLinear().range([ 0, width]).domain([0, 22]);
+  }else{
+    var x = d3.scaleLog().range([ 0, width]).domain([1, 22]);
+  }
+
+  // Update vertical bars
+  verticalLines
+    .transition()
+    .duration(1000)
+      .attr("x1", function(d) { return x(d); })
+      .attr("x2", function(d) { return x(d); })
+
+  // Update X axis labels
+  xAxisLabels
+    .transition()
+    .duration(1000)
+      .attr("x", function(d) { return x(d); })
+
+  // Update circle position
+  var u = svg.selectAll('circle')
+    .data( function(d){ return(d.values)} )
+  u
+    .enter()
+    .append("circle")
+      .on("mouseover", mouseover)
+      .on("mouseleave", mouseleave)
+    .merge(u)
+    .transition()
+    .duration(1000)
+      .attr("class", "myLolliCircles")
+      .attr("cx", function(d) { return x(d.MRR); })
+      .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 5}else{size=5} ; return size  })
+      .style("fill", function(d){ return myColorCOD(d.COD) })
+      .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+  u
+    .exit()
+    .transition()
+    .duration(1000)
+    .style("opacity",0)
+    .remove()
 
 
-// Add Baseline
-var horizLines = svg
-  .selectAll('vertLines')
-  .data( function(d){ return(d.values)} )
-  .enter()
-  .append("line")
-    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-    .attr("x1", 0)
-    .attr("x2", function(d) { return x(d.MRR); })
-    .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-    .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-    .attr("stroke", function(d) { return myColorCOD(d.COD) })
-    .attr("stroke-width", 1)
-    .style("opacity",.5)
-    .on("mouseover", mouseover)
-    .on("mouseleave", mouseleave)
+
+  // Update Label position
+  var w = svg.selectAll('.labelHover')
+    .data( function(d){ return(d.values)} )
+  w
+    .enter()
+    .append("text")
+    .merge(w)
+    .transition()
+    .duration(1000)
+      .text( function(d) { return Math.round(d.MRR*100)/100; } )
+      .attr("x", function(d) { return x(d.MRR)+15; })
+      .attr("y", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr("class", function(d) { return "labelHover " + d.COD.replace(/\s/g, ''); })
+      .attr("alignment-baseline", "middle")
+      .style("opacity", 0)
+  w
+    .exit()
+    .transition()
+    .duration(1000)
+    .style("opacity",0)
+    .remove()
+
+
+  // // Add text annotation
+  // svg
+  //   .selectAll('myAnnot')
+  //   .data( function(d){ return(d.values)} )
+  //   .enter()
+  //   .append("text")
+  //     .text( function(d) { return Math.round(d.MRR*100)/100; } )
+  //     .attr("x", function(d) { return x(d.MRR)+15; })
+  //     .attr("y", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+  //     .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+  //     .attr("alignment-baseline", "middle")
+  //     .style("opacity", 0)
+  //
+
+
+  // Update circle position
+  var v = svg.selectAll('line')
+    .data( function(d){ return(d.values)} )
+  v
+    .enter()
+    .append("line")
+      .on("mouseover", mouseover)
+      .on("mouseleave", mouseleave)
+    .merge(v)
+    .transition()
+    .duration(1000)
+      .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+      .attr("x1", 0)
+      .attr("x2", function(d) { return x(d.MRR); })
+      .attr("y1", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr("y2", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+      .attr("stroke", function(d) { return myColorCOD(d.COD) })
+      .attr("stroke-width", 1)
+      .style("opacity",.5)
+  v
+    .exit()
+    .transition()
+    .duration(1000)
+    .style("opacity",0)
+    .remove()
+
+// close the update chart function
+}
+
+
+
+
+// ======================= //
+// EVENT LISTENER
+// ======================= //
+
+
+// An event listener to the radio button for Lollipop SEX
+d3.select("#controlLolliSexAll").on("change", updateChart)
+
+// An event listener to the radio button for LOG choice
+d3.select("#controlLolliLogAll").on("change", updateChart)
+
+// Initialize
+updateChart()
+
+
 
 
 
