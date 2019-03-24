@@ -11,15 +11,9 @@ var margin = {top: 37, right: 10, bottom: 3, left: 20},
     height = 260 - margin.top - margin.bottom;
 
 // group the data: I want to draw one line per group
-var data_filter = data_MRR.filter(function(d){ return d.sex == "both" })
+var data_filter = data_MRR
 var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
   .key(function(d) { return d.mentalDis;})
-  .entries(data_filter);
-
-// Second dataset = add sex level
-var data_filterSex = data_MRR.filter(function(d){ return d.sex != "both" })
-var sumstatSex = d3.nest() // nest function allows to group the calculation per level of a factor
-  .key(function(d) { return d.mentalDis+"-"+d.sex;})
   .entries(data_filter);
 
 // What is the list of groups?
@@ -55,6 +49,10 @@ svg
   .attr("x", 0)
   .text(function(d){ return(d.key)})
 
+// Color scale for dots
+var myColorLolliSex = d3.scaleOrdinal()
+  .domain(["both", "men", "women"])
+  .range(["steelblue", "#1E8F89", "#EE5A45"])
 
 
 
@@ -106,6 +104,10 @@ var vertLine1 = svg
     .attr("stroke", "orange")
     .style("stroke-dasharray", ("8, 6"))
 
+
+
+
+
 // ======================= //
 // Y SCALE AND AXIS
 // ======================= //
@@ -148,7 +150,7 @@ svg.selectAll('.myMainLabel')
 // Scale to slightly modify sexes on the Y axis
 var myPositionLolliSex = d3.scaleOrdinal()
   .domain(["both", "men", "women"])
-  .range([0, -3, 3])
+  .range([0, 0, 0])
 
 
 
@@ -195,13 +197,7 @@ function updateChart() {
 
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlLolliSexAll']:checked").val();
-
-  // What dataset should we use?
-  if(selectedSexOption == "both"){
-    selectedData = ""
-  }else{
-    selectedData = ""
-  }
+  console.log(selectedSexOption)
 
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLogAll']:checked").val();
@@ -233,7 +229,7 @@ function updateChart() {
 
   // Update circle position
   var u = svg.selectAll('circle')
-    .data( function(d){console.log(d) ;  return(d.values)} )
+    .data( function(d){return(d.values)} )
   u
     .enter()
     .append("circle")
@@ -246,8 +242,15 @@ function updateChart() {
       .attr("cx", function(d) { return x(d.MRR); })
       .attr("cy", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
       .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 5}else{size=5} ; return size  })
-      .style("fill", function(d){ return myColorCOD(d.COD) })
-      .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
+      .style("fill", function(d){ if(selectedSexOption!="both"){col=myColorLolliSex(d.sex)}else{col=myColorCOD(d.COD)} ; return col })
+      .attr("class", function(d) { return d.COD.replace(/\s/g, '') })
+      .style("opacity", function(d){
+        if(selectedSexOption=="both"){
+          if(d.sex=="both"){opa=1}else{opa=0}
+        }else{
+          if(d.sex=="both"){opa=0}else{opa=1}
+        } ;
+        return opa })
   u
     .exit()
     .transition()
@@ -281,7 +284,7 @@ function updateChart() {
 
   // lolli horiz line position
   var v = svg.selectAll('.lolliHorizLine')
-    .data( function(d){ return(d.values)} )
+    .data( function(d){ return(d.values.filter(function(i){return i.sex=="both"}))} )
   v
     .enter()
     .append("line")
@@ -305,6 +308,7 @@ function updateChart() {
     .duration(1000)
     .style("opacity",0)
     .remove()
+
 
 // close the update chart function
 }
