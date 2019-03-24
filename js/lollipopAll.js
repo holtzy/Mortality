@@ -16,6 +16,12 @@ var sumstat = d3.nest() // nest function allows to group the calculation per lev
   .key(function(d) { return d.mentalDis;})
   .entries(data_filter);
 
+// Second dataset = add sex level
+var data_filterSex = data_MRR.filter(function(d){ return d.sex != "both" })
+var sumstatSex = d3.nest() // nest function allows to group the calculation per level of a factor
+  .key(function(d) { return d.mentalDis+"-"+d.sex;})
+  .entries(data_filter);
+
 // What is the list of groups?
 allKeys = sumstat.map(function(d){return d.key})
 
@@ -190,14 +196,13 @@ function updateChart() {
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlLolliSexAll']:checked").val();
 
-  // Create the filtered dataset
-  var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedMentalDisOption })
+  // What dataset should we use?
   if(selectedSexOption == "both"){
-    selectedData = selectedData.filter(function(d){ return d.sex == "both" })
+    selectedData = ""
   }else{
-    selectedData = selectedData.filter(function(d){ return d.sex != "both" })
+    selectedData = ""
   }
-  
+
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLogAll']:checked").val();
   if(selectedLogOption == "normal"){
@@ -228,7 +233,7 @@ function updateChart() {
 
   // Update circle position
   var u = svg.selectAll('circle')
-    .data( function(d){ return(d.values)} )
+    .data( function(d){console.log(d) ;  return(d.values)} )
   u
     .enter()
     .append("circle")
@@ -273,22 +278,6 @@ function updateChart() {
     .duration(1000)
     .style("opacity",0)
     .remove()
-
-
-  // // Add text annotation
-  // svg
-  //   .selectAll('myAnnot')
-  //   .data( function(d){ return(d.values)} )
-  //   .enter()
-  //   .append("text")
-  //     .text( function(d) { return Math.round(d.MRR*100)/100; } )
-  //     .attr("x", function(d) { return x(d.MRR)+15; })
-  //     .attr("y", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
-  //     .attr("class", function(d) { return d.COD.replace(/\s/g, ''); })
-  //     .attr("alignment-baseline", "middle")
-  //     .style("opacity", 0)
-  //
-
 
   // lolli horiz line position
   var v = svg.selectAll('.lolliHorizLine')

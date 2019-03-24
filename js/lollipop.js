@@ -257,7 +257,7 @@ var mouseleave = function(d) {
 
 
 // ======================= //
-// INTERACTIVITY
+// SHAPES
 // ======================= //
 
 // Function that update the chart for a disorder
