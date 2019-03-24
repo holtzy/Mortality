@@ -187,6 +187,17 @@ var mouseleave = function(d) {
 
 function updateChart() {
 
+  // Recover the SEX option?
+  selectedSexOption = $("input[name='controlLolliSexAll']:checked").val();
+
+  // Create the filtered dataset
+  var selectedData = data_MRR.filter(function(d){ return d.mentalDis == selectedMentalDisOption })
+  if(selectedSexOption == "both"){
+    selectedData = selectedData.filter(function(d){ return d.sex == "both" })
+  }else{
+    selectedData = selectedData.filter(function(d){ return d.sex != "both" })
+  }
+  
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLogAll']:checked").val();
   if(selectedLogOption == "normal"){
