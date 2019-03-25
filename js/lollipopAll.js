@@ -68,7 +68,7 @@ var x = d3.scaleLinear()
   .range([ 0, width]);
 
 // Add vertical lines
-xTickPos = [5,10,15,20]
+xTickPos = [5,10,15,20,25]
 var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
@@ -189,6 +189,42 @@ var mouseleave = function(d) {
 
 
 
+
+
+// ======================= //
+// SEX LEGEND
+// ======================= //
+  svg
+    .append("text")
+    .attr("x",width-20)
+    .attr("y",-22)
+    .text("M")
+    .style("fill", myColorLolliSex("men"))
+    .attr("class", "sexLegend")
+    .style("opacity",0)
+    .style("text-anchor", "middle")
+  svg
+    .append("text")
+    .attr("x",width-29)
+    .attr("y",-22)
+    .text("-")
+    .style("fill", "black")
+    .attr("class", "sexLegend")
+    .style("opacity",0)
+    .style("text-anchor", "middle")
+  svg
+    .append("text")
+    .attr("x",width-38)
+    .attr("y",-22)
+    .text("F")
+    .style("fill", myColorLolliSex("women"))
+    .attr("class", "sexLegend")
+    .style("opacity",0)
+    .style("text-anchor", "middle")
+
+
+
+
 // ======================= //
 // SHAPES
 // ======================= //
@@ -199,12 +235,19 @@ function updateChart() {
   selectedSexOption = $("input[name='controlLolliSexAll']:checked").val();
   console.log(selectedSexOption)
 
+  // If sex are seperated, upper X axis limit is not the same
+  if(selectedSexOption=="both"){
+    upperLimit = 25
+  }else{
+    upperLimit = 35
+  }
+
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLogAll']:checked").val();
   if(selectedLogOption == "normal"){
-    var x = d3.scaleLinear().range([ 0, width]).domain([0, 25]);
+    var x = d3.scaleLinear().range([ 0, width]).domain([0, upperLimit]);
   }else{
-    var x = d3.scaleLog().range([ 0, width]).domain([1, 25]);
+    var x = d3.scaleLog().range([ 0, width]).domain([1, upperLimit]);
   }
 
   // Update vertical bars
@@ -227,6 +270,13 @@ function updateChart() {
     .attr("x1", function(d) { return x(1); })
     .attr("x2", function(d) { return x(1); })
 
+  // Do we need sex legend?
+  if(selectedSexOption == "both"){
+    svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 0)
+  }else{
+    svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 1)
+  }
+  
   // Update circle position
   var u = svg.selectAll('circle')
     .data( function(d){return(d.values)} )
@@ -244,13 +294,13 @@ function updateChart() {
       .attr('r', function(d,i){ if(typeCOD.includes(d.COD)){size = 5}else{size=5} ; return size  })
       .style("fill", function(d){ if(selectedSexOption!="both"){col=myColorLolliSex(d.sex)}else{col=myColorCOD(d.COD)} ; return col })
       .attr("class", function(d) { return d.COD.replace(/\s/g, '') })
-      .style("opacity", function(d){
+      .style("display", function(d){
         if(selectedSexOption=="both"){
-          if(d.sex=="both"){opa=1}else{opa=0}
+          if(d.sex=="both"){out="block"}else{out="none"}
         }else{
-          if(d.sex=="both"){opa=0}else{opa=1}
+          if(d.sex=="both"){out="none"}else{out="block"}
         } ;
-        return opa })
+        return out })
   u
     .exit()
     .transition()
@@ -260,21 +310,34 @@ function updateChart() {
 
 
 
-  // Update Label position
+  // Update HOVER LABEL
   var w = svg.selectAll('.labelHover')
     .data( function(d){ return(d.values)} )
   w
     .enter()
     .append("text")
     .merge(w)
-    .transition()
-    .duration(1000)
       .text( function(d) { return Math.round(d.MRR*100)/100; } )
-      .attr("x", function(d) { return x(d.MRR)+15; })
-      .attr("y", function(d) { id = bothCOD.indexOf(d.COD) ; return posYaxis[id] + myPositionLolliSex(d.sex) })
+      .attr("x", function(d) { if(selectedSexOption=="both"){ pos=x(d.MRR)+25;}else{pos=x(d.MRR)} ; return pos })
+      .attr("y", function(d) {
+        id = bothCOD.indexOf(d.COD) ;
+        pos = posYaxis[id] + myPositionLolliSex(d.sex)
+        if(d.sex=="men"){ pos = pos+17 }
+        if(d.sex=="women"){ pos = pos-17 }
+        return(pos)
+      })
       .attr("class", function(d) { return "labelHover " + d.COD.replace(/\s/g, ''); })
       .attr("alignment-baseline", "middle")
+      .attr("text-anchor", "middle")
       .style("opacity", 0)
+      .style("display", function(d){
+        if(selectedSexOption=="both"){
+          if(d.sex=="both"){out="block"}else{out="none"}
+        }else{
+          if(d.sex=="both"){out="none"}else{out="block"}
+        } ;
+        return out
+      })
   w
     .exit()
     .transition()
@@ -282,7 +345,7 @@ function updateChart() {
     .style("opacity",0)
     .remove()
 
-  // lolli horiz line position
+  // HORIZ LINE = STEM
   var v = svg.selectAll('.lolliHorizLine')
     .data( function(d){ return(d.values.filter(function(i){return i.sex=="both"}))} )
   v
@@ -301,13 +364,22 @@ function updateChart() {
       .attr("class", function(d) { return "lolliHorizLine " + d.COD.replace(/\s/g, ''); })
       .attr("stroke", function(d) { return myColorCOD(d.COD) })
       .attr("stroke-width", 1)
-      .style("opacity",.5)
+      .style("display", function(d){
+        if(selectedSexOption=="both"){
+          if(d.sex=="both"){out="block"}else{out="none"}
+        }else{
+          if(d.sex=="both"){out="none"}else{out="block"}
+        } ;
+        return out })
   v
     .exit()
     .transition()
     .duration(1000)
     .style("opacity",0)
     .remove()
+
+
+
 
 
 // close the update chart function
