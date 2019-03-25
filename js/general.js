@@ -50,6 +50,7 @@ vec = [colCOD1,
               colCOD3,
               colCOD3
           ]
+
 myColorCOD = d3.scaleOrdinal()
   .domain(bothCOD)
   .range(vec)

@@ -534,13 +534,6 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 
 
-/* ---------- BIG LETTER START PARAGRAPH ----------------- */
-
-.drop-cap::first-letter {
-  -webkit-initial-letter: 2;
-          initial-letter: 2;
-  margin-right: .7em;
-}
 
 
 

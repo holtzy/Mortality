@@ -207,6 +207,8 @@ var mouseclick = function(d) {
 
 
 
+
+
 // ======================= //
 // BARS OF STACKED BARPLOT
 // ======================= //
@@ -436,13 +438,12 @@ var closeBarButton = svgBar
         .transition()
         .duration(1000)
         .style("opacity",1)
+      // show again text that explains you can click on a bar
+      d3.selectAll(".explanationClick").style("display", "block")
+
     })
 
 
-var closeBar = function(d) {
-  console.log("okkkkkk")
-
-}
 
 
 
