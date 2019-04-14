@@ -68,7 +68,7 @@ var x = d3.scaleLinear()
   .range([ 0, width]);
 
 // Add vertical lines
-xTickPos = [5,10,15,20,25]
+xTickPos = [2,3,5,10,15,20,25]
 var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
@@ -77,7 +77,7 @@ var verticalLines = svg.selectAll("xTicks")
     .attr("x2", function(d) { return x(d); })
     .attr("y1", -20 )
     .attr("y2", height)
-    .attr("stroke", "#F8F8F8")
+    .attr("stroke", "white")
     .attr("stroke-width", 2)
 
 // Add the labels
@@ -276,7 +276,7 @@ function updateChart() {
   }else{
     svg.selectAll(".sexLegend").transition().duration(1000).style("opacity", 1)
   }
-  
+
   // Update circle position
   var u = svg.selectAll('circle')
     .data( function(d){return(d.values)} )
