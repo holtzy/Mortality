@@ -66,24 +66,3 @@ close(fileConn)
 
 
 
-
-
-a = clean %>% 
-  filter(dx2 == "Any Disorder") %>% 
-  filter(cod_label == "All Causes") %>%
-  filter(sex2 == "Males") %>%
-  select(specific, irr, left, right)
-
-colnames(a) = c("x", "y", "CI_left", "CI_right")
-a$y = round(a$y, 2)
-a$CI_left = round(a$CI_left, 2)
-a$CI_right = round(a$CI_right, 2)
-a$CI_right = 1.25*a$CI_right
-a$CI_left = 0.8*a$CI_left
-a
-write.table(a, file="~/Desktop/D3-graph-gallery/DATA/data_IC.csv", sep=",", row.names = F, quote=F)
-
-
-
-asummary()
-
