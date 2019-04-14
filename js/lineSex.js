@@ -555,7 +555,7 @@ function updateChart(data){
       .attr("cx", x(selectedDataMales.specific))
       .attr("cy", yRight(selectedDataMales.irr))
     textRightMales
-      .text(Math.round(selectedDataMales.irr*10)/10)
+      .text((Math.round(selectedDataMales.irr*10)/10).toFixed(1))
       .attr("x", function(){ if(selectedDataMales.specific<35){
           return x(selectedDataMales.specific)-25
         }else{
@@ -567,7 +567,7 @@ function updateChart(data){
       .attr("cx", x(selectedDataFemales.specific))
       .attr("cy", yRight(selectedDataFemales.irr))
     textRightFemales
-      .text(Math.round(selectedDataFemales.irr*10)/10)
+      .text((Math.round(selectedDataFemales.irr*10)/10).toFixed(1))
       .attr("x", function(){ if(selectedDataFemales.specific<35){
           return x(selectedDataFemales.specific)+25
         }else{
@@ -638,18 +638,20 @@ function updateChart(data){
     focusRightFemales.style("opacity", 0)
     textRightFemales.style("opacity",0)
     textRightAge.style("opacity", 0)
+
     focusLeftTop.style("opacity", 0)
     focusLeftBottom.style("opacity", 0)
     focusLeftLine.style("opacity", 0)
     textLeftTop.style("opacity", 0)
     textLeftBottom.style("opacity", 0)
+    textLeftAge.style("opacity", 0)
+
     focusCenterTop.style("opacity", 0)
     focusCenterBottom.style("opacity", 0)
     focusCenterLine.style("opacity", 0)
     textCenterTop.style("opacity", 0)
     textCenterBottom.style("opacity", 0)
-    textLeftAge.style("opacity", 0)
-    textLeftCenter.style("opacity", 0)
+    textCenterAge.style("opacity", 0)
   }
 
 // Close the update chart function

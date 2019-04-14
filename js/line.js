@@ -383,7 +383,7 @@ function updateChart(data){
       .attr("cx", x(selectedData.specific))
       .attr("cy", yRight(selectedData.irr))
     textRight
-      .text(Math.round(selectedData.irr*10)/10)
+      .text((Math.round(selectedData.irr*10)/10).toFixed(1))
       .attr("x", function(){ if(selectedData.specific<35){
           return x(selectedData.specific)-25
         }else{
@@ -430,6 +430,7 @@ function updateChart(data){
     textLeftTop.style("opacity", 0)
     textLeftBottom.style("opacity", 0)
     textRight.style("opacity",0)
+    textRightAge.style("opacity",0)
     textLeftAge.style("opacity",0)
   }
 
