@@ -330,6 +330,11 @@ function updateChart(data){
       .style("fill", "black")
       .style("opacity", 0)
       .attr("text-anchor", "middle")
+  var textRightAge = svgRight.append('g')
+    .append('text')
+      .style("fill", "black")
+      .style("opacity", 0)
+      .attr("text-anchor", "middle")
 
   // Create the Line that travels along both curves of left chart
   var focusLeftLine = svgLeft.append('g')
@@ -366,6 +371,7 @@ function updateChart(data){
     textLeftBottom.style("opacity", 1)
     textRight.style("opacity",1)
     textLeftAge.style("opacity",1)
+    textRightAge.style("opacity",1)
   }
 
   function mousemove() {
@@ -407,6 +413,14 @@ function updateChart(data){
       .text("Age: " + selectedData.specific)
       .attr("x",x(selectedData.specific)+10)
       .attr("y", yLeft(selectedData.undiagnosed)+30 )
+    textRightAge
+      .text("Age: " + selectedData.specific)
+      .attr("x", function(){ if(selectedData.specific<35){
+          return x(selectedData.specific)+25
+        }else{
+          return x(selectedData.specific)-25
+      }})
+      .attr("y", yRight(selectedData.irr)+30)
   }
   function mouseout() {
     focusRight.style("opacity", 0)
