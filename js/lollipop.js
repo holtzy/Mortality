@@ -38,7 +38,7 @@ xAxis.select(".domain").remove()
 
 // vertical lines
 svg.selectAll(".tick line").attr("stroke", "#B0B0B0")
-xTickPos = [5,10,15,20,25,30,35,40]
+xTickPos = [2,3,5,10,15,20,25,30,35,40]
 var verticalLines = svg.selectAll("xTicks")
   .data(xTickPos)
   .enter()
