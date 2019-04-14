@@ -398,7 +398,7 @@ function updateChart(data){
   // This allows to find the closest X index of the mouse:
   var bisect = d3.bisector(function(d) { return d.specific; }).left;
 
-  // Create the circle and texts that travels along the curves of right chart
+  // RIGHT CHART: Create the circle and texts that travels along the curves
   var focusRightMales = svgRight.append('g')
     .append('circle')
       .style("fill", "none")
@@ -417,6 +417,11 @@ function updateChart(data){
       .attr('r', 8.5)
       .style("opacity", 0)
   var textRightFemales = svgRight.append('g')
+    .append('text')
+      .style("fill", "black")
+      .style("opacity", 0)
+      .attr("text-anchor", "middle")
+  var textRightAge = svgRight.append('g')
     .append('text')
       .style("fill", "black")
       .style("opacity", 0)
@@ -519,6 +524,7 @@ function updateChart(data){
     textRightMales.style("opacity",1)
     focusRightFemales.style("opacity", 1)
     textRightFemales.style("opacity",1)
+    textRightAge.style("opacity",1)
 
     focusLeftTop.style("opacity", 1)
     focusLeftBottom.style("opacity", 1)
@@ -568,6 +574,15 @@ function updateChart(data){
           return x(selectedDataFemales.specific)-25
       }})
       .attr("y", yRight(selectedDataFemales.irr))
+    textRightAge
+      .text("Age: " + selectedDataFemales.specific)
+      .attr("x", function(){ if(selectedDataFemales.specific<35){
+          return x(selectedDataFemales.specific)+25
+        }else{
+          return x(selectedDataFemales.specific)-25
+      }})
+      .attr("y", function(){ min=Math.min(selectedDataFemales.irr, selectedDataMales.irr) ; return yRight(min)+30 }  )
+
 
     focusLeftTop
       .attr("cx", x(selectedDataFemales.specific))
