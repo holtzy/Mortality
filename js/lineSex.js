@@ -637,6 +637,7 @@ function updateChart(data){
     textRightMales.style("opacity",0)
     focusRightFemales.style("opacity", 0)
     textRightFemales.style("opacity",0)
+    textRightAge.style("opacity", 0)
     focusLeftTop.style("opacity", 0)
     focusLeftBottom.style("opacity", 0)
     focusLeftLine.style("opacity", 0)
