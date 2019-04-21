@@ -19,8 +19,6 @@ LYL <- read.table("LYL.txt", header=T)
 colnames(LYL) <- c("mentalDis", "COD", "sex", "n", "LYL")
 # Circulatory Diseases, not heart disease or something like that
 LYL$COD <- gsub("Dis. Circulatory System", "Circulatory Diseases", LYL$COD)
-# issue with substance use disorder label
-LYL$mentalDis <- gsub("Substance Use Disorders", "Substance Use", LYL$mentalDis)
 # Save this long format
 tosave <- paste("data_LYL_long = ", toJSON(LYL))
 fileConn<-file("LYLlong.js")
@@ -45,6 +43,8 @@ clean <- MRR %>%
 colnames(clean) <- c("sex", "mentalDis", "COD", "MRR", "MRR_left", "MRR_right")
 # Special case for circulatory diseases
 clean$COD <- gsub("Dis. Circulatory System", "Circulatory Diseases", clean$COD)
+# Same for substance use
+LYL$mentalDis <- gsub("Substance Use Disorders", "Substance Use", LYL$mentalDis)
 tosave <- paste("data_MRR = ", toJSON(clean))
 fileConn<-file("MRR.js")
 writeLines(tosave, fileConn)

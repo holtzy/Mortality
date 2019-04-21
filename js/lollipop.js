@@ -294,7 +294,7 @@ function updateChart() {
   }
 
   // Different X axis limit for substance use
-  if(selectedMentalDisOption=="Substance Use"){
+  if(selectedMentalDisOption=="Substance Use Disorders"){
     upperLimit = 35
   }else{
     upperLimit = 20
@@ -395,7 +395,7 @@ d3.select("#controlLolliLog").on("change", updateChart)
 
 // Listen to the button to show Substance use., behavioral or organic
 d3.select("#showSubstanceUse").on("click", function(){
-  document.getElementById("controlLolliDisorder").value = "Substance Use"
+  document.getElementById("controlLolliDisorder").value = "Substance Use Disorders"
   updateChart()
 })
 d3.select("#showOrganic").on("click", function(){
