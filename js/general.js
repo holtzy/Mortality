@@ -1,5 +1,19 @@
 // List of mental disorders
-allDisorder = ["Organic Disorders","Substance Use Disorders","Schizophrenia","Mood Disorders", "Neurotic Disorders","Eating Disorders", "Personality Disorders", "Intellectual Disabilities", "Developmental Disorders", "Behavioral Disorders", "Any Disorder"]
+allDisorder = [
+  "Organic Disorders",
+  "Substance Use Disorders",
+  "Schizophrenia",
+  "Mood Disorders",
+  "Neurotic Disorders",
+  "Eating Disorders",
+  "Personality Disorders",
+  "Intellectual Disabilities",
+  "Developmental Disorders",
+  "Behavioral Disorders",
+  "Any Disorder"]
+
+
+
 
 // List of the cause of Death
 allCOD = ["Suicide",
@@ -9,11 +23,12 @@ allCOD = ["Suicide",
               "Neoplasms",
               "Diabetes Mellitus",
               "Circulatory Diseases",
-              "Respiratory Diseases",
               "Digestive Diseases",
               "Alcohol Misuse",
+              "Respiratory Diseases",
               "Other Causes"
           ]
+
 typeCOD = ["Natural Causes","Unnatural Causes","All Causes"]
 bothCOD = ["All Causes",
             "Unnatural Causes",
@@ -21,14 +36,14 @@ bothCOD = ["All Causes",
               "Homicide",
               "Accidents",
             "Natural Causes",
-              "Alcohol Misuse",
-              "Other Causes",
               "Infectious Diseases",
-              "Respiratory Diseases",
+              "Neoplasms",
               "Diabetes Mellitus",
-              "Digestive Diseases",
               "Circulatory Diseases",
-              "Neoplasms"
+              "Digestive Diseases",
+              "Alcohol Misuse",
+              "Respiratory Diseases",
+              "Other Causes"
           ]
 
 // Color scale for type of death
