@@ -12,9 +12,6 @@ allDisorder = [
   "Behavioral Disorders",
   "Any Disorder"]
 
-
-
-
 // List of the cause of Death
 allCOD = ["Suicide",
               "Accidents",

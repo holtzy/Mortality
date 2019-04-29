@@ -6,8 +6,7 @@ function plotLineFocus(){
 // ======================= //
 
 // Get filtered data
-data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90})
-data_codSpecific = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label != "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90})
+data_codSpecific = data_MRRage.filter(function(d){ return d.type == "CODspecific" & d.specific > 15 & d.specific <= 90})
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 20, bottom: 50, left: 20},
@@ -229,7 +228,7 @@ function updateChart(data){
   // Nest the data = group per sex and COD
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
     .key(function(d){ return d.cod_label;})
-    .entries(data_codSpecific);
+    .entries(data);
 
   // Add the diagnosed line LEFT
   var diagnosedLineLeft = svgLeft
@@ -665,34 +664,8 @@ function updateChart(data){
 }
 
 // Initialise the chart
-updateChart(data_sexSpecific)
+updateChart(data_codSpecific)
 
-
-
-
-
-
-
-// ======================= //
-// ADD THE ANNOTATION WHEN HOVER
-// ======================= //
-
-
-
-
-
-
-// ======================= //
-// SHOW 2 LINES FOR SEX IF BUTTON IS CLICKED
-// ======================= //
-//
-// // If user clicks on something with the class  showSex.. -> show sex
-// var anchors = document.getElementsByClassName("showSexLinechart")
-// for(var i = 0; i < anchors.length; i++) {
-//   anchors[i].onclick = function(){ updateChart(data_sexSpecific)}
-// }
-// // And for grouping everything
-// document.getElementById("showAllGrouped").onclick = function(){ updateChart(data_allGrouped)} ;
 
 
 

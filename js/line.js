@@ -6,7 +6,7 @@ function plotLine(){
 // ======================= //
 
 // Get filtered data
-data_allGrouped = data_MRRage.filter(function(d){ return d.dx2 == "Any Disorder" & d.cod_label == "All Causes" & d.sex2 == "Persons" & d.specific > 15 & d.specific <= 90 })
+data = data_MRRage.filter(function(d){ return d.type == "Global" & d.specific > 15 & d.specific <= 90 })
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 50, left: 60},
@@ -32,10 +32,6 @@ var svgRight = d3.select("#my_MRR")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-
-var mySexColor = d3.scaleOrdinal()
-  .domain(["Persons", "Males", "Females"])
-  .range(["steelblue", "#1E8F89", "#EE5A45"])
 
 
 
@@ -95,13 +91,6 @@ svgLeft.append("text")
     .attr("y", 30)
     .text("per 100,000 person-years")
     .style("opacity", ".6")
-// svgLeft.append("text")
-//     .attr("text-anchor", "start")
-//     .attr("x", 10)
-//     .attr("y", 50)
-//     .text("(95% CI)")
-//     .style("opacity", ".6")
-
 
 // Right: Add Y axis and scale
 var yRight = d3.scaleLinear()
@@ -135,14 +124,16 @@ svgLeft
   .text("Mental disorder")
   .attr("x", 341)
   .attr("y", 70)
-  .attr("fill", mySexColor("both"))
+  .attr("fill", "steelblue")
 svgLeft
   .append("text")
   .text("No mental disorder")
   .attr("x", 341)
   .attr("y", 102)
-  .attr("fill", mySexColor("both"))
+  .attr("fill", "steelblue")
   .attr("opacity", .8)
+
+
 
 
 // ======================= //
@@ -151,7 +142,7 @@ svgLeft
 
 function updateChart(data){
 
-  // Nest the data = group per sex and COD
+  // Nest the data. A bit weird here since we have only one level. But allows to get the good format. And was copy and pasted from other tempaltes (Sex and COD)
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
     .key(function(d){ return d.sex2;})
     .entries(data);
@@ -168,7 +159,7 @@ function updateChart(data){
       .duration(1000)
         .attr("class", "lineDiag")
         .attr("fill", "none")
-        .attr("stroke", function(d){ return mySexColor(d.key) })
+        .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .style("opacity", 1)
         .attr("d", function(d){
@@ -197,7 +188,7 @@ function updateChart(data){
       .duration(1000)
         .attr("class", "lineUndiag")
         .attr("fill", "none")
-        .attr("stroke", function(d){ return mySexColor(d.key) })
+        .attr("stroke", "steelblue")
         .style("stroke-dasharray", ("3, 3"))
         .attr("stroke-width", 1.5)
         .style("opacity", 1)
@@ -227,7 +218,7 @@ function updateChart(data){
       .transition()
       .duration(1000)
         .attr("class", "lineConfidence")
-        .attr("fill", function(d){ return mySexColor(d.key) })
+        .attr("fill", "steelblue")
         .attr("stroke", "none")
         .attr("stroke-width", 1.5)
         .attr("d", function(d){
@@ -259,7 +250,7 @@ function updateChart(data){
       .duration(1000)
         .attr("class", "lineMrr")
         .attr("fill", "none")
-        .attr("stroke", function(d){ return mySexColor(d.key) })
+        .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .style("opacity", 1)
         .attr("d", function(d){
@@ -439,7 +430,7 @@ function updateChart(data){
 }
 
 // Initialise the chart
-updateChart(data_allGrouped)
+updateChart(data)
 
 
 

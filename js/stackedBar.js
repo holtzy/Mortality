@@ -6,7 +6,19 @@ function plotStackedbar(){
 // ======================= //
 
 // List of groups = List of Mental Disorder = Order on stacked barplot
-var groups = ["Any Disorder","Substance Use Disorders","Intellectual Disabilities", "Eating Disorders","Schizophrenia","Personality Disorders", "Behavioral Disorders", "Neurotic Disorders","Mood Disorders",  "Organic Disorders", "Developmental Disorders"]
+var groups  = [
+  "Any Disorder",
+  "Organic Disorders",
+  "Substance Use Disorders",
+  "Schizophrenia",
+  "Mood Disorders",
+  "Neurotic Disorders",
+  "Eating Disorders",
+  "Personality Disorders",
+  "Intellectual Disabilities",
+  "Developmental Disorders",
+  "Behavioral Disorders"
+  ]
 
 // List of subgroups
 var subgroups = ["Natural Causes","Unnatural Causes"]
