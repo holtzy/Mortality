@@ -1,309 +1,309 @@
 "dx2" "cod_label" "sex" "cases" "LYL"
-"Organic Disorders" "Infectious Diseases" "Females" 294 0.0397986724902774
-"Organic Disorders" "Infectious Diseases" "Males" 198 0.116649944463233
-"Substance Use Disorders" "Infectious Diseases" "Females" 140 0.152269235893193
-"Substance Use Disorders" "Infectious Diseases" "Males" 297 0.215036716596282
-"Schizophrenia" "Infectious Diseases" "Females" 94 0.0568891539753826
-"Schizophrenia" "Infectious Diseases" "Males" 132 0.200904771137223
-"Mood Disorders" "Infectious Diseases" "Females" 233 0.0252908636603164
-"Mood Disorders" "Infectious Diseases" "Males" 172 0.0867825407719608
-"Neurotic Disorders" "Infectious Diseases" "Females" 177 0.0480517891980297
-"Neurotic Disorders" "Infectious Diseases" "Males" 165 0.115143758854787
-"Eating Disorders" "Infectious Diseases" "Females" NA NA
+"Organic Disorders" "Infectious Diseases" "Females" 693 0.0979173714021803
+"Organic Disorders" "Infectious Diseases" "Males" 500 0.184764590055225
+"Substance Use Disorders" "Infectious Diseases" "Females" 330 0.278781346174039
+"Substance Use Disorders" "Infectious Diseases" "Males" 565 0.326855667341871
+"Schizophrenia" "Infectious Diseases" "Females" 237 0.127305845579919
+"Schizophrenia" "Infectious Diseases" "Males" 239 0.286937906860571
+"Mood Disorders" "Infectious Diseases" "Females" 639 0.0914483774014703
+"Mood Disorders" "Infectious Diseases" "Males" 405 0.150743310708197
+"Neurotic Disorders" "Infectious Diseases" "Females" 423 0.106883290432643
+"Neurotic Disorders" "Infectious Diseases" "Males" 322 0.177245187013841
+"Eating Disorders" "Infectious Diseases" "Females" 4 0.0861182001908224
 "Eating Disorders" "Infectious Diseases" "Males" NA NA
-"Personality Disorders" "Infectious Diseases" "Females" 116 0.070294806793617
-"Personality Disorders" "Infectious Diseases" "Males" 149 0.190996317215885
-"Intellectual Disabilities" "Infectious Diseases" "Females" 7 0.0535059162166411
-"Intellectual Disabilities" "Infectious Diseases" "Males" 17 0.230004965171945
+"Personality Disorders" "Infectious Diseases" "Females" 287 0.146670956181929
+"Personality Disorders" "Infectious Diseases" "Males" 276 0.271639707765715
+"Intellectual Disabilities" "Infectious Diseases" "Females" 25 0.231336685083743
+"Intellectual Disabilities" "Infectious Diseases" "Males" 32 0.356586664997748
 "Developmental Disorders" "Infectious Diseases" "Females" NA NA
-"Developmental Disorders" "Infectious Diseases" "Males" NA NA
-"Behavioral Disorders" "Infectious Diseases" "Females" 8 0.179697792664594
-"Behavioral Disorders" "Infectious Diseases" "Males" 8 0.0587291691904978
-"Any Disorder" "Infectious Diseases" "Females" 636 0.04871728846209
-"Any Disorder" "Infectious Diseases" "Males" 634 0.135659179171444
-"Organic Disorders" "Neoplasms" "Females" 4678 -0.277322215974757
-"Organic Disorders" "Neoplasms" "Males" 4311 -0.713872327974644
-"Substance Use Disorders" "Neoplasms" "Females" 4133 0.324703527927383
-"Substance Use Disorders" "Neoplasms" "Males" 6330 -0.296517712259639
-"Schizophrenia" "Neoplasms" "Females" 3085 -0.0913051252427824
-"Schizophrenia" "Neoplasms" "Males" 2204 -1.02168344002625
-"Mood Disorders" "Neoplasms" "Females" 8208 -0.0282956661271931
-"Mood Disorders" "Neoplasms" "Males" 5063 -0.687281978697661
-"Neurotic Disorders" "Neoplasms" "Females" 7085 0.374916849210647
-"Neurotic Disorders" "Neoplasms" "Males" 4236 -0.285915891223496
-"Eating Disorders" "Neoplasms" "Females" 89 -0.67297138002373
-"Eating Disorders" "Neoplasms" "Males" 9 -0.631072593669044
-"Personality Disorders" "Neoplasms" "Females" 4573 0.142811325942944
-"Personality Disorders" "Neoplasms" "Males" 3275 -0.491094848320068
-"Intellectual Disabilities" "Neoplasms" "Females" 242 -0.489107622116106
-"Intellectual Disabilities" "Neoplasms" "Males" 223 -1.74728151782188
-"Developmental Disorders" "Neoplasms" "Females" 19 0.943199636992954
-"Developmental Disorders" "Neoplasms" "Males" 27 -2.16265326211914
-"Behavioral Disorders" "Neoplasms" "Females" 143 0.541168986747337
-"Behavioral Disorders" "Neoplasms" "Males" 137 -0.25995810489215
-"Any Disorder" "Neoplasms" "Females" 19093 0.11184049873763
-"Any Disorder" "Neoplasms" "Males" 15889 -0.452645006056854
-"Organic Disorders" "Diabetes Mellitus" "Females" 1037 0.10878980659277
-"Organic Disorders" "Diabetes Mellitus" "Males" 1010 0.294229634984746
-"Substance Use Disorders" "Diabetes Mellitus" "Females" 367 0.152602353273673
-"Substance Use Disorders" "Diabetes Mellitus" "Males" 770 0.217984754921099
-"Schizophrenia" "Diabetes Mellitus" "Females" 457 0.292045864836517
-"Schizophrenia" "Diabetes Mellitus" "Males" 434 0.421213947697139
-"Mood Disorders" "Diabetes Mellitus" "Females" 960 0.13903487550969
-"Mood Disorders" "Diabetes Mellitus" "Males" 807 0.330878151879748
-"Neurotic Disorders" "Diabetes Mellitus" "Females" 632 0.130945531316991
-"Neurotic Disorders" "Diabetes Mellitus" "Males" 592 0.27234202493738
-"Eating Disorders" "Diabetes Mellitus" "Females" 8 0.0420353117244247
-"Eating Disorders" "Diabetes Mellitus" "Males" 5 0.829275123908737
-"Personality Disorders" "Diabetes Mellitus" "Females" 467 0.210024706147743
-"Personality Disorders" "Diabetes Mellitus" "Males" 469 0.309029974079775
-"Intellectual Disabilities" "Diabetes Mellitus" "Females" 44 0.372241969581254
-"Intellectual Disabilities" "Diabetes Mellitus" "Males" 51 0.412688098347539
+"Developmental Disorders" "Infectious Diseases" "Males" 4 0.61177212433555
+"Behavioral Disorders" "Infectious Diseases" "Females" 15 0.343944989975445
+"Behavioral Disorders" "Infectious Diseases" "Males" 15 0.0713157769522802
+"Any Disorder" "Infectious Diseases" "Females" 1552 0.109820509227464
+"Any Disorder" "Infectious Diseases" "Males" 1368 0.214365994343405
+"Organic Disorders" "Neoplasms" "Females" 4678 -0.203087057187217
+"Organic Disorders" "Neoplasms" "Males" 4311 -0.658374642376358
+"Substance Use Disorders" "Neoplasms" "Females" 4133 0.379684551771997
+"Substance Use Disorders" "Neoplasms" "Males" 6330 -0.264332912398563
+"Schizophrenia" "Neoplasms" "Females" 3085 -0.0379278814473683
+"Schizophrenia" "Neoplasms" "Males" 2204 -0.989147850121041
+"Mood Disorders" "Neoplasms" "Females" 8208 0.015797794671329
+"Mood Disorders" "Neoplasms" "Males" 5063 -0.656356639067342
+"Neurotic Disorders" "Neoplasms" "Females" 7085 0.419324494248285
+"Neurotic Disorders" "Neoplasms" "Males" 4236 -0.256956075778759
+"Eating Disorders" "Neoplasms" "Females" 89 -0.649135413204143
+"Eating Disorders" "Neoplasms" "Males" 9 -0.598131454241207
+"Personality Disorders" "Neoplasms" "Females" 4573 0.186492283696719
+"Personality Disorders" "Neoplasms" "Males" 3275 -0.464536600678219
+"Intellectual Disabilities" "Neoplasms" "Females" 242 -0.428334227560862
+"Intellectual Disabilities" "Neoplasms" "Males" 223 -1.71381780687215
+"Developmental Disorders" "Neoplasms" "Females" 19 1.00352380702853
+"Developmental Disorders" "Neoplasms" "Males" 27 -2.13042377588716
+"Behavioral Disorders" "Neoplasms" "Females" 143 0.598887017942017
+"Behavioral Disorders" "Neoplasms" "Males" 137 -0.233169314873122
+"Any Disorder" "Neoplasms" "Females" 19093 0.162740065891674
+"Any Disorder" "Neoplasms" "Males" 15889 -0.417805328171682
+"Organic Disorders" "Diabetes Mellitus" "Females" 1037 0.11365402810336
+"Organic Disorders" "Diabetes Mellitus" "Males" 1010 0.296279094899969
+"Substance Use Disorders" "Diabetes Mellitus" "Females" 367 0.15924296320802
+"Substance Use Disorders" "Diabetes Mellitus" "Males" 770 0.221277132742325
+"Schizophrenia" "Diabetes Mellitus" "Females" 457 0.29590453911854
+"Schizophrenia" "Diabetes Mellitus" "Males" 434 0.423866121051348
+"Mood Disorders" "Diabetes Mellitus" "Females" 960 0.142715047550713
+"Mood Disorders" "Diabetes Mellitus" "Males" 807 0.332972076211885
+"Neurotic Disorders" "Diabetes Mellitus" "Females" 632 0.13576397672068
+"Neurotic Disorders" "Diabetes Mellitus" "Males" 592 0.275053785724912
+"Eating Disorders" "Diabetes Mellitus" "Females" 8 0.0475080045435601
+"Eating Disorders" "Diabetes Mellitus" "Males" 5 0.831974106106984
+"Personality Disorders" "Diabetes Mellitus" "Females" 467 0.214600383729763
+"Personality Disorders" "Diabetes Mellitus" "Males" 469 0.311316772602981
+"Intellectual Disabilities" "Diabetes Mellitus" "Females" 44 0.379472800799748
+"Intellectual Disabilities" "Diabetes Mellitus" "Males" 51 0.41602148047857
 "Developmental Disorders" "Diabetes Mellitus" "Females" NA NA
-"Developmental Disorders" "Diabetes Mellitus" "Males" NA NA
-"Behavioral Disorders" "Diabetes Mellitus" "Females" 15 0.178083591006893
-"Behavioral Disorders" "Diabetes Mellitus" "Males" 26 0.163519937501645
-"Any Disorder" "Diabetes Mellitus" "Females" 2425 0.158862811210753
-"Any Disorder" "Diabetes Mellitus" "Males" 2526 0.299555436602829
-"Organic Disorders" "Dis. Circulatory System" "Females" 24207 1.8343066571554
-"Organic Disorders" "Dis. Circulatory System" "Males" 15866 2.01068878226223
-"Substance Use Disorders" "Dis. Circulatory System" "Females" 4199 0.36899085199047
-"Substance Use Disorders" "Dis. Circulatory System" "Males" 6248 -0.251296227719521
-"Schizophrenia" "Dis. Circulatory System" "Females" 5536 1.19462370035389
-"Schizophrenia" "Dis. Circulatory System" "Males" 3449 0.848680950298092
-"Mood Disorders" "Dis. Circulatory System" "Females" 14804 0.777695356288979
-"Mood Disorders" "Dis. Circulatory System" "Males" 7876 0.659486682083055
-"Neurotic Disorders" "Dis. Circulatory System" "Females" 7530 0.376485643435337
-"Neurotic Disorders" "Dis. Circulatory System" "Males" 4775 0.254057563256552
-"Eating Disorders" "Dis. Circulatory System" "Females" 61 0.19043991075687
-"Eating Disorders" "Dis. Circulatory System" "Males" 8 -0.184250040843389
-"Personality Disorders" "Dis. Circulatory System" "Females" 4886 0.514068667719885
-"Personality Disorders" "Dis. Circulatory System" "Males" 3550 0.119273521057382
-"Intellectual Disabilities" "Dis. Circulatory System" "Females" 407 2.21440870889628
-"Intellectual Disabilities" "Dis. Circulatory System" "Males" 398 1.12929405711959
-"Developmental Disorders" "Dis. Circulatory System" "Females" 15 1.52862527797479
-"Developmental Disorders" "Dis. Circulatory System" "Males" 31 -0.175459804869356
-"Behavioral Disorders" "Dis. Circulatory System" "Females" 159 0.715406310160964
-"Behavioral Disorders" "Dis. Circulatory System" "Males" 147 0.462978341410845
-"Any Disorder" "Dis. Circulatory System" "Females" 41125 1.11816557269116
-"Any Disorder" "Dis. Circulatory System" "Males" 28374 0.848331221812605
-"Organic Disorders" "Respiratory Diseases" "Females" 5120 0.477607645213097
-"Organic Disorders" "Respiratory Diseases" "Males" 4206 0.554860536223172
-"Substance Use Disorders" "Respiratory Diseases" "Females" 2760 1.68065090088231
-"Substance Use Disorders" "Respiratory Diseases" "Males" 3023 0.852674252845081
-"Schizophrenia" "Respiratory Diseases" "Females" 2385 1.40306773770308
-"Schizophrenia" "Respiratory Diseases" "Males" 1460 1.13382428227599
-"Mood Disorders" "Respiratory Diseases" "Females" 5758 1.00888538493888
-"Mood Disorders" "Respiratory Diseases" "Males" 3040 0.733654550451329
-"Neurotic Disorders" "Respiratory Diseases" "Females" 4153 1.30917661087559
-"Neurotic Disorders" "Respiratory Diseases" "Males" 2033 0.86046014405457
-"Eating Disorders" "Respiratory Diseases" "Females" 40 1.4546213197899
-"Eating Disorders" "Respiratory Diseases" "Males" 4 0.96114865932512
-"Personality Disorders" "Respiratory Diseases" "Females" 2782 1.36704945288124
-"Personality Disorders" "Respiratory Diseases" "Males" 1625 0.938646040042523
-"Intellectual Disabilities" "Respiratory Diseases" "Females" 192 1.65283377591835
-"Intellectual Disabilities" "Respiratory Diseases" "Males" 215 1.87231822118803
-"Developmental Disorders" "Respiratory Diseases" "Females" 10 2.02058561849262
-"Developmental Disorders" "Respiratory Diseases" "Males" 11 0.805438823462603
-"Behavioral Disorders" "Respiratory Diseases" "Females" 79 1.67036703643441
-"Behavioral Disorders" "Respiratory Diseases" "Males" 55 0.857286598088162
-"Any Disorder" "Respiratory Diseases" "Females" 13205 0.933148105729181
-"Any Disorder" "Respiratory Diseases" "Males" 9404 0.662448634887906
-"Organic Disorders" "Digestive Diseases" "Females" 1569 0.110810348882444
-"Organic Disorders" "Digestive Diseases" "Males" 1011 0.189456778412355
-"Substance Use Disorders" "Digestive Diseases" "Females" 968 0.696169520557245
-"Substance Use Disorders" "Digestive Diseases" "Males" 1393 0.731373270141207
-"Schizophrenia" "Digestive Diseases" "Females" 683 0.321796096308078
-"Schizophrenia" "Digestive Diseases" "Males" 512 0.521780484111144
-"Mood Disorders" "Digestive Diseases" "Females" 1823 0.282638693812822
-"Mood Disorders" "Digestive Diseases" "Males" 880 0.279288445393172
-"Neurotic Disorders" "Digestive Diseases" "Females" 1261 0.333101309491529
-"Neurotic Disorders" "Digestive Diseases" "Males" 699 0.333472134251574
-"Eating Disorders" "Digestive Diseases" "Females" 25 0.814407059745571
+"Developmental Disorders" "Diabetes Mellitus" "Males" 3 0.184018702336403
+"Behavioral Disorders" "Diabetes Mellitus" "Females" 15 0.185361172018097
+"Behavioral Disorders" "Diabetes Mellitus" "Males" 26 0.166866961105414
+"Any Disorder" "Diabetes Mellitus" "Females" 2425 0.163459811948448
+"Any Disorder" "Diabetes Mellitus" "Males" 2526 0.302314197315264
+"Organic Disorders" "Dis. Circulatory System" "Females" 24207 1.96422022162302
+"Organic Disorders" "Dis. Circulatory System" "Males" 15866 2.0940533984912
+"Substance Use Disorders" "Dis. Circulatory System" "Females" 4199 0.513232179383781
+"Substance Use Disorders" "Dis. Circulatory System" "Males" 6248 -0.188425299592703
+"Schizophrenia" "Dis. Circulatory System" "Females" 5536 1.32044462784283
+"Schizophrenia" "Dis. Circulatory System" "Males" 3449 0.908155873680299
+"Mood Disorders" "Dis. Circulatory System" "Females" 14804 0.878216045326542
+"Mood Disorders" "Dis. Circulatory System" "Males" 7876 0.71394129658856
+"Neurotic Disorders" "Dis. Circulatory System" "Females" 7530 0.489013306096909
+"Neurotic Disorders" "Dis. Circulatory System" "Males" 4775 0.309383196057221
+"Eating Disorders" "Dis. Circulatory System" "Females" 61 0.284713895841063
+"Eating Disorders" "Dis. Circulatory System" "Males" 8 -0.120327621961056
+"Personality Disorders" "Dis. Circulatory System" "Females" 4886 0.624289824541917
+"Personality Disorders" "Dis. Circulatory System" "Males" 3550 0.169277523799324
+"Intellectual Disabilities" "Dis. Circulatory System" "Females" 407 2.37255095178982
+"Intellectual Disabilities" "Dis. Circulatory System" "Males" 398 1.19154486736178
+"Developmental Disorders" "Dis. Circulatory System" "Females" 15 1.68803154415142
+"Developmental Disorders" "Dis. Circulatory System" "Males" 31 -0.112119878690023
+"Behavioral Disorders" "Dis. Circulatory System" "Females" 159 0.863050342586163
+"Behavioral Disorders" "Dis. Circulatory System" "Males" 147 0.509189587242743
+"Any Disorder" "Dis. Circulatory System" "Females" 41125 1.23974979546678
+"Any Disorder" "Dis. Circulatory System" "Males" 28374 0.913050591679899
+"Organic Disorders" "Respiratory Diseases" "Females" 5120 0.504152647988489
+"Organic Disorders" "Respiratory Diseases" "Males" 4206 0.580300777177619
+"Substance Use Disorders" "Respiratory Diseases" "Females" 2760 1.70917980846088
+"Substance Use Disorders" "Respiratory Diseases" "Males" 3023 0.871077254466805
+"Schizophrenia" "Respiratory Diseases" "Females" 2385 1.42201727169123
+"Schizophrenia" "Respiratory Diseases" "Males" 1460 1.15051445144948
+"Mood Disorders" "Respiratory Diseases" "Females" 5758 1.02206066839452
+"Mood Disorders" "Respiratory Diseases" "Males" 3040 0.74803469984222
+"Neurotic Disorders" "Respiratory Diseases" "Females" 4153 1.32765893335672
+"Neurotic Disorders" "Respiratory Diseases" "Males" 2033 0.875773096613316
+"Eating Disorders" "Respiratory Diseases" "Females" 40 1.4599098375062
+"Eating Disorders" "Respiratory Diseases" "Males" 4 0.979743432682801
+"Personality Disorders" "Respiratory Diseases" "Females" 2782 1.38477426508128
+"Personality Disorders" "Respiratory Diseases" "Males" 1625 0.952217770391912
+"Intellectual Disabilities" "Respiratory Diseases" "Females" 192 1.68934701458758
+"Intellectual Disabilities" "Respiratory Diseases" "Males" 215 1.88738828850078
+"Developmental Disorders" "Respiratory Diseases" "Females" 10 2.05836973046829
+"Developmental Disorders" "Respiratory Diseases" "Males" 11 0.824688529635898
+"Behavioral Disorders" "Respiratory Diseases" "Females" 79 1.70515487288105
+"Behavioral Disorders" "Respiratory Diseases" "Males" 55 0.871458227229722
+"Any Disorder" "Respiratory Diseases" "Females" 13205 0.954234248394709
+"Any Disorder" "Respiratory Diseases" "Males" 9404 0.681102176333304
+"Organic Disorders" "Digestive Diseases" "Females" 1569 0.124937825640299
+"Organic Disorders" "Digestive Diseases" "Males" 1011 0.19547743471859
+"Substance Use Disorders" "Digestive Diseases" "Females" 968 0.708263657193014
+"Substance Use Disorders" "Digestive Diseases" "Males" 1393 0.736130002272631
+"Schizophrenia" "Digestive Diseases" "Females" 683 0.332146145791479
+"Schizophrenia" "Digestive Diseases" "Males" 512 0.525927580912972
+"Mood Disorders" "Digestive Diseases" "Females" 1823 0.290255540506176
+"Mood Disorders" "Digestive Diseases" "Males" 880 0.282886002477851
+"Neurotic Disorders" "Digestive Diseases" "Females" 1261 0.342876221538393
+"Neurotic Disorders" "Digestive Diseases" "Males" 699 0.337765839830824
+"Eating Disorders" "Digestive Diseases" "Females" 25 0.807430405100035
 "Eating Disorders" "Digestive Diseases" "Males" NA NA
-"Personality Disorders" "Digestive Diseases" "Females" 868 0.407215863433836
-"Personality Disorders" "Digestive Diseases" "Males" 587 0.452298409029888
-"Intellectual Disabilities" "Digestive Diseases" "Females" 70 0.640648936030461
-"Intellectual Disabilities" "Digestive Diseases" "Males" 93 1.14649621471921
-"Developmental Disorders" "Digestive Diseases" "Females" 5 0.866433653815722
-"Developmental Disorders" "Digestive Diseases" "Males" 19 1.8791715890942
-"Behavioral Disorders" "Digestive Diseases" "Females" 20 0.211402212735189
-"Behavioral Disorders" "Digestive Diseases" "Males" 37 0.728189440819795
-"Any Disorder" "Digestive Diseases" "Females" 4218 0.276659491136727
-"Any Disorder" "Digestive Diseases" "Males" 3062 0.406761051217366
-"Organic Disorders" "Alcohol Misuse" "Females" 466 0.338684867468956
-"Organic Disorders" "Alcohol Misuse" "Males" 1083 0.989508468542126
-"Substance Use Disorders" "Alcohol Misuse" "Females" 2744 3.90408349024753
-"Substance Use Disorders" "Alcohol Misuse" "Males" 6878 5.69967714224658
-"Schizophrenia" "Alcohol Misuse" "Females" 462 0.659136300541861
-"Schizophrenia" "Alcohol Misuse" "Males" 1001 1.46163817163432
-"Mood Disorders" "Alcohol Misuse" "Females" 1128 0.692050968539755
-"Mood Disorders" "Alcohol Misuse" "Males" 1751 1.49380259434468
-"Neurotic Disorders" "Alcohol Misuse" "Females" 1544 0.999609305363483
-"Neurotic Disorders" "Alcohol Misuse" "Males" 2243 2.04215794565846
-"Eating Disorders" "Alcohol Misuse" "Females" 42 1.10577554733075
-"Eating Disorders" "Alcohol Misuse" "Males" 9 2.1183184493351
-"Personality Disorders" "Alcohol Misuse" "Females" 1094 1.20515310766258
-"Personality Disorders" "Alcohol Misuse" "Males" 1876 2.54964051032147
-"Intellectual Disabilities" "Alcohol Misuse" "Females" 18 0.10376810278325
-"Intellectual Disabilities" "Alcohol Misuse" "Males" 66 0.386743120955402
+"Personality Disorders" "Digestive Diseases" "Females" 868 0.416767315014041
+"Personality Disorders" "Digestive Diseases" "Males" 587 0.456000486429017
+"Intellectual Disabilities" "Digestive Diseases" "Females" 70 0.655424523431396
+"Intellectual Disabilities" "Digestive Diseases" "Males" 93 1.15036520809033
+"Developmental Disorders" "Digestive Diseases" "Females" 5 0.881565448365419
+"Developmental Disorders" "Digestive Diseases" "Males" 19 1.88413914556254
+"Behavioral Disorders" "Digestive Diseases" "Females" 20 0.225895664488013
+"Behavioral Disorders" "Digestive Diseases" "Males" 37 0.73151418120181
+"Any Disorder" "Digestive Diseases" "Females" 4218 0.286816504379065
+"Any Disorder" "Digestive Diseases" "Males" 3062 0.411029262743752
+"Organic Disorders" "Alcohol Misuse" "Females" 466 0.326713666555135
+"Organic Disorders" "Alcohol Misuse" "Males" 1083 0.97920571534561
+"Substance Use Disorders" "Alcohol Misuse" "Females" 2744 3.89517303111609
+"Substance Use Disorders" "Alcohol Misuse" "Males" 6878 5.6985628625486
+"Schizophrenia" "Alcohol Misuse" "Females" 462 0.653979982224518
+"Schizophrenia" "Alcohol Misuse" "Males" 1001 1.46037510297946
+"Mood Disorders" "Alcohol Misuse" "Females" 1128 0.685212215534336
+"Mood Disorders" "Alcohol Misuse" "Males" 1751 1.49025456988959
+"Neurotic Disorders" "Alcohol Misuse" "Females" 1544 0.997334213009859
+"Neurotic Disorders" "Alcohol Misuse" "Males" 2243 2.04127489413483
+"Eating Disorders" "Alcohol Misuse" "Females" 42 1.10135728876181
+"Eating Disorders" "Alcohol Misuse" "Males" 9 2.1170979498856
+"Personality Disorders" "Alcohol Misuse" "Females" 1094 1.20248974300797
+"Personality Disorders" "Alcohol Misuse" "Males" 1876 2.5483240095809
+"Intellectual Disabilities" "Alcohol Misuse" "Females" 18 0.104216021063897
+"Intellectual Disabilities" "Alcohol Misuse" "Males" 66 0.387168444847803
 "Developmental Disorders" "Alcohol Misuse" "Females" NA NA
-"Developmental Disorders" "Alcohol Misuse" "Males" 8 0.0238671444543525
-"Behavioral Disorders" "Alcohol Misuse" "Females" 31 0.879601961923976
-"Behavioral Disorders" "Alcohol Misuse" "Males" 83 1.76087745426931
-"Any Disorder" "Alcohol Misuse" "Females" 3512 0.967301905718627
-"Any Disorder" "Alcohol Misuse" "Males" 8011 2.51471517981502
-"Organic Disorders" "Suicide" "Females" 171 0.10566070260295
-"Organic Disorders" "Suicide" "Males" 283 0.201371452324403
-"Substance Use Disorders" "Suicide" "Females" 830 1.38198301764151
-"Substance Use Disorders" "Suicide" "Males" 1867 1.81856597150531
-"Schizophrenia" "Suicide" "Females" 681 1.47299527977978
-"Schizophrenia" "Suicide" "Males" 1035 2.26863066880607
-"Mood Disorders" "Suicide" "Females" 1537 1.18599992907876
-"Mood Disorders" "Suicide" "Males" 1946 2.28448520255474
-"Neurotic Disorders" "Suicide" "Females" 1287 0.918299753650754
-"Neurotic Disorders" "Suicide" "Males" 1844 1.97943252263695
-"Eating Disorders" "Suicide" "Females" 83 1.2809141016814
-"Eating Disorders" "Suicide" "Males" 12 2.80663488217693
-"Personality Disorders" "Suicide" "Females" 907 1.24504019482297
-"Personality Disorders" "Suicide" "Males" 1056 1.95180064113015
-"Intellectual Disabilities" "Suicide" "Females" 29 0.478366184695856
-"Intellectual Disabilities" "Suicide" "Males" 40 0.335878645506669
-"Developmental Disorders" "Suicide" "Females" 6 0.318634131993471
-"Developmental Disorders" "Suicide" "Males" 32 0.335333093366889
-"Behavioral Disorders" "Suicide" "Females" 44 0.728120637747279
-"Behavioral Disorders" "Suicide" "Males" 128 1.13479364289505
-"Any Disorder" "Suicide" "Females" 2449 0.733019258278393
-"Any Disorder" "Suicide" "Males" 4154 1.48837269367075
-"Organic Disorders" "Accidents" "Females" 1684 0.279508197534195
-"Organic Disorders" "Accidents" "Males" 1354 0.529150938815258
-"Substance Use Disorders" "Accidents" "Females" 1532 2.36173878173429
-"Substance Use Disorders" "Accidents" "Males" 3403 3.4463596345268
-"Schizophrenia" "Accidents" "Females" 872 1.11379667301578
-"Schizophrenia" "Accidents" "Males" 1307 2.47913594844707
-"Mood Disorders" "Accidents" "Females" 1767 0.629561247781541
-"Mood Disorders" "Accidents" "Males" 1410 1.08668347303102
-"Neurotic Disorders" "Accidents" "Females" 1451 0.701653605556189
-"Neurotic Disorders" "Accidents" "Males" 1650 1.41329469110864
-"Eating Disorders" "Accidents" "Females" 63 0.780661187716926
-"Eating Disorders" "Accidents" "Males" 7 1.57710715548416
-"Personality Disorders" "Accidents" "Females" 1110 1.10488208053662
-"Personality Disorders" "Accidents" "Males" 1495 2.66801765549742
-"Intellectual Disabilities" "Accidents" "Females" 66 0.831128087015152
-"Intellectual Disabilities" "Accidents" "Males" 123 1.51394949122438
-"Developmental Disorders" "Accidents" "Females" 10 1.03582377398722
-"Developmental Disorders" "Accidents" "Males" 26 -0.120152652600934
-"Behavioral Disorders" "Accidents" "Females" 76 1.23077004525441
-"Behavioral Disorders" "Accidents" "Males" 267 2.20949476023694
-"Any Disorder" "Accidents" "Females" 4593 0.664113437510144
-"Any Disorder" "Accidents" "Males" 5790 1.62062666172241
-"Organic Disorders" "Homicide" "Females" 9 0.00664909782438022
-"Organic Disorders" "Homicide" "Males" 9 0.00788066313792568
-"Substance Use Disorders" "Homicide" "Females" 39 0.0733242866070738
-"Substance Use Disorders" "Homicide" "Males" 135 0.14198314293534
-"Schizophrenia" "Homicide" "Females" 13 0.0201863158152938
-"Schizophrenia" "Homicide" "Males" 33 0.0608422289960652
-"Mood Disorders" "Homicide" "Females" 23 0.0107872522063467
-"Mood Disorders" "Homicide" "Males" 28 0.025904737147371
-"Neurotic Disorders" "Homicide" "Females" 52 0.03280229332097
-"Neurotic Disorders" "Homicide" "Males" 56 0.0519130543701282
+"Developmental Disorders" "Alcohol Misuse" "Males" 8 0.0243732797926189
+"Behavioral Disorders" "Alcohol Misuse" "Females" 31 0.879850518092718
+"Behavioral Disorders" "Alcohol Misuse" "Males" 83 1.76130444409031
+"Any Disorder" "Alcohol Misuse" "Females" 3512 0.957196204848978
+"Any Disorder" "Alcohol Misuse" "Males" 8011 2.50898555681089
+"Organic Disorders" "Suicide" "Females" 171 0.102389253354534
+"Organic Disorders" "Suicide" "Males" 283 0.200135574987919
+"Substance Use Disorders" "Suicide" "Females" 830 1.37905276919639
+"Substance Use Disorders" "Suicide" "Males" 1867 1.8187187778364
+"Schizophrenia" "Suicide" "Females" 681 1.46050949182801
+"Schizophrenia" "Suicide" "Males" 1035 2.26651844644509
+"Mood Disorders" "Suicide" "Females" 1537 1.17349444418148
+"Mood Disorders" "Suicide" "Males" 1946 2.27870230099011
+"Neurotic Disorders" "Suicide" "Females" 1287 0.915812840782674
+"Neurotic Disorders" "Suicide" "Males" 1844 1.97854259067745
+"Eating Disorders" "Suicide" "Females" 83 1.2813969562453
+"Eating Disorders" "Suicide" "Males" 12 2.80501997885667
+"Personality Disorders" "Suicide" "Females" 907 1.24206746637189
+"Personality Disorders" "Suicide" "Males" 1056 1.9509435581244
+"Intellectual Disabilities" "Suicide" "Females" 29 0.478768796186424
+"Intellectual Disabilities" "Suicide" "Males" 40 0.336487063968509
+"Developmental Disorders" "Suicide" "Females" 6 0.319223979271919
+"Developmental Disorders" "Suicide" "Males" 32 0.336005071083393
+"Behavioral Disorders" "Suicide" "Females" 44 0.728335624936169
+"Behavioral Disorders" "Suicide" "Males" 128 1.13541310130624
+"Any Disorder" "Suicide" "Females" 2449 0.725356966156873
+"Any Disorder" "Suicide" "Males" 4154 1.48528592266026
+"Organic Disorders" "Accidents" "Females" 1684 0.2827079447948
+"Organic Disorders" "Accidents" "Males" 1354 0.530493198737455
+"Substance Use Disorders" "Accidents" "Females" 1532 2.36573448710579
+"Substance Use Disorders" "Accidents" "Males" 3403 3.44953614718597
+"Schizophrenia" "Accidents" "Females" 872 1.11325057309708
+"Schizophrenia" "Accidents" "Males" 1307 2.48000062787226
+"Mood Disorders" "Accidents" "Females" 1767 0.63013909865287
+"Mood Disorders" "Accidents" "Males" 1410 1.08722896212684
+"Neurotic Disorders" "Accidents" "Females" 1451 0.707448795136173
+"Neurotic Disorders" "Accidents" "Males" 1650 1.41604568960637
+"Eating Disorders" "Accidents" "Females" 63 0.787046176955393
+"Eating Disorders" "Accidents" "Males" 7 1.5800582995176
+"Personality Disorders" "Accidents" "Females" 1110 1.10898190258554
+"Personality Disorders" "Accidents" "Males" 1495 2.66919941822634
+"Intellectual Disabilities" "Accidents" "Females" 66 0.841455070053333
+"Intellectual Disabilities" "Accidents" "Males" 123 1.51789384013473
+"Developmental Disorders" "Accidents" "Females" 10 1.04667705893367
+"Developmental Disorders" "Accidents" "Males" 26 -0.115943204634726
+"Behavioral Disorders" "Accidents" "Females" 76 1.24019904221433
+"Behavioral Disorders" "Accidents" "Males" 267 2.21415312397509
+"Any Disorder" "Accidents" "Females" 4593 0.665889204134334
+"Any Disorder" "Accidents" "Males" 5790 1.62094569591165
+"Organic Disorders" "Homicide" "Females" 9 0.00642907831198097
+"Organic Disorders" "Homicide" "Males" 9 0.0078083550317917
+"Substance Use Disorders" "Homicide" "Females" 39 0.0731623403560099
+"Substance Use Disorders" "Homicide" "Males" 135 0.141954370027431
+"Schizophrenia" "Homicide" "Females" 13 0.0200296609343737
+"Schizophrenia" "Homicide" "Males" 33 0.0607795858063868
+"Mood Disorders" "Homicide" "Females" 23 0.010689564075917
+"Mood Disorders" "Homicide" "Males" 28 0.0258425261409347
+"Neurotic Disorders" "Homicide" "Females" 52 0.0327294821083516
+"Neurotic Disorders" "Homicide" "Males" 56 0.051891125649382
 "Eating Disorders" "Homicide" "Females" NA NA
 "Eating Disorders" "Homicide" "Males" NA NA
-"Personality Disorders" "Homicide" "Females" 21 0.0212207141432644
-"Personality Disorders" "Homicide" "Males" 58 0.116552897754318
+"Personality Disorders" "Homicide" "Females" 21 0.0211850218201122
+"Personality Disorders" "Homicide" "Males" 58 0.116481036971565
 "Intellectual Disabilities" "Homicide" "Females" NA NA
 "Intellectual Disabilities" "Homicide" "Males" NA NA
 "Developmental Disorders" "Homicide" "Females" NA NA
 "Developmental Disorders" "Homicide" "Males" NA NA
-"Behavioral Disorders" "Homicide" "Females" NA NA
-"Behavioral Disorders" "Homicide" "Males" 12 0.0945489681147218
-"Any Disorder" "Homicide" "Females" 83 0.0217522099924597
-"Any Disorder" "Homicide" "Males" 176 0.0651243952529592
-"Organic Disorders" "Other Causes" "Females" 12910 2.17018929128128
-"Organic Disorders" "Other Causes" "Males" 8668 2.60098610198553
-"Substance Use Disorders" "Other Causes" "Females" 3054 1.94993788789881
-"Substance Use Disorders" "Other Causes" "Males" 4729 2.09158832023189
-"Schizophrenia" "Other Causes" "Females" 3672 2.65254915189125
-"Schizophrenia" "Other Causes" "Males" 2847 3.51778444637306
-"Mood Disorders" "Other Causes" "Females" 7713 1.29219489712895
-"Mood Disorders" "Other Causes" "Males" 4221 1.45843702486938
-"Neurotic Disorders" "Other Causes" "Females" 4629 1.1154451053366
-"Neurotic Disorders" "Other Causes" "Males" 3101 1.35420415379918
-"Eating Disorders" "Other Causes" "Females" 138 3.55943448065304
-"Eating Disorders" "Other Causes" "Males" 13 3.52038370547888
-"Personality Disorders" "Other Causes" "Females" 3176 1.44309308791824
-"Personality Disorders" "Other Causes" "Males" 2382 1.74333038681533
-"Intellectual Disabilities" "Other Causes" "Females" 501 7.17730706171882
-"Intellectual Disabilities" "Other Causes" "Males" 551 7.29342934982058
-"Developmental Disorders" "Other Causes" "Females" 31 4.32404707613027
-"Developmental Disorders" "Other Causes" "Males" 71 5.89095882560183
-"Behavioral Disorders" "Other Causes" "Females" 129 1.905676233214
-"Behavioral Disorders" "Other Causes" "Males" 211 2.49775621903825
-"Any Disorder" "Other Causes" "Females" 22419 1.73478011969174
-"Any Disorder" "Other Causes" "Males" 16877 2.16375057278773
-"Organic Disorders" "Natural Causes" "Females" 50281 4.80286507310946
-"Organic Disorders" "Natural Causes" "Males" 36353 6.04250791889875
-"Substance Use Disorders" "Natural Causes" "Females" 18365 9.22940776867061
-"Substance Use Disorders" "Natural Causes" "Males" 29668 9.26052051700298
-"Schizophrenia" "Natural Causes" "Females" 16374 6.48880288036728
-"Schizophrenia" "Natural Causes" "Males" 12039 7.08414361350071
-"Mood Disorders" "Natural Causes" "Females" 40627 4.1894953737522
-"Mood Disorders" "Natural Causes" "Males" 23810 4.35504801109566
-"Neurotic Disorders" "Natural Causes" "Females" 27011 4.68773214422821
-"Neurotic Disorders" "Natural Causes" "Males" 17844 4.94592183358901
-"Eating Disorders" "Natural Causes" "Females" 406 6.552640823798
-"Eating Disorders" "Natural Causes" "Males" 50 7.06326890434163
-"Personality Disorders" "Natural Causes" "Females" 17962 5.35971101850008
-"Personality Disorders" "Natural Causes" "Males" 13913 5.81212031024219
-"Intellectual Disabilities" "Natural Causes" "Females" 1481 11.725606849029
-"Intellectual Disabilities" "Natural Causes" "Males" 1614 10.7236925095004
-"Developmental Disorders" "Natural Causes" "Females" 84 10.0607388545499
-"Developmental Disorders" "Natural Causes" "Males" 172 6.35298149145418
-"Behavioral Disorders" "Natural Causes" "Females" 584 6.28140412488737
-"Behavioral Disorders" "Natural Causes" "Males" 704 6.26937905542635
-"Any Disorder" "Natural Causes" "Females" 106633 5.34947579337791
-"Any Disorder" "Natural Causes" "Males" 84777 6.57857627023804
-"Organic Disorders" "Unnatural Causes" "Females" 1864 0.391817997961525
-"Organic Disorders" "Unnatural Causes" "Males" 1646 0.738403054277586
-"Substance Use Disorders" "Unnatural Causes" "Females" 2401 3.81704608598287
-"Substance Use Disorders" "Unnatural Causes" "Males" 5405 5.40690874896745
-"Schizophrenia" "Unnatural Causes" "Females" 1566 2.60697826861085
-"Schizophrenia" "Unnatural Causes" "Males" 2375 4.80860884624921
-"Mood Disorders" "Unnatural Causes" "Females" 3327 1.82634842906665
-"Mood Disorders" "Unnatural Causes" "Males" 3384 3.39707341273313
-"Neurotic Disorders" "Unnatural Causes" "Females" 2790 1.65275565252791
-"Neurotic Disorders" "Unnatural Causes" "Males" 3550 3.44464026811572
-"Eating Disorders" "Unnatural Causes" "Females" 148 2.08236506067801
-"Eating Disorders" "Unnatural Causes" "Males" 19 4.35216579050496
-"Personality Disorders" "Unnatural Causes" "Females" 2038 2.37114298950286
-"Personality Disorders" "Unnatural Causes" "Males" 2609 4.73637119438189
-"Intellectual Disabilities" "Unnatural Causes" "Females" 97 1.34973659682772
-"Intellectual Disabilities" "Unnatural Causes" "Males" 165 1.86390730316242
-"Developmental Disorders" "Unnatural Causes" "Females" 16 1.33357382368989
-"Developmental Disorders" "Unnatural Causes" "Males" 60 0.23037340760907
-"Behavioral Disorders" "Unnatural Causes" "Females" 123 1.96920214161045
-"Behavioral Disorders" "Unnatural Causes" "Males" 407 3.43883737124671
-"Any Disorder" "Unnatural Causes" "Females" 7125 1.418884905781
-"Any Disorder" "Unnatural Causes" "Males" 10120 3.17412375064612
-"Organic Disorders" "All Causes" "Females" 52145 5.19468307107099
-"Organic Disorders" "All Causes" "Males" 37999 6.78091097317634
-"Substance Use Disorders" "All Causes" "Females" 20766 13.0464538546535
-"Substance Use Disorders" "All Causes" "Males" 35073 14.6674292659704
-"Schizophrenia" "All Causes" "Females" 17940 9.09578114897813
-"Schizophrenia" "All Causes" "Males" 14414 11.8927524597499
-"Mood Disorders" "All Causes" "Females" 43954 6.01584380281885
-"Mood Disorders" "All Causes" "Males" 27194 7.75212142382879
-"Neurotic Disorders" "All Causes" "Females" 29801 6.34048779675613
-"Neurotic Disorders" "All Causes" "Males" 21394 8.39056210170473
-"Eating Disorders" "All Causes" "Females" 554 8.63500588447602
-"Eating Disorders" "All Causes" "Males" 69 11.4154346948466
-"Personality Disorders" "All Causes" "Females" 20000 7.73085400800294
-"Personality Disorders" "All Causes" "Males" 16522 10.5484915046241
-"Intellectual Disabilities" "All Causes" "Females" 1578 13.0753434458567
-"Intellectual Disabilities" "All Causes" "Males" 1779 12.5875998126628
-"Developmental Disorders" "All Causes" "Females" 100 11.3943126782397
-"Developmental Disorders" "All Causes" "Males" 232 6.58335489906325
-"Behavioral Disorders" "All Causes" "Females" 707 8.25060626649781
-"Behavioral Disorders" "All Causes" "Males" 1111 9.70821642667306
-"Any Disorder" "All Causes" "Females" 113758 6.76836069915891
-"Any Disorder" "All Causes" "Males" 94897 9.75270002088416
+"Behavioral Disorders" "Homicide" "Females" 3 0.010331613599019
+"Behavioral Disorders" "Homicide" "Males" 12 0.0945544166909191
+"Any Disorder" "Homicide" "Females" 83 0.0215246674928532
+"Any Disorder" "Homicide" "Males" 176 0.0649681724767455
+"Organic Disorders" "Other Causes" "Females" 12511 2.10121315522137
+"Organic Disorders" "Other Causes" "Males" 8366 2.53970354478283
+"Substance Use Disorders" "Other Causes" "Females" 2864 1.87052165543326
+"Substance Use Disorders" "Other Causes" "Males" 4461 2.00092628070877
+"Schizophrenia" "Other Causes" "Females" 3529 2.60662016871578
+"Schizophrenia" "Other Causes" "Males" 2740 3.44797267019101
+"Mood Disorders" "Other Causes" "Females" 7307 1.24865273032245
+"Mood Disorders" "Other Causes" "Males" 3988 1.40901580329366
+"Neurotic Disorders" "Other Causes" "Females" 4383 1.09243309128271
+"Neurotic Disorders" "Other Causes" "Males" 2944 1.30932790717739
+"Eating Disorders" "Other Causes" "Females" 137 3.56739019318182
+"Eating Disorders" "Other Causes" "Males" 13 3.66083346529998
+"Personality Disorders" "Other Causes" "Females" 3005 1.40017237924729
+"Personality Disorders" "Other Causes" "Males" 2255 1.67801171697173
+"Intellectual Disabilities" "Other Causes" "Females" 483 7.05349905086425
+"Intellectual Disabilities" "Other Causes" "Males" 536 7.18582534288817
+"Developmental Disorders" "Other Causes" "Females" 31 4.4870597113927
+"Developmental Disorders" "Other Causes" "Males" 69 5.21235675621955
+"Behavioral Disorders" "Other Causes" "Females" 122 1.79339493495325
+"Behavioral Disorders" "Other Causes" "Males" 204 2.49723231149891
+"Any Disorder" "Other Causes" "Females" 21503 1.7001131984608
+"Any Disorder" "Other Causes" "Males" 16143 2.10222173404578
+"Organic Disorders" "Natural Causes" "Females" 50281 5.02972185934664
+"Organic Disorders" "Natural Causes" "Males" 36353 6.21140991309469
+"Substance Use Disorders" "Natural Causes" "Females" 18365 9.51407919274109
+"Substance Use Disorders" "Natural Causes" "Males" 29668 9.40207098808974
+"Schizophrenia" "Natural Causes" "Females" 16374 6.72049069951693
+"Schizophrenia" "Natural Causes" "Males" 12039 7.21460185700409
+"Mood Disorders" "Natural Causes" "Females" 40627 4.37435841970754
+"Mood Disorders" "Natural Causes" "Males" 23810 4.47149111994462
+"Neurotic Disorders" "Natural Causes" "Females" 27011 4.9112875266862
+"Neurotic Disorders" "Natural Causes" "Males" 17844 5.06886783077358
+"Eating Disorders" "Natural Causes" "Females" 406 6.70529241192117
+"Eating Disorders" "Natural Causes" "Males" 50 7.20429336234747
+"Personality Disorders" "Natural Causes" "Females" 17962 5.57625715050091
+"Personality Disorders" "Natural Causes" "Males" 13913 5.92225138686336
+"Intellectual Disabilities" "Natural Causes" "Females" 1481 12.0575128200596
+"Intellectual Disabilities" "Natural Causes" "Males" 1614 10.861082490293
+"Developmental Disorders" "Natural Causes" "Females" 84 10.3998041868901
+"Developmental Disorders" "Natural Causes" "Males" 172 6.49880488330537
+"Behavioral Disorders" "Natural Causes" "Females" 584 6.59553951293675
+"Behavioral Disorders" "Natural Causes" "Males" 704 6.37571217444807
+"Any Disorder" "Natural Causes" "Females" 106633 5.57413033861791
+"Any Disorder" "Natural Causes" "Males" 84777 6.71526418510062
+"Organic Disorders" "Unnatural Causes" "Females" 1864 0.391526276461315
+"Organic Disorders" "Unnatural Causes" "Males" 1646 0.738437128757166
+"Substance Use Disorders" "Unnatural Causes" "Females" 2401 3.81794959665819
+"Substance Use Disorders" "Unnatural Causes" "Males" 5405 5.4102092950498
+"Schizophrenia" "Unnatural Causes" "Females" 1566 2.59378972585947
+"Schizophrenia" "Unnatural Causes" "Males" 2375 4.80729866012373
+"Mood Disorders" "Unnatural Causes" "Females" 3327 1.81432310691027
+"Mood Disorders" "Unnatural Causes" "Males" 3384 3.39177378925788
+"Neurotic Disorders" "Unnatural Causes" "Females" 2790 1.6559911180272
+"Neurotic Disorders" "Unnatural Causes" "Males" 3550 3.4464794059332
+"Eating Disorders" "Unnatural Causes" "Females" 148 2.08925402239418
+"Eating Disorders" "Unnatural Causes" "Males" 19 4.35353793977957
+"Personality Disorders" "Unnatural Causes" "Females" 2038 2.37223439077755
+"Personality Disorders" "Unnatural Causes" "Males" 2609 4.73662401332231
+"Intellectual Disabilities" "Unnatural Causes" "Females" 97 1.36047059115055
+"Intellectual Disabilities" "Unnatural Causes" "Males" 165 1.8684635416399
+"Developmental Disorders" "Unnatural Causes" "Females" 16 1.34504032093839
+"Developmental Disorders" "Unnatural Causes" "Males" 60 0.235264892636558
+"Behavioral Disorders" "Unnatural Causes" "Females" 123 1.97886628074952
+"Behavioral Disorders" "Unnatural Causes" "Males" 407 3.44412064197225
+"Any Disorder" "Unnatural Causes" "Females" 7125 1.41277083778406
+"Any Disorder" "Unnatural Causes" "Males" 10120 3.17119979104866
+"Organic Disorders" "All Causes" "Females" 52145 5.42124813580795
+"Organic Disorders" "All Causes" "Males" 37999 6.94984704185185
+"Substance Use Disorders" "All Causes" "Females" 20766 13.3320287893993
+"Substance Use Disorders" "All Causes" "Males" 35073 14.8122802831395
+"Schizophrenia" "All Causes" "Females" 17940 9.3142804253764
+"Schizophrenia" "All Causes" "Males" 14414 12.0219005171278
+"Mood Disorders" "All Causes" "Females" 43954 6.1886815266178
+"Mood Disorders" "All Causes" "Males" 27194 7.8632649092025
+"Neurotic Disorders" "All Causes" "Females" 29801 6.5672786447134
+"Neurotic Disorders" "All Causes" "Males" 21394 8.51534723670678
+"Eating Disorders" "All Causes" "Females" 554 8.79454643431535
+"Eating Disorders" "All Causes" "Males" 69 11.557831302127
+"Personality Disorders" "All Causes" "Females" 20000 7.94849154127846
+"Personality Disorders" "All Causes" "Males" 16522 10.6588754001857
+"Intellectual Disabilities" "All Causes" "Females" 1578 13.4179834112101
+"Intellectual Disabilities" "All Causes" "Males" 1779 12.7295460319329
+"Developmental Disorders" "All Causes" "Females" 100 11.7448445078285
+"Developmental Disorders" "All Causes" "Males" 232 6.73406977594193
+"Behavioral Disorders" "All Causes" "Females" 707 8.57440579368627
+"Behavioral Disorders" "All Causes" "Males" 1111 9.81983281642032
+"Any Disorder" "All Causes" "Females" 113758 6.98690117640197
+"Any Disorder" "All Causes" "Males" 94897 9.88646397614927

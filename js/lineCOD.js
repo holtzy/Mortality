@@ -252,30 +252,6 @@ function updateChart(data){
             (d.values)
         })
 
-  // Add diagnosed confidence LEFT -> to small -> Impossible to see it!
-  // var diagnosedConfidenceLeft = svgLeft
-  //     .selectAll(".lineConfidence")
-  //     .data(sumstat.filter(function(d){ return d.key=="Natural Causes"}))
-  // diagnosedConfidenceLeft
-  //     .enter()
-  //     .append("path")
-  //     .merge(diagnosedConfidenceLeft)
-  //     .style("opacity", .5)
-  //     .transition()
-  //     .duration(1000)
-  //       .attr("class", "lineConfidence")
-  //       .attr("fill", function(d){ return myColorCOD(d.key) })
-  //       .attr("stroke", "none")
-  //       .attr("stroke-width", 1.5)
-  //       .attr("d", function(d){
-  //         return d3.area()
-  //         .x(function(d) { return x(d.specific) })
-  //         .y0(function(d) { console.log(d) ; return yLeft(d.diag_left) })
-  //         .y1(function(d) { return yLeft(d.diag_right) })
-  //         (d.values)
-  //       })
-
-
   // Add the diagnosed line CENTER
   var diagnosedLineCenter = svgCenter
       .selectAll(".lineDiag")
@@ -345,7 +321,7 @@ function updateChart(data){
         })
 
 
-  // Add MRR confindence interval
+  // Add MRR confidence interval
   var confidenceLine = svgRight
       .selectAll(".lineConfidence")
       .data(sumstat)

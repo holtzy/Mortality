@@ -123,13 +123,13 @@ svgLeft
   .append("text")
   .text("Mental disorder")
   .attr("x", 341)
-  .attr("y", 70)
+  .attr("y", 80)
   .attr("fill", "steelblue")
 svgLeft
   .append("text")
   .text("No mental disorder")
   .attr("x", 341)
-  .attr("y", 102)
+  .attr("y", 110)
   .attr("fill", "steelblue")
   .attr("opacity", .8)
 
