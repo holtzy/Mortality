@@ -89,7 +89,7 @@ svg.append("text")
     .attr("x", width)
     .attr("y", height + 50)
     .style("fill", "#C8C8C8")
-    .text("Estimates based on less than 4 cases are not shown");
+    .text("Estimates based on less than 3 cases are not shown");
 
 
 

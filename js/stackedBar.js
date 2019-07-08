@@ -278,6 +278,7 @@ updateStackedBar()
 // BARS OF BARPLOT
 // ======================= //
 
+
 // Initialize the bars
 svgBar
   .selectAll(".myBarsBarplot")
@@ -383,7 +384,7 @@ function updateBar(mentalDis){
     .data(data_long)
     .transition()
     .duration(1000)
-      .attr("height", function(d) { return Math.abs(yBar(d.value) - yBar(0)) })
+      .attr("height", function(d) { return typeof d.value === "undefined" ? 0 : Math.abs(yBar(d.value) - yBar(0)) })
       .attr("y", function(d) {
               if (d.value >= 0){
                   return yBar(d.value);
@@ -399,10 +400,10 @@ function updateBar(mentalDis){
     .transition()
     .duration(1000)
       .style("opacity", 1)
-      .attr("text-anchor", (d)=>{
-        if( d.value>=0 ){ return("end") }else{ return("start")} })
+      .attr("text-anchor", (d) => {
+        if( d.value>=0 || typeof d.value === "undefined" ){ return("end") }else{ return("start")} })
       .attr('transform', (d)=>{
-        if( d.value>=0 ){
+        if( d.value>=0 || typeof d.value === "undefined" ){
           return 'translate( '+ (xBar(d.COD)+myPaddingBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)+10) +'),'+ 'rotate(-90)'
         }else{
           return 'translate( '+ (xBar(d.COD)+myPaddingBar(d.COD)+xBar.bandwidth()/2) +' , '+ (yBar(0)-10) +'),'+ 'rotate(-90)'
@@ -416,14 +417,16 @@ function updateBar(mentalDis){
     .transition()
     .duration(1000)
       .style("opacity", 1)
-      .attr("y",  (d)=>{
+      .attr("y",  (d) => {
         if( d.value>=0 ){
-          return yBar(d.value)-10
-        }else{
-          return yBar(d.value)+10
+          return yBar(d.value)-10;
+        }else if( d.value<0 ){
+          return yBar(d.value)+10;
+        }else if( typeof d.value === "undefined" ){
+          return yBar(0)-2;
         }
       })
-      .text(function(d){ return Math.round(d.value*10)/10 })
+      .text(function(d){ return ( typeof d.value === "undefined"  ? "Na" : Math.round(d.value*10)/10 ) })
 
 
 }
