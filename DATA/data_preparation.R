@@ -28,7 +28,7 @@ close(fileConn)
 wide <- LYL %>%
   filter(n>3) %>%
   select(mentalDis, sex, COD, LYL) %>%
-  spread(COD, LYL, -4, fill=0)
+  spread(COD, LYL, -4, fill=NA)
 tosave <- paste("data_LYL = ", toJSON(wide))
 fileConn<-file("LYL.js")
 writeLines(tosave, fileConn)

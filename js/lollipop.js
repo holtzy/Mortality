@@ -277,7 +277,6 @@ function updateChart() {
   }else{
     selectedData = selectedData.filter(function(d){ return d.sex != "both" })
   }
-
   // Log scale or Linear scale?
   selectedLogOption = $("input[name='controlLolliLog']:checked").val();
   if(selectedLogOption == "normal"){

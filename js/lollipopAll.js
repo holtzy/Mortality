@@ -233,7 +233,6 @@ function updateChart() {
 
   // Recover the SEX option?
   selectedSexOption = $("input[name='controlLolliSexAll']:checked").val();
-  console.log(selectedSexOption)
 
   // If sex are seperated, upper X axis limit is not the same
   if(selectedSexOption=="both"){

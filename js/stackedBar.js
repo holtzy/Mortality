@@ -338,8 +338,6 @@ svgBar
   .attr("y", -27)
   .html("Detail per Cause of Death")
 
-
-
 // update the barplot
 function updateBar(mentalDis){
 
