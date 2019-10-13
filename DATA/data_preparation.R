@@ -44,7 +44,7 @@ colnames(clean) <- c("sex", "mentalDis", "COD", "MRR", "MRR_left", "MRR_right")
 # Special case for circulatory diseases
 clean$COD <- gsub("Dis. Circulatory System", "Circulatory Diseases", clean$COD)
 # Same for substance use
-clean$mentalDis <- gsub("Substance Use", "Substance Use Disorders", clean$mentalDis)
+# clean$mentalDis <- gsub("Substance Use", "Substance Use Disorders", clean$mentalDis)
 #save
 tosave <- paste("data_MRR = ", toJSON(clean))
 fileConn<-file("MRR.js")
